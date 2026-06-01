@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: smart-ev-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+        placeholder: "mongodb+srv://..."
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: web
+    name: smart-ev-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://smart-ev-backend.onrender.com
+        placeholder: "https://your-backend-service-url.onrender.com"
