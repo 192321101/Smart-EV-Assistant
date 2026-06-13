@@ -94,3 +94,5 @@ Thumbs.db
 dist/
 dist-ssr/
 *.local
+
+.vercel

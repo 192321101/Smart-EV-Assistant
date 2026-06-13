@@ -245,7 +245,7 @@ export default function WeatherAlert() {
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
             <CloudLightning className="w-7 h-7 text-indigo-500 animate-pulse" />
-            <span>EV Weather Copilot</span>
+            <span>Weather Alerts</span>
           </h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Live weather telemetry & battery efficiency diagnostics

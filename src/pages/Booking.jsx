@@ -129,7 +129,7 @@ export default function Booking() {
     <div className="space-y-6">
       {/* Page Title */}
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Slot Reservation Terminal</h1>
+        <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Booking</h1>
         <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
           Lock high-speed charging intervals & configure invoices
         </p>
@@ -161,6 +161,10 @@ export default function Booking() {
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Select Station</label>
                 <select
+                  id="stationSelect"
+                  name="stationSelect"
+                  data-testid="station-select"
+                  aria-label="Select Station"
                   value={stationId}
                   onChange={(e) => {
                     setStationId(e.target.value);
@@ -178,6 +182,10 @@ export default function Booking() {
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Select Charger Slot</label>
                 <select
+                  id="slotSelect"
+                  name="slotSelect"
+                  data-testid="slot-select"
+                  aria-label="Select Charger Slot"
                   value={slotId}
                   onChange={(e) => setSlotId(e.target.value)}
                   className="w-full py-2.5 px-3 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:border-indigo-550 focus:border-indigo-500"
@@ -196,6 +204,10 @@ export default function Booking() {
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Reservation Date</label>
                 <input
+                  id="bookingDate"
+                  name="bookingDate"
+                  data-testid="booking-date-input"
+                  aria-label="Reservation Date"
                   type="date"
                   value={bookingDate}
                   min={new Date().toISOString().split('T')[0]}
@@ -208,6 +220,10 @@ export default function Booking() {
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Arrival Time</label>
                 <input
+                  id="bookingTime"
+                  name="bookingTime"
+                  data-testid="booking-time-input"
+                  aria-label="Arrival Time"
                   type="time"
                   value={bookingTime}
                   onChange={(e) => setBookingTime(e.target.value)}
@@ -233,6 +249,10 @@ export default function Booking() {
                   </div>
                 ) : (
                   <select
+                    id="vehicleSelect"
+                    name="vehicleSelect"
+                    data-testid="vehicle-select"
+                    aria-label="Select Vehicle Profile"
                     value={vehicleId}
                     onChange={(e) => setVehicleId(e.target.value)}
                     className="w-full py-2.5 px-3 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:border-indigo-550 focus:border-indigo-500"
@@ -250,6 +270,10 @@ export default function Booking() {
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Charging Duration</label>
                 <select
+                  id="durationSelect"
+                  name="durationSelect"
+                  data-testid="duration-select"
+                  aria-label="Charging Duration"
                   value={duration}
                   onChange={(e) => setDuration(Number(e.target.value))}
                   className="w-full py-2.5 px-3 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700"
@@ -268,6 +292,10 @@ export default function Booking() {
             <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Redeem Carbon Coins coupon</h3>
             <form onSubmit={handleApplyCoupon} className="flex gap-2">
               <input
+                id="couponCode"
+                name="couponCode"
+                data-testid="coupon-code-input"
+                aria-label="Redeem Carbon Coins coupon"
                 type="text"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value)}
@@ -275,6 +303,11 @@ export default function Booking() {
                 className="flex-1 px-4 py-2.5 bg-white/50 border border-slate-200/80 rounded-xl text-xs font-semibold focus:outline-none focus:border-indigo-500 focus:bg-white transition-all"
               />
               <button
+                id="apply-coupon-btn"
+                name="apply-coupon-btn"
+                data-testid="apply-coupon-button"
+                aria-label="Apply Coupon"
+                role="button"
                 type="submit"
                 className="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-extrabold flex items-center justify-center transition-colors"
               >
@@ -357,11 +390,16 @@ export default function Booking() {
             </div>
 
             <button
+              id="book-now-btn"
+              name="book-now-btn"
+              data-testid="book-now-button"
+              aria-label="Book Now"
+              role="button"
               onClick={handleReserve}
               disabled={confirming}
               className="w-full mt-4 py-3 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-indigo-500/20 hover:opacity-95 transition-all flex items-center justify-center gap-1.5"
             >
-              {confirming ? 'Securing Grid Slot...' : 'Lock Charging reservation'}
+              {confirming ? 'Securing Grid Slot...' : 'Book Now'}
             </button>
           </div>
         </div>

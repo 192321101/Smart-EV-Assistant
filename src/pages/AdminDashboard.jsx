@@ -222,7 +222,7 @@ export default function AdminDashboard() {
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none flex items-center gap-2">
             <Server className="w-7 h-7 text-purple-650 animate-pulse" />
-            <span>Grid Admin Terminal</span>
+            <span>Admin Dashboard</span>
           </h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Supervisory terminal for operational hubs, user directories, and power grids

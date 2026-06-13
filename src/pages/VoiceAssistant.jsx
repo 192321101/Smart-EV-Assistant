@@ -59,7 +59,7 @@ export default function VoiceAssistant() {
       {/* Header Info */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight">AI Voice Assistant</h1>
+          <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight">Voice Assistant</h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Hands-free speech commands & vehicle operations copilot
           </p>

@@ -122,7 +122,7 @@ export default function ChargingStation() {
       {/* Header Info */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight">Charging Station Network</h1>
+          <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight">Charging Stations</h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Explore nearby Fast DC hyperchargers and reserved slot systems
           </p>
@@ -135,6 +135,10 @@ export default function ChargingStation() {
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-3 w-4.5 h-4.5 text-slate-400" />
           <input
+            id="searchQuery"
+            name="searchQuery"
+            data-testid="search-query-input"
+            aria-label="Search Stations"
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -146,6 +150,11 @@ export default function ChargingStation() {
         <div className="flex gap-2 items-center flex-wrap">
           {/* Radius Filter Toggle */}
           <button
+            id="radius-filter-btn"
+            name="radius-filter-btn"
+            data-testid="radius-filter-button"
+            aria-label="Within 15km"
+            role="button"
             onClick={() => setFilterWithin15km(!filterWithin15km)}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border text-xs font-bold transition-all ${
               filterWithin15km ? 'bg-sky-500 text-white border-sky-500 shadow-sm shadow-sky-500/10' : 'bg-white text-slate-600 border-slate-200'
@@ -157,6 +166,11 @@ export default function ChargingStation() {
 
           {/* Filter Toggle Trigger */}
           <button
+            id="advanced-filters-btn"
+            name="advanced-filters-btn"
+            data-testid="advanced-filters-button"
+            aria-label="Advanced Filters"
+            role="button"
             onClick={() => setShowFilters(!showFilters)}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border text-xs font-bold transition-all ${
               showFilters ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-600 border-slate-200'

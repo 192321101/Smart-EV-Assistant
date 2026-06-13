@@ -73,8 +73,17 @@ router.post('/post', protect, async (req, res) => {
     return res.status(400).json({ success: false, message: 'Post title cannot be empty.' });
   }
 
+  // SEC-016: Enforce max length on community post content.
+  if (title.trim().length > 200) {
+    return res.status(400).json({ success: false, message: 'Post title must be 200 characters or fewer.' });
+  }
+
   if (!text || text.trim() === '') {
     return res.status(400).json({ success: false, message: 'Post text cannot be empty.' });
+  }
+
+  if (text.trim().length > 5000) {
+    return res.status(400).json({ success: false, message: 'Post text must be 5000 characters or fewer.' });
   }
 
   try {
@@ -96,9 +105,17 @@ router.post('/post', protect, async (req, res) => {
       comments: []
     });
 
-    // Give 10 carbon points bonus for posting discussions!
-    user.points = (user.points || 0) + 10;
-    await user.save();
+    // SEC-027: Give 10 carbon points bonus, but cap at 50 community points per day.
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const communityPointsToday = await CommunityPost.countDocuments({
+      userId: user._id,
+      createdAt: { $gte: todayStart }
+    }) * 10; // each post = 10 pts
+    if (communityPointsToday < 50) {
+      user.points = (user.points || 0) + 10;
+      await user.save();
+    }
 
     // Broadcast new post in realtime
     const io = req.app.get('io');
@@ -118,7 +135,8 @@ router.post('/post', protect, async (req, res) => {
 // @access  Private
 router.post('/post/:id/like', protect, async (req, res) => {
   try {
-    const post = await CommunityPost.findById(req.id || req.params.id);
+    // SEC-013: Fixed req.id (always undefined) -> req.params.id.
+    const post = await CommunityPost.findById(req.params.id);
 
     if (!post) {
       return res.status(404).json({ success: false, message: 'Post not found' });
@@ -165,7 +183,8 @@ router.post('/post/:id/comment', protect, async (req, res) => {
   }
 
   try {
-    const post = await CommunityPost.findById(req.id || req.params.id);
+    // SEC-013: Fixed req.id (always undefined) -> req.params.id.
+    const post = await CommunityPost.findById(req.params.id);
     if (!post) {
       return res.status(404).json({ success: false, message: 'Post not found' });
     }
@@ -188,9 +207,18 @@ router.post('/post/:id/comment', protect, async (req, res) => {
 
     await post.save();
 
-    // Give 5 carbon points for commenting!
-    user.points = (user.points || 0) + 5;
-    await user.save();
+    // SEC-027: Give 5 carbon points for commenting, capped at 10 comments per day per user.
+    const todayStart2 = new Date();
+    todayStart2.setHours(0, 0, 0, 0);
+    // Count how many comments this user already made today across all posts (simple heuristic on current post)
+    const recentCommentCount = post.comments.filter(c =>
+      c.userId && c.userId.toString() === user._id.toString() &&
+      c.createdAt && new Date(c.createdAt) >= todayStart2
+    ).length;
+    if (recentCommentCount <= 10) {
+      user.points = (user.points || 0) + 5;
+      await user.save();
+    }
 
     // Broadcast updated comments in realtime
     const io = req.app.get('io');

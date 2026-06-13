@@ -219,7 +219,7 @@ export default function CostOptimizer() {
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
             <Coins className="text-indigo-500 w-7 h-7" />
-            <span>Charging Cost Optimizer</span>
+            <span>Cost Optimizer</span>
           </h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Real-time public tariffs & hourly time-of-use pricing models

@@ -185,6 +185,12 @@ router.get('/request/:id', protect, async (req, res) => {
     if (!request) {
       return res.status(404).json({ success: false, message: 'Emergency request not found.' });
     }
+
+    // SEC-009: Ownership check — users may only read their own emergency requests.
+    if (request.userId.toString() !== req.user.id) {
+      return res.status(403).json({ success: false, message: 'Access denied: This emergency request belongs to another user.' });
+    }
+
     res.json({ success: true, request });
   } catch (err) {
     console.error(err);
@@ -218,6 +224,14 @@ router.post('/contacts/notify', protect, async (req, res) => {
   const { requestId } = req.body;
   try {
     if (requestId) {
+      // SEC-010: Ownership check — users can only update notification state on their own requests.
+      const request = await EmergencyRequest.findById(requestId);
+      if (!request) {
+        return res.status(404).json({ success: false, message: 'Emergency request not found.' });
+      }
+      if (request.userId.toString() !== req.user.id) {
+        return res.status(403).json({ success: false, message: 'Access denied: This request belongs to another user.' });
+      }
       await EmergencyRequest.findByIdAndUpdate(requestId, { contactsNotified: true });
     }
     const notifiedList = [

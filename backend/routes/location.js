@@ -40,10 +40,10 @@ router.post('/update', protect, async (req, res) => {
 
     await telemetry.save();
 
-    // Broadcast location:updated via Socket.IO
+    // SEC-025: Broadcast location only to this user's own Socket.IO room, not all clients.
     const io = req.app.get('io');
     if (io) {
-      io.emit('location:updated', {
+      io.to(req.user.id.toString()).emit('location:updated', {
         userId: req.user.id,
         coordinates: [parseFloat(lng), parseFloat(lat)],
         speedKmph: speedKmph || 0,

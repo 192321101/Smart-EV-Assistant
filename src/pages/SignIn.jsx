@@ -82,6 +82,10 @@ export default function SignIn() {
             <div className="relative">
               <Mail className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
               <input
+                id="email"
+                name="email"
+                data-testid="email-input"
+                aria-label="Email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -97,9 +101,14 @@ export default function SignIn() {
             <div className="flex justify-between items-center mb-1.5">
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Password</label>
               <button
+                id="forgot-password-btn"
+                name="forgot-password"
+                data-testid="forgot-password-button"
+                aria-label="Forgot Password"
+                role="button"
                 type="button"
                 className="text-[10px] font-bold text-indigo-600 hover:underline"
-                onClick={() => alert('Demo account passwords are: Test@1234')}
+                onClick={() => alert('Demo account passwords are: Driver: Test@1234, Admin: Admin@1234, Operator: Operator@1234')}
               >
                 Forgot Password?
               </button>
@@ -107,6 +116,10 @@ export default function SignIn() {
             <div className="relative">
               <Lock className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
               <input
+                id="password"
+                name="password"
+                data-testid="password-input"
+                aria-label="Password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -118,11 +131,16 @@ export default function SignIn() {
           </div>
 
           <button
+            id="login-btn"
+            name="login-btn"
+            data-testid="login-button"
+            aria-label="Sign In"
+            role="button"
             type="submit"
             disabled={loading}
             className="w-full py-3 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-indigo-500/20 hover:opacity-95 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-4"
           >
-            {loading ? 'Decrypting Nodes...' : 'Sign In System'}
+            {loading ? 'Decrypting Nodes...' : 'Sign In'}
           </button>
         </form>
 
@@ -134,6 +152,11 @@ export default function SignIn() {
           </p>
           <div className="grid grid-cols-3 gap-2">
             <button
+              id="demo-driver-btn"
+              name="demo-driver-btn"
+              data-testid="demo-driver-button"
+              aria-label="Demo Driver"
+              role="button"
               onClick={() => handleQuickLogin('driver')}
               className="px-2 py-2 bg-sky-50 hover:bg-sky-100/80 border border-sky-100 rounded-xl text-[10px] font-bold text-sky-700 transition-colors flex items-center justify-center gap-1"
             >
@@ -141,6 +164,11 @@ export default function SignIn() {
               <span>Driver</span>
             </button>
             <button
+              id="demo-operator-btn"
+              name="demo-operator-btn"
+              data-testid="demo-operator-button"
+              aria-label="Demo Operator"
+              role="button"
               onClick={() => handleQuickLogin('operator')}
               className="px-2 py-2 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-100 rounded-xl text-[10px] font-bold text-emerald-700 transition-colors flex items-center justify-center gap-1"
             >
@@ -148,6 +176,11 @@ export default function SignIn() {
               <span>Operator</span>
             </button>
             <button
+              id="demo-admin-btn"
+              name="demo-admin-btn"
+              data-testid="demo-admin-button"
+              aria-label="Demo Admin"
+              role="button"
               onClick={() => handleQuickLogin('admin')}
               className="px-2 py-2 bg-purple-50 hover:bg-purple-100/80 border border-purple-100 rounded-xl text-[10px] font-bold text-purple-700 transition-colors flex items-center justify-center gap-1"
             >

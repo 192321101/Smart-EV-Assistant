@@ -83,23 +83,41 @@ router.get('/history', protect, async (req, res) => {
 router.post('/', protect, async (req, res) => {
   const { stationId, slotId, scheduledTime, duration_min, vehicleId, paymentId } = req.body;
 
+  // SEC-028: Validate that paymentId is provided (placeholder — integrate payment provider for full verification).
+  if (!paymentId || typeof paymentId !== 'string' || paymentId.trim() === '') {
+    return res.status(400).json({ success: false, message: 'A valid payment reference is required to create a booking.' });
+  }
+
   try {
-    // 1. Find station
-    const station = await Station.findOne({ _id: stationId });
-    if (!station) {
-      return res.status(404).json({ success: false, message: 'Charging station not found.' });
+    // 1. SEC-026: Atomic slot availability check + status update to prevent race conditions (TOCTOU fix).
+    // This single operation finds the station only if the target slot is 'available',
+    // and atomically sets it to 'occupied'. If the slot was already taken, result is null.
+    const updatedStation = await Station.findOneAndUpdate(
+      {
+        _id: stationId,
+        'slots.id': slotId,
+        'slots.status': 'available'
+      },
+      {
+        $set: { 'slots.$.status': 'occupied' }
+      },
+      { new: true }
+    );
+
+    if (!updatedStation) {
+      // Station not found OR slot was already occupied at the moment of the atomic check.
+      const station = await Station.findById(stationId);
+      if (!station) {
+        return res.status(404).json({ success: false, message: 'Charging station not found.' });
+      }
+      const slot = station.slots.find(s => s.id === slotId);
+      if (!slot) {
+        return res.status(404).json({ success: false, message: 'Charging slot not found.' });
+      }
+      return res.status(409).json({ success: false, message: 'Charging slot is already occupied. Please choose another slot.' });
     }
 
-    // 2. Validate slot availability
-    const slot = station.slots.find(s => s.id === slotId);
-    if (!slot) {
-      return res.status(404).json({ success: false, message: 'Charging slot not found.' });
-    }
-    if (slot.status === 'occupied') {
-      return res.status(400).json({ success: false, message: 'Charging slot is already occupied.' });
-    }
-
-    // 3. Create booking
+    // 2. Create booking record.
     const booking = await Booking.create({
       userId: req.user.id,
       stationId,
@@ -107,29 +125,19 @@ router.post('/', protect, async (req, res) => {
       scheduledTime: new Date(scheduledTime),
       duration_min: parseInt(duration_min) || 60,
       vehicleId,
-      paymentId
+      paymentId: paymentId.trim()
     });
 
-    // 4. Update slot status in Charging Station to occupied
-    slot.status = 'occupied';
-    await station.save();
-
-    // 5. Broadcast status change real-time via Socket.IO
+    // 3. Broadcast status change real-time via Socket.IO.
     const io = req.app.get('io');
     if (io) {
-      io.emit('station:status_update', { 
-        stationId, 
-        slotId, 
-        status: 'occupied' 
-      });
-      console.log(`📡 [Socket Broadcast] Status updated for Station: ${stationId}, Slot: ${slotId} to: occupied`);
+      io.emit('station:status_update', { stationId, slotId, status: 'occupied' });
     }
 
-    // 6. Award carbon points to user
+    // 4. Award carbon points to user.
     const user = await User.findById(req.user.id);
     if (user) {
       user.points = (user.points || 0) + 50;
-      // Recalculate tier based on points
       if (user.points >= 1000) {
         user.tier = 'gold';
       } else if (user.points >= 500) {

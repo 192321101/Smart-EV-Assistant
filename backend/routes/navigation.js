@@ -8,6 +8,9 @@ import RouteHistory from '../models/RouteHistory.js';
 
 const router = express.Router();
 
+// SEC-012: Escape special RegExp characters in user-supplied strings to prevent ReDoS and NoSQL injection.
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // Mock Locations list in case DB has not been seeded yet
 const defaultPlaces = [
   { name: 'Bandra West (PulseCharge Hub)', address: 'Linking Road, Bandra West, Mumbai', coordinates: [72.8311, 19.0596], type: 'destination' },
@@ -111,7 +114,8 @@ const handleRouteCalculation = async (req, res) => {
     let resolvedDestName = destination;
     
     // Look up location name in DB or fallback mock
-    const dbLoc = await SavedLocation.findOne({ name: new RegExp(destination, 'i') });
+    // SEC-012: Escape destination before using in RegExp to prevent ReDoS.
+    const dbLoc = await SavedLocation.findOne({ name: new RegExp(escapeRegex(destination), 'i') });
     if (dbLoc) {
       resolvedDestCoords = dbLoc.coordinates;
       resolvedDestName = dbLoc.name;
@@ -224,10 +228,12 @@ router.get('/search', protect, async (req, res) => {
     await RecentSearch.create({ userId: req.user.id, query: q });
 
     // Search in DB
+    // SEC-012: Escape user query before building regex.
+    const safeQ = escapeRegex(q);
     const dbMatches = await SavedLocation.find({
       $or: [
-        { name: new RegExp(q, 'i') },
-        { address: new RegExp(q, 'i') }
+        { name: new RegExp(safeQ, 'i') },
+        { address: new RegExp(safeQ, 'i') }
       ]
     }).limit(5);
 
@@ -272,7 +278,8 @@ router.get('/eta', protect, async (req, res) => {
     const covered = parseFloat(distanceCovered) || 0;
 
     let totalDist = 15;
-    const dbLoc = await SavedLocation.findOne({ name: new RegExp(destination, 'i') });
+    // SEC-012: Escape destination before using in RegExp.
+    const dbLoc = await SavedLocation.findOne({ name: new RegExp(escapeRegex(destination), 'i') });
     if (dbLoc) {
       totalDist = 18.2;
     }
@@ -309,10 +316,11 @@ router.get('/recalculate', protect, async (req, res) => {
 
     const startCoords = [parseFloat(currentLng), parseFloat(currentLat)];
     let resolvedDestCoords = [80.1550, 13.0380]; // Porur default fallback
-    const dbLoc = await SavedLocation.findOne({ name: new RegExp(destination, 'i') });
-    const resolvedName = dbLoc ? dbLoc.name : destination;
-    if (dbLoc) {
-      resolvedDestCoords = dbLoc.coordinates;
+    // SEC-012: Escape destination before RegExp use.
+    const dbLoc2 = await SavedLocation.findOne({ name: new RegExp(escapeRegex(destination), 'i') });
+    const resolvedName = dbLoc2 ? dbLoc2.name : destination;
+    if (dbLoc2) {
+      resolvedDestCoords = dbLoc2.coordinates;
     } else {
       const mockLoc = defaultPlaces.find(p => p.name.toLowerCase().includes(destination.toLowerCase()));
       if (mockLoc) {

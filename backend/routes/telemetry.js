@@ -59,6 +59,14 @@ router.post('/', protect, async (req, res) => {
   const { vehicleId, batteryPercent, range_km, speed_kmh, isCharging, estimatedChargeTime_mins, powerDraw_kW, temperature_c, longitude, latitude } = req.body;
 
   try {
+    // SEC-011: Verify vehicleId belongs to the authenticated user before writing data.
+    if (vehicleId) {
+      const vehicle = await Vehicle.findById(vehicleId);
+      if (!vehicle || vehicle.userId.toString() !== req.user.id) {
+        return res.status(403).json({ success: false, message: 'Access denied: Vehicle does not belong to your account.' });
+      }
+    }
+
     const telemetry = await Telemetry.create({
       userId: req.user.id,
       vehicleId,
@@ -75,11 +83,13 @@ router.post('/', protect, async (req, res) => {
       } : undefined
     });
 
-    // Update vehicle state as well
-    await Vehicle.findByIdAndUpdate(vehicleId, {
-      currentCharge_percent: batteryPercent,
-      range_km
-    });
+    // Update vehicle state as well (ownership already confirmed above).
+    if (vehicleId) {
+      await Vehicle.findByIdAndUpdate(vehicleId, {
+        currentCharge_percent: batteryPercent,
+        range_km
+      });
+    }
 
     res.status(201).json({ success: true, telemetry });
   } catch (err) {

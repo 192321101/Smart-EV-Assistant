@@ -1,0 +1,82 @@
+name: Smart EV Assistant CI/CD E2E Tests
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  run-e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Frontend Dependencies
+        run: npm ci
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Start Backend Server (runs MongoMemoryServer internally)
+        env:
+          PORT: 5000
+          FRONTEND_URL: http://localhost:3000
+          JWT_SECRET: e2e_test_jwt_secret_must_be_long_and_secure_abcdefghijklmnopqrstuvwxyz123456
+          SEED_ADMIN_PASSWORD: Admin@1234
+          SEED_OPERATOR_PASSWORD: Operator@1234
+          NODE_ENV: test
+        run: |
+          cd backend
+          npm start &
+
+      - name: Start Frontend Server
+        run: |
+          npm run dev &
+
+      - name: Install wait-on tool
+        run: npm install -g wait-on
+
+      - name: Wait for Servers to be Ready
+        run: |
+          wait-on http-get://localhost:5000/api/health --timeout 60000
+          wait-on http-get://localhost:3000/welcome --timeout 60000
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium webdriver-manager openpyxl
+
+      - name: Run Selenium E2E Tests
+        env:
+          BASE_URL: http://localhost:3000
+        run: |
+          python tests/ev_e2e_tests.py
+
+      - name: Generate Vulnerability Excel Report
+        run: |
+          python tests/generate_excel_report.py
+
+      - name: Upload Test and Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-and-security-reports
+          path: |
+            tests/ev_test_report.xlsx
+            Vulnerability Test Results/Security_Test_Status.xlsx
+          if-no-files-found: error

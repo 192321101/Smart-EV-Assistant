@@ -265,7 +265,7 @@ export default function EmergencySOS() {
       <div>
         <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none flex items-center gap-2">
           <AlertOctagon className="w-7 h-7 text-rose-500 animate-pulse" />
-          <span>Emergency SOS Portal</span>
+          <span>Emergency SOS</span>
         </h1>
         <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
           One-tap EV hazard dispatch & battery rescue routing
@@ -291,11 +291,16 @@ export default function EmergencySOS() {
 
               {/* Pulsating Trigger button */}
               <button
+                id="sos-trigger-btn"
+                name="sos-trigger-btn"
+                data-testid="sos-trigger-button"
+                aria-label="Emergency"
+                role="button"
                 onClick={startSOSCountdown}
                 className="w-36 h-36 rounded-full bg-gradient-to-tr from-rose-500 via-pink-600 to-rose-700 text-white font-black text-xl shadow-xl shadow-rose-500/35 border-8 border-rose-100/50 hover:scale-102 active:scale-98 transition-all flex flex-col items-center justify-center mx-auto"
               >
                 <AlertOctagon className="w-8 h-8 mb-1.5" />
-                <span>TRIGGER</span>
+                <span>Emergency</span>
               </button>
             </div>
           ) : countdown !== null ? (

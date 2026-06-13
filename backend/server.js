@@ -1,8 +1,10 @@
+import './config/env.js';
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -38,7 +40,7 @@ import Notification from './models/Notification.js';
 import SavedLocation from './models/SavedLocation.js';
 import bcrypt from 'bcryptjs';
 
-dotenv.config();
+// dotenv.config() already called above at module load time.
 
 // Connect to MongoDB Atlas
 connectDB().then(async (isConnected) => {
@@ -53,20 +55,60 @@ connectDB().then(async (isConnected) => {
 const app = express();
 const server = http.createServer(app);
 
-// Initialize Socket.io with CORS settings
+// SEC-020: Restrict CORS to the configured frontend origin only.
+const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+const corsOptions = {
+  origin: allowedOrigin,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+};
+
+// SEC-020: Initialize Socket.io with restricted CORS (no wildcard).
 const io = new Server(server, {
-  cors: {
-    origin: '*', // Allow connections from all origins for local dev convenience
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
-  }
+  cors: corsOptions
 });
 
 app.set('io', io);
 
-// Register Middleware
-app.use(cors());
-app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// SEC-023: Apply security headers via helmet.
+app.use(helmet());
+
+// SEC-020: Apply CORS before routes.
+app.use(cors(corsOptions));
+
+// SEC-022: Explicit global body size limit.
+app.use(express.json({ limit: '2mb' }));
+
+// SEC-021: Global rate limiter — 200 requests per 15 minutes per IP (increased in dev/test).
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: process.env.NODE_ENV === 'production' ? 200 : 10000,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many requests, please try again later.' }
+});
+app.use(globalLimiter);
+
+// SEC-021: Strict rate limiter for authentication endpoints (increased in dev/test).
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: process.env.NODE_ENV === 'production' ? 10 : 10000,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many authentication attempts. Please wait 15 minutes.' }
+});
+app.use('/api/auth/login', authLimiter);
+app.use('/api/auth/forgot-password', authLimiter);
+app.use('/api/auth/verify-otp', authLimiter);
+app.use('/api/auth/reset-password', authLimiter);
+
+// SEC-023: Serve uploads with nosniff and attachment disposition to prevent XSS.
+app.use('/uploads', (req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Content-Disposition', 'attachment');
+  next();
+}, express.static(path.join(__dirname, 'uploads')));
 
 // Bind API Routes
 app.use('/api/auth', authRoutes);
@@ -392,6 +434,7 @@ async function seedUsersAndData() {
     if (userCount === 0) {
       console.log('⚡ [DB Seed] User collection is empty. Seeding default driver, admin, and operator accounts...');
       
+      // SEC-017: Use only fictional placeholder accounts. Real user PII must never appear in source code.
       const driver = await User.create({
         name: 'Amit Sharma',
         email: 'test1@ev.app',
@@ -403,10 +446,26 @@ async function seedUsersAndData() {
         tier: 'silver'
       });
 
+      // SEC-017: Replaced real email with fictional placeholder.
+      const user_prabha = await User.create({
+        name: 'Prabha User',
+        email: 'prabha.testuser@example.com',
+        password: 'TestPrabha@9999',
+        phone: '+919876543219',
+        evModel: '4 Wheeler',
+        role: 'driver',
+        points: 450,
+        tier: 'silver'
+      });
+
+      // SEC-018: Load admin/operator seed passwords from env vars, fallback only in dev.
+      const adminSeedPassword = process.env.SEED_ADMIN_PASSWORD || 'Admin@1234';
+      const operatorSeedPassword = process.env.SEED_OPERATOR_PASSWORD || 'Operator@1234';
+
       const admin = await User.create({
         name: 'Admin Master',
         email: 'admin@ev.app',
-        password: 'Admin@1234',
+        password: adminSeedPassword,
         phone: '+919876543214',
         role: 'admin',
         points: 1000,
@@ -416,14 +475,15 @@ async function seedUsersAndData() {
       const operator = await User.create({
         name: 'Operator Station',
         email: 'operator@ev.app',
-        password: 'Operator@1234',
+        password: operatorSeedPassword,
         phone: '+919876543215',
         role: 'station_operator',
         points: 200,
         tier: 'bronze'
       });
 
-      console.log('⚡ [DB Seed] Default accounts created: test1@ev.app / admin@ev.app / operator@ev.app');
+      // SEC-029: Do not log credentials or real email addresses.
+      console.log('⚡ [DB Seed] Default driver, admin, and operator accounts created.');
 
       // Seed vehicle for the driver
       await Vehicle.create({
@@ -522,3 +582,4 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`🚀 [Server] Operational on port ${PORT}`);
 });
+// Nodemon trigger comment v2

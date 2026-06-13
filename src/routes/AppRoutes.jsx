@@ -21,6 +21,7 @@ import Analytics from '../pages/Analytics';
 import Settings from '../pages/Settings';
 import WeatherAlert from '../pages/WeatherAlert';
 import CostOptimizer from '../pages/CostOptimizer';
+import NotFound from '../pages/NotFound';
 
 import NavigationLayout from '../components/NavigationLayout';
 
@@ -197,7 +198,7 @@ export default function AppRoutes() {
         />
 
         {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );

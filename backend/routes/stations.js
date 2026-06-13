@@ -1,9 +1,23 @@
 import express from 'express';
 import protect from '../middleware/auth.js';
+import { adminProtect } from '../middleware/admin.js';
 import Station from '../models/Station.js';
 import User from '../models/User.js';
 
 const router = express.Router();
+
+// SEC-008: Middleware that allows admin OR station_operator roles.
+const adminOrOperatorProtect = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (user && (user.role === 'admin' || user.role === 'station_operator')) {
+      return next();
+    }
+    return res.status(403).json({ success: false, message: 'Access denied: Admin or Station Operator role required.' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error during role authorization.' });
+  }
+};
 
 // @route   GET /api/stations/nearby
 // @desc    Get nearby charging stations with query-based filtering
@@ -304,9 +318,10 @@ router.post('/:id/reviews', protect, async (req, res) => {
 });
 
 // @route   PUT /api/stations/:id/slots/:slotId
-// @desc    Admin node slot status override
-// @access  Private
-router.put('/:id/slots/:slotId', protect, async (req, res) => {
+// @desc    Admin/Operator slot status override
+// @access  Private — Admin or Station Operator only
+// SEC-008: Added adminOrOperatorProtect to prevent drivers from changing slot status.
+router.put('/:id/slots/:slotId', protect, adminOrOperatorProtect, async (req, res) => {
   const { status } = req.body;
 
   if (!status || !['available', 'occupied'].includes(status)) {

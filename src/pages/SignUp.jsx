@@ -53,7 +53,7 @@ export default function SignUp() {
     setLoading(false);
     
     if (res.success) {
-      navigate('/dashboard');
+      navigate('/signin');
     } else {
       setErrors({ server: res.error || 'Signup failed. Please try again.' });
     }
@@ -121,6 +121,10 @@ export default function SignUp() {
                 <div className="relative">
                   <User className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
                   <input
+                    id="name"
+                    name="name"
+                    data-testid="name-input"
+                    aria-label="Full Name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -137,6 +141,10 @@ export default function SignUp() {
                 <div className="relative">
                   <Mail className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
                   <input
+                    id="email"
+                    name="email"
+                    data-testid="email-input"
+                    aria-label="Email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -153,6 +161,10 @@ export default function SignUp() {
                 <div className="relative">
                   <Phone className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
                   <input
+                    id="phone"
+                    name="phone"
+                    data-testid="phone-input"
+                    aria-label="Phone Number"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -216,6 +228,10 @@ export default function SignUp() {
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
                   <input
+                    id="password"
+                    name="password"
+                    data-testid="password-input"
+                    aria-label="Password"
                     type="password"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -232,6 +248,10 @@ export default function SignUp() {
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-3.5 w-4.5 h-4.5 text-slate-400" />
                   <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    data-testid="confirm-password-input"
+                    aria-label="Confirm Password"
                     type="password"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
@@ -243,11 +263,16 @@ export default function SignUp() {
               </div>
 
               <button
+                id="signup-btn"
+                name="signup-btn"
+                data-testid="signup-button"
+                aria-label="Sign Up"
+                role="button"
                 type="submit"
                 disabled={loading}
                 className="w-full py-3 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 text-white font-extrabold text-sm rounded-xl shadow-lg shadow-indigo-500/20 hover:opacity-95 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 mt-4"
               >
-                {loading ? 'Creating Matrix...' : 'Sign Up Profile'}
+                {loading ? 'Creating Matrix...' : 'Sign Up'}
               </button>
             </form>
 

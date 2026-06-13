@@ -308,7 +308,7 @@ export default function Settings() {
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Title */}
       <div className="text-left">
-        <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Settings & Preferences</h1>
+        <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Settings</h1>
         <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
           Customize charging targets, user profiles, and active EV garage
         </p>

@@ -148,7 +148,7 @@ export default function Analytics() {
       {/* Header Info */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Performance Analytics</h1>
+          <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Analytics</h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Energy telemetry tracking and environmental index meters
           </p>

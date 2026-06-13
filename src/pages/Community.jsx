@@ -311,7 +311,7 @@ export default function Community() {
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none flex items-center gap-2">
             <Users className="w-7 h-7 text-indigo-500" />
-            <span>Green Voyager Community</span>
+            <span>Community</span>
           </h1>
           <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
             Share EV logs, compete on leaderboard, and redeem carbon rewards

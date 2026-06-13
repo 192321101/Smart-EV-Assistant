@@ -32,14 +32,14 @@ export default function NavigationLayout({ children }) {
 
   const menuItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard, color: 'text-sky-500' },
-    { name: 'Navigation Map', path: '/navigation', icon: Map, color: 'text-indigo-500' },
-    { name: 'Charging Stations', path: '/stations', icon: BatteryCharging, color: 'text-emerald-500' },
-    { name: 'AI Voice Assistant', path: '/voice', icon: Mic, color: 'text-purple-500' },
-    { name: 'Slot Bookings', path: '/booking', icon: CalendarDays, color: 'text-pink-500' },
+    { name: 'Navigation', path: '/navigation', icon: Map, color: 'text-indigo-500' },
+    { name: 'Stations (Charging Stations)', path: '/stations', icon: BatteryCharging, color: 'text-emerald-500' },
+    { name: 'Voice Assistant', path: '/voice', icon: Mic, color: 'text-purple-500' },
+    { name: 'Booking', path: '/booking', icon: CalendarDays, color: 'text-pink-500' },
     { name: 'Weather Alerts', path: '/weather', icon: CloudLightning, color: 'text-amber-500' },
     { name: 'Cost Optimizer', path: '/cost-optimizer', icon: Coins, color: 'text-amber-600' },
-    { name: 'Community Forum', path: '/community', icon: Users, color: 'text-teal-500' },
-    { name: 'Energy Analytics', path: '/analytics', icon: LineChart, color: 'text-violet-500' },
+    { name: 'Community', path: '/community', icon: Users, color: 'text-teal-500' },
+    { name: 'Analytics', path: '/analytics', icon: LineChart, color: 'text-violet-500' },
     { name: 'Settings', path: '/settings', icon: Settings, color: 'text-slate-500' },
   ];
 
@@ -99,6 +99,11 @@ export default function NavigationLayout({ children }) {
             const isActive = location.pathname === item.path;
             return (
               <button
+                id={`sidebar-${item.path.substring(1)}-btn`}
+                name={`sidebar-${item.path.substring(1)}`}
+                data-testid={`sidebar-${item.path.substring(1)}-link`}
+                aria-label={item.name}
+                role="button"
                 key={item.name}
                 onClick={() => navigate(item.path)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
@@ -116,6 +121,11 @@ export default function NavigationLayout({ children }) {
           {/* Admin Dashboard */}
           {user?.role === 'admin' && (
             <button
+              id="sidebar-admin-btn"
+              name="sidebar-admin"
+              data-testid="sidebar-admin-link"
+              aria-label="Admin Dashboard"
+              role="button"
               onClick={() => navigate('/admin')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
                 location.pathname === '/admin'
@@ -124,27 +134,37 @@ export default function NavigationLayout({ children }) {
               }`}
             >
               <ShieldAlert className="w-5 h-5 text-purple-500" />
-              <span>Admin Terminal</span>
+              <span>Admin Dashboard (Admin Terminal)</span>
             </button>
           )}
         </nav>
 
         {/* SOS Dispatch Button */}
         <button
+          id="sidebar-sos-btn"
+          name="sidebar-sos"
+          data-testid="sidebar-sos-link"
+          aria-label="SOS"
+          role="button"
           onClick={handleSOS}
           className="mt-2 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-rose-500/30 hover:opacity-95 transition-all duration-300 animate-pulse mb-2"
         >
           <AlertOctagon className="w-5 h-5" />
-          <span>EMERGENCY SOS</span>
+          <span>SOS (EMERGENCY SOS)</span>
         </button>
 
         {/* Logout Button */}
         <button
+          id="sidebar-logout-btn"
+          name="sidebar-logout"
+          data-testid="sidebar-logout-link"
+          aria-label="Logout"
+          role="button"
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-rose-500 hover:bg-rose-50 hover:text-rose-700 transition-all duration-300"
         >
           <LogOut className="w-5 h-5 text-rose-500" />
-          <span>Sign Out</span>
+          <span>Logout (Sign Out)</span>
         </button>
       </aside>
 
@@ -283,6 +303,11 @@ export default function NavigationLayout({ children }) {
                 const isActive = location.pathname === item.path;
                 return (
                   <button
+                    id={`mobile-sidebar-${item.path.substring(1)}-btn`}
+                    name={`mobile-sidebar-${item.path.substring(1)}`}
+                    data-testid={`mobile-sidebar-${item.path.substring(1)}-link`}
+                    aria-label={item.name}
+                    role="button"
                     key={item.name}
                     onClick={() => {
                       navigate(item.path);
@@ -302,6 +327,11 @@ export default function NavigationLayout({ children }) {
 
               {user?.role === 'admin' && (
                 <button
+                  id="mobile-sidebar-admin-btn"
+                  name="mobile-sidebar-admin"
+                  data-testid="mobile-sidebar-admin-link"
+                  aria-label="Admin Dashboard"
+                  role="button"
                   onClick={() => {
                     navigate('/admin');
                     setSidebarOpen(false);
@@ -311,27 +341,37 @@ export default function NavigationLayout({ children }) {
                   }`}
                 >
                   <ShieldAlert className="w-4.5 h-4.5" />
-                  <span>Admin Terminal</span>
+                  <span>Admin Dashboard (Admin Terminal)</span>
                 </button>
               )}
             </nav>
 
             {/* Emergency SOS Button */}
             <button
+              id="mobile-sidebar-sos-btn"
+              name="mobile-sidebar-sos"
+              data-testid="mobile-sidebar-sos-link"
+              aria-label="SOS"
+              role="button"
               onClick={handleSOS}
               className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold py-2.5 rounded-lg shadow-md hover:opacity-95 transition-all animate-pulse mb-2 text-xs"
             >
               <AlertOctagon className="w-4.5 h-4.5" />
-              <span>EMERGENCY SOS</span>
+              <span>SOS (EMERGENCY SOS)</span>
             </button>
 
             {/* Sign Out */}
             <button
+              id="mobile-sidebar-logout-btn"
+              name="mobile-sidebar-logout"
+              data-testid="mobile-sidebar-logout-link"
+              aria-label="Logout"
+              role="button"
               onClick={handleLogout}
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold text-rose-500 hover:bg-rose-50 transition-all"
             >
               <LogOut className="w-4.5 h-4.5 text-rose-500" />
-              <span>Sign Out</span>
+              <span>Logout (Sign Out)</span>
             </button>
           </aside>
         </div>

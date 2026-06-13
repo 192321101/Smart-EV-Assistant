@@ -469,7 +469,7 @@ export default function Navigation() {
     <div className="space-y-6">
       {/* Page Title Header */}
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Smart Route Copilot</h1>
+        <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight leading-none">Navigation</h1>
         <p className="text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider">
           GPS Route Planning & Range Telemetry Integration
         </p>
@@ -536,6 +536,10 @@ export default function Navigation() {
                 <div className="relative">
                   <MapPin className="absolute left-3 top-3 w-4.5 h-4.5 text-slate-400" />
                   <input
+                    id="startLocation"
+                    name="startLocation"
+                    data-testid="start-location-input"
+                    aria-label="Starting Position"
                     type="text"
                     value={startLocationText}
                     onChange={(e) => fetchStartSuggestions(e.target.value)}
@@ -595,6 +599,10 @@ export default function Navigation() {
                 <div className="relative">
                   <NavIcon className="absolute left-3 top-3 w-4.5 h-4.5 text-sky-500" />
                   <input
+                    id="destination"
+                    name="destination"
+                    data-testid="destination-input"
+                    aria-label="Destination"
                     type="text"
                     value={destination}
                     onChange={(e) => fetchDestSuggestions(e.target.value)}
@@ -624,6 +632,11 @@ export default function Navigation() {
               </div>
 
               <button
+                id="search-route-btn"
+                name="search-route-btn"
+                data-testid="search-route-button"
+                aria-label="Search Route"
+                role="button"
                 type="submit"
                 disabled={calculating}
                 className="w-full py-2.5 bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-extrabold text-xs rounded-xl shadow-md hover:opacity-95 active:scale-98 transition-all flex items-center justify-center gap-1.5"

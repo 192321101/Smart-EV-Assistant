@@ -116,6 +116,8 @@ export const VoiceProvider = ({ children }) => {
   // Fetch past conversation logs on mount
   useEffect(() => {
     const fetchHistory = async () => {
+      const token = localStorage.getItem('ev_token');
+      if (!token || token.startsWith('mock_jwt_token')) return;
       try {
         const res = await api.get('/voice/history');
         if (res.data.success && res.data.history && res.data.history.length > 0) {

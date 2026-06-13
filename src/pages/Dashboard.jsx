@@ -184,7 +184,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Card A: Battery State of Charge (SoC) */}
-        <div className="glass-panel-neon p-6 rounded-3xl border border-sky-200/50 flex flex-col justify-between min-h-[220px]">
+        <div id="battery-soc-card" name="battery-soc-card" data-testid="battery-soc-card" className="glass-panel-neon p-6 rounded-3xl border border-sky-200/50 flex flex-col justify-between min-h-[220px]">
           <div className="flex justify-between items-start">
             <div>
               <span className="text-[10px] font-bold text-sky-600 uppercase tracking-widest bg-sky-50 border border-sky-100 px-2 py-0.5 rounded-full">
@@ -218,7 +218,7 @@ export default function Dashboard() {
         </div>
 
         {/* Card B: Projected Driving Range */}
-        <div className="glass-panel-purple p-6 rounded-3xl border border-purple-200/50 flex flex-col justify-between min-h-[220px]">
+        <div id="driving-range-card" name="driving-range-card" data-testid="driving-range-card" className="glass-panel-purple p-6 rounded-3xl border border-purple-200/50 flex flex-col justify-between min-h-[220px]">
           <div className="flex justify-between items-start">
             <div>
               <span className="text-[10px] font-bold text-purple-600 uppercase tracking-widest bg-purple-50 border border-purple-100 px-2 py-0.5 rounded-full">
@@ -244,7 +244,7 @@ export default function Dashboard() {
         </div>
 
         {/* Card C: Carbon Points Loyalty */}
-        <div className="glass-panel p-6 rounded-3xl border border-emerald-200/40 flex flex-col justify-between min-h-[220px]">
+        <div id="eco-contribution-card" name="eco-contribution-card" data-testid="eco-contribution-card" className="glass-panel p-6 rounded-3xl border border-emerald-200/40 flex flex-col justify-between min-h-[220px]">
           <div className="flex justify-between items-start">
             <div>
               <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full">
@@ -452,10 +452,15 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Navigation Shortcut list */}
-        <div className="glass-panel p-5 md:p-6 rounded-3xl border border-slate-200/50">
+        <div id="quick-commands-section" name="quick-commands-section" data-testid="quick-commands-section" className="glass-panel p-5 md:p-6 rounded-3xl border border-slate-200/50">
           <h3 className="text-base font-bold text-slate-800 mb-4">Quick Command Modules</h3>
           <div className="grid grid-cols-2 gap-4">
             <button
+              id="shortcut-navigation-btn"
+              name="shortcut-navigation-btn"
+              data-testid="shortcut-navigation-button"
+              aria-label="Map Navigation"
+              role="button"
               onClick={() => navigate('/navigation')}
               className="p-4 bg-sky-50 hover:bg-sky-100 border border-sky-100 rounded-2xl text-left transition-all"
             >
@@ -467,6 +472,11 @@ export default function Dashboard() {
             </button>
 
             <button
+              id="shortcut-stations-btn"
+              name="shortcut-stations-btn"
+              data-testid="shortcut-stations-button"
+              aria-label="Charging Hubs"
+              role="button"
               onClick={() => navigate('/stations')}
               className="p-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 rounded-2xl text-left transition-all"
             >
