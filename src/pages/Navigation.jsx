@@ -188,7 +188,7 @@ export default function Navigation() {
     setShowPrompt(false);
   };
 
-  const planRouteTo = async (destName) => {
+  const planRouteToWithCoords = async (destName, startCoordsVal, autoStart = false) => {
     if (!destName) return;
     setDestination(destName);
     setCalculating(true);
@@ -197,8 +197,8 @@ export default function Navigation() {
 
     try {
       const res = await api.post('/navigation/route', {
-        startCoords: currentCoords,
-        startName: startLocationText,
+        startCoords: startCoordsVal,
+        startName: `My Location [${startCoordsVal[0].toFixed(4)}, ${startCoordsVal[1].toFixed(4)}]`,
         destination: destName.trim()
       });
 
@@ -211,6 +211,13 @@ export default function Navigation() {
         
         speakVoice(`Route planned to ${r.destinationName}. Total distance ${r.distance} kilometers. Est. battery remaining ${r.socAtArrival} percent.`);
         loadSidebarData(); // Refresh history list
+
+        if (autoStart) {
+          setIsNavigating(true);
+          setNavIndex(0);
+          setRemainingDist(r.distance);
+          setRemainingTime(r.timeMinutes);
+        }
       }
     } catch (err) {
       console.error('❌ [Route Plan] API routing request failed:', err.message);
@@ -218,6 +225,38 @@ export default function Navigation() {
     } finally {
       setCalculating(false);
     }
+  };
+
+  const enableGpsAndPlanRoute = (destName) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+          const coords = [longitude, latitude];
+          setCurrentCoords(coords);
+          setStartLocationText(`My Location [${longitude.toFixed(4)}, ${latitude.toFixed(4)}]`);
+          setIsUsingGPS(true);
+          setShowPrompt(false);
+          speakVoice("GPS system activated. Location lock completed.");
+          planRouteToWithCoords(destName, coords, true);
+        },
+        (err) => {
+          console.warn('Geolocation permission denied.');
+          setIsUsingGPS(false);
+          setShowPrompt(false);
+          planRouteToWithCoords(destName, currentCoords, true);
+        },
+        { enableHighAccuracy: true }
+      );
+    } else {
+      setIsUsingGPS(false);
+      setShowPrompt(false);
+      planRouteToWithCoords(destName, currentCoords, true);
+    }
+  };
+
+  const planRouteTo = async (destName) => {
+    await planRouteToWithCoords(destName, currentCoords, false);
   };
 
   // Submit routing request
@@ -234,7 +273,7 @@ export default function Navigation() {
       console.log('📡 [Navigation] Voice Action Event:', action, params);
 
       if (action === 'plan_route' && params && params.destination) {
-        planRouteTo(params.destination);
+        enableGpsAndPlanRoute(params.destination);
       } else if (action === 'start_navigation') {
         if (routeData) {
           setIsNavigating(true);
@@ -265,7 +304,7 @@ export default function Navigation() {
         sessionStorage.removeItem('pending_voice_action');
         if (action === 'plan_route' && dest) {
           setTimeout(() => {
-            planRouteTo(dest);
+            enableGpsAndPlanRoute(dest);
           }, 300);
         }
       } catch (e) {

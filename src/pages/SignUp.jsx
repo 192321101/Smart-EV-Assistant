@@ -53,7 +53,7 @@ export default function SignUp() {
     setLoading(false);
     
     if (res.success) {
-      navigate('/signin');
+      setOtpStep(true);
     } else {
       setErrors({ server: res.error || 'Signup failed. Please try again.' });
     }

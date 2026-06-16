@@ -37,8 +37,8 @@ BASE_URL     = os.environ.get("BASE_URL", "http://localhost:3000")
 DEMO_EMAIL   = "test1@ev.app"
 DEMO_PASS    = "Test@1234"
 # Secondary: user's account (tested in TC-009)
-USER_EMAIL   = "prabha.testuser@example.com"
-USER_PASS    = "TestPrabha@9999"
+USER_EMAIL   = "prabha02102005@gmail.com"
+USER_PASS    = "123456789"
 
 WAIT_S       = 15
 PAGE_LOAD    = 6      # seconds to wait after navigation

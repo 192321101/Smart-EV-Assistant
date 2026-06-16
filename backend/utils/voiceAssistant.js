@@ -189,7 +189,199 @@ const KNOWLEDGE_BASE = [
   }
 ];
 
-export function generateConversationalReply(cmd, originalText, vehicle, telemetry, nearbyStations) {
+const INDIA_CITIES = {
+  chennai: { lat: 13.0827, lng: 80.2707 },
+  tiruvannamalai: { lat: 12.2274, lng: 79.0747 },
+  thiruvannamalai: { lat: 12.2274, lng: 79.0747 },
+  bangalore: { lat: 12.9716, lng: 77.5946 },
+  bengaluru: { lat: 12.9716, lng: 77.5946 },
+  mysore: { lat: 12.2958, lng: 76.6394 },
+  mysuru: { lat: 12.2958, lng: 76.6394 },
+  mumbai: { lat: 19.0760, lng: 72.8777 },
+  pune: { lat: 18.5204, lng: 73.8567 },
+  delhi: { lat: 28.6139, lng: 77.2090 },
+  newdelhi: { lat: 28.6139, lng: 77.2090 },
+  salem: { lat: 11.6643, lng: 78.1460 },
+  coimbatore: { lat: 11.0168, lng: 76.9558 },
+  madurai: { lat: 9.9252, lng: 78.1198 },
+  trichy: { lat: 10.7905, lng: 78.7047 },
+  tiruchirappalli: { lat: 10.7905, lng: 78.7047 },
+  vellore: { lat: 12.9165, lng: 79.1325 },
+  pondicherry: { lat: 11.9416, lng: 79.8083 },
+  puducherry: { lat: 11.9416, lng: 79.8083 },
+  villupuram: { lat: 11.9398, lng: 79.4883 },
+  tambaram: { lat: 12.9234, lng: 80.1289 },
+  adyar: { lat: 13.0063, lng: 80.2575 },
+  poonamallee: { lat: 13.0473, lng: 80.0945 },
+  poonamalle: { lat: 13.0473, lng: 80.0945 },
+  kochi: { lat: 9.9312, lng: 76.2673 },
+  hyderabad: { lat: 17.3850, lng: 78.4867 },
+  kolkata: { lat: 22.5726, lng: 88.3639 },
+  ahmedabad: { lat: 23.0225, lng: 72.5714 },
+  jaipur: { lat: 26.9124, lng: 75.7873 },
+  lucknow: { lat: 26.8467, lng: 80.9462 },
+  nagpur: { lat: 21.1458, lng: 79.0882 },
+  chandigarh: { lat: 30.7333, lng: 76.7794 },
+  dehradun: { lat: 30.3165, lng: 78.0322 },
+  shimla: { lat: 31.1048, lng: 77.1734 },
+  srinagar: { lat: 34.0837, lng: 74.7973 },
+  goa: { lat: 15.4909, lng: 73.8278 },
+  munnar: { lat: 10.0889, lng: 77.0595 },
+  mangalore: { lat: 12.9141, lng: 74.8560 },
+  manali: { lat: 32.2396, lng: 77.1887 },
+  murudeshwar: { lat: 14.0940, lng: 74.4849 },
+  muzaffarpur: { lat: 26.1206, lng: 85.3900 },
+  chengalpattu: { lat: 12.6841, lng: 79.9774 },
+  cherthala: { lat: 9.6846, lng: 76.3364 },
+  cherrapunji: { lat: 25.2702, lng: 91.7086 },
+  pondumudi: { lat: 8.7607, lng: 77.1167 },
+  mahabalipuram: { lat: 12.6269, lng: 80.1722 },
+  satara: { lat: 17.6805, lng: 74.0183 },
+  sambalpur: { lat: 21.4669, lng: 83.9878 },
+  sangli: { lat: 16.8524, lng: 74.5815 }
+};
+
+const KNOWN_ROUTES = {
+  'chennai-tiruvannamalai': { distance: 195, timeHours: 3.5, kwh: 31.2 },
+  'tiruvannamalai-chennai': { distance: 195, timeHours: 3.5, kwh: 31.2 },
+  'chennai-thiruvannamalai': { distance: 195, timeHours: 3.5, kwh: 31.2 },
+  'thiruvannamalai-chennai': { distance: 195, timeHours: 3.5, kwh: 31.2 },
+  'bangalore-mysore': { distance: 143, timeHours: 2.5, kwh: 22.9 },
+  'mysore-bangalore': { distance: 143, timeHours: 2.5, kwh: 22.9 },
+  'bengaluru-mysuru': { distance: 143, timeHours: 2.5, kwh: 22.9 },
+  'mysuru-bengaluru': { distance: 143, timeHours: 2.5, kwh: 22.9 },
+  'mumbai-pune': { distance: 148, timeHours: 3, kwh: 23.7 },
+  'pune-mumbai': { distance: 148, timeHours: 3, kwh: 23.7 },
+  'adyar-poonamallee': { distance: 23, timeHours: 0.75, kwh: 3.7 },
+  'poonamallee-adyar': { distance: 23, timeHours: 0.75, kwh: 3.7 },
+  'chennai-villupuram': { distance: 165, timeHours: 3, kwh: 26.4 },
+  'villupuram-chennai': { distance: 165, timeHours: 3, kwh: 26.4 },
+  'chennai-pondicherry': { distance: 150, timeHours: 3, kwh: 24.0 },
+  'pondicherry-chennai': { distance: 150, timeHours: 3, kwh: 24.0 },
+  'chennai-bangalore': { distance: 345, timeHours: 6, kwh: 55.2 },
+  'bangalore-chennai': { distance: 345, timeHours: 6, kwh: 55.2 },
+  'chennai-trichy': { distance: 330, timeHours: 5.5, kwh: 52.8 },
+  'trichy-chennai': { distance: 330, timeHours: 5.5, kwh: 52.8 },
+  'bandra-andheri': { distance: 10, timeHours: 0.33, kwh: 1.6 },
+  'andheri-bandra': { distance: 10, timeHours: 0.33, kwh: 1.6 }
+};
+
+function normalizeCityName(name) {
+  let n = name.toLowerCase()
+    .replace(/(?:,\s*india|\s+india)/gi, "")
+    .replace(/(?:,\s*tamil\s*nadu|\s+tamil\s*nadu|\s+tn)/gi, "")
+    .replace(/(?:the\s+city\s+of\s+|town\s+of\s+|district\s+of\s+|in\s+)/gi, "")
+    .trim();
+  if (n.startsWith("thiru")) {
+    if (n.includes("vannamalai")) return "tiruvannamalai";
+    if (n.includes("nanthapuram")) return "trivandrum";
+  }
+  if (n === "bengaluru") return "bangalore";
+  if (n === "puducherry") return "pondicherry";
+  if (n === "cochin") return "kochi";
+  if (n === "allahabad") return "prayagraj";
+  if (n === "tuticorin") return "thoothukudi";
+  if (n === "trichy") return "tiruchirappalli";
+  if (n === "poonamalle") return "poonamallee";
+  if (n === "mysuru") return "mysore";
+  return n;
+}
+
+function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the earth in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c; // Distance in km
+  return d;
+}
+
+async function getGeocodingCoordinates(placeName) {
+  const normalized = normalizeCityName(placeName);
+  if (INDIA_CITIES[normalized]) {
+    return {
+      name: placeName,
+      lat: INDIA_CITIES[normalized].lat,
+      lng: INDIA_CITIES[normalized].lng
+    };
+  }
+
+  // Try online geocoding with 2.5s timeout
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(placeName + ', India')}&format=json&limit=1`;
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'Smart-EV-Assistant-Bot/1.0' },
+      signal: controller.signal
+    });
+    clearTimeout(timer);
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data[0]) {
+        return {
+          name: data[0].display_name.split(',')[0],
+          lat: parseFloat(data[0].lat),
+          lng: parseFloat(data[0].lon)
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[Nominatim API] Failed to geocode location online:', err.message);
+  }
+  return null;
+}
+
+async function getOnlineRoadDistance(lat1, lng1, lat2, lng2) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+    const url = `http://router.project-osrm.org/route/v1/driving/${lng1},${lat1};${lng2},${lat2}?overview=false`;
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timer);
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.routes && data.routes[0]) {
+        const distanceMeters = data.routes[0].distance;
+        const durationSeconds = data.routes[0].duration;
+        return {
+          distanceKm: Math.round(distanceMeters / 1000),
+          durationMins: Math.round(durationSeconds / 60)
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[OSRM API] Failed to fetch road distance online:', err.message);
+  }
+  return null;
+}
+
+function parseDistanceQuery(text) {
+  const clean = text.toLowerCase().trim();
+  // Case 1: distance from X to Y / from X to Y distance / navigate from X to Y
+  let match = clean.match(/(?:distance\s+(?:from\s+)?|how\s+far\s+(?:is\s+)?(?:from\s+)?|navigate\s+me\s+from\s+|navigate\s+from\s+|take\s+me\s+from\s+|route\s+from\s+)(.+?)\s+to\s+(.+)/i) ||
+              clean.match(/from\s+(.+?)\s+to\s+(.+?)(?:\s+distance|\s+how\s+far)/i);
+  if (match) {
+    return { loc1: match[1].trim(), loc2: match[2].trim() };
+  }
+  // Case 2: distance between X and Y
+  match = clean.match(/(?:distance|how\s+far)\s+between\s+(.+?)\s+and\s+(.+)/i);
+  if (match) {
+    return { loc1: match[1].trim(), loc2: match[2].trim() };
+  }
+  // Case 3: how far is X from Y
+  match = clean.match(/how\s+far\s+is\s+(.+?)\s+from\s+(.+)/i);
+  if (match) {
+    return { loc1: match[2].trim(), loc2: match[1].trim() };
+  }
+  return null;
+}
+
+export async function generateConversationalReply(cmd, originalText, vehicle, telemetry, nearbyStations, prevLogs) {
   const cleanCmd = cmd.toLowerCase().trim();
   const charge = telemetry ? telemetry.batteryPercent : (vehicle ? vehicle.currentCharge_percent : 45);
   const capacity = vehicle ? vehicle.batteryCapacity_kWh : 40.5;
@@ -213,6 +405,309 @@ export function generateConversationalReply(cmd, originalText, vehicle, telemetr
     targetPage: customPage || targetPage,
     params: customParams || params
   });
+
+  let queryToParse = cleanCmd;
+  let forceSalemTamilNadu = false;
+
+  // Check if Salem confirmation
+  const positiveConfirmations = ['yes', 'yeah', 'yup', 'correct', 'sure', 'indeed', 'y'];
+  const negativeConfirmations = ['no', 'nah', 'nope', 'never', 'n'];
+
+  const isPositive = positiveConfirmations.some(kw => cleanCmd === kw || cleanCmd.startsWith(kw + ' ') || cleanCmd.startsWith(kw + ','));
+  const isNegative = negativeConfirmations.some(kw => cleanCmd === kw || cleanCmd.startsWith(kw + ' ') || cleanCmd.startsWith(kw + ','));
+
+  if (prevLogs && prevLogs.length > 0) {
+    const lastAssistantMsg = prevLogs.find(log => log.sender === 'assistant');
+    if (lastAssistantMsg && (lastAssistantMsg.text.includes("multiple places named Salem") || lastAssistantMsg.text.includes("Salem in Tamil Nadu") || lastAssistantMsg.text.includes("I found Salem, Tamil Nadu"))) {
+      if (isPositive) {
+        forceSalemTamilNadu = true;
+        // Search for any user log that contains the word "salem" as the original query
+        const originalUserLog = prevLogs.find(log => log.sender === 'user' && log.text.toLowerCase().includes('salem'));
+        if (originalUserLog) {
+          queryToParse = originalUserLog.text.toLowerCase();
+        } else {
+          queryToParse = "how far is salem"; // fallback
+        }
+      } else if (isNegative) {
+        return makeResult(
+          "Okay, please specify which Salem you meant (e.g., Salem in Oregon, USA).",
+          'ev_knowledge'
+        );
+      }
+    }
+  }
+
+  // Salem check - trigger ambiguity response if the parsed query contains 'salem' but not 'tamil nadu'
+  const hasSalem = queryToParse.includes('salem');
+  const hasTamilNadu = queryToParse.includes('tamil nadu') || queryToParse.includes('tamilnadu') || queryToParse.includes('tn');
+  const isTwoLocationsQuery = parseDistanceQuery(queryToParse) !== null;
+
+  if (hasSalem && !hasTamilNadu && !forceSalemTamilNadu && !isTwoLocationsQuery) {
+    const navKeywords = ['navigate', 'take me', 'start navigation', 'begin navigation', 'go to', 'open navigation', 'route to', 'plan route', 'drive me'];
+    const isExplicitNavigation = navKeywords.some(kw => queryToParse.toLowerCase().includes(kw));
+    
+    if (isExplicitNavigation) {
+      return makeResult(
+        "I found Salem, Tamil Nadu. Would you like to start navigation?",
+        'unclear_location'
+      );
+    } else {
+      return makeResult(
+        "I found multiple places named Salem. Did you mean Salem in Tamil Nadu?",
+        'unclear_location'
+      );
+    }
+  }
+
+  // Tata Nexon EV Specifications Queries
+  const queryLower = queryToParse.toLowerCase();
+  
+  if (queryLower.includes('nexon') && (queryLower.includes('range') || queryLower.includes('certified'))) {
+    return makeResult(
+      "The Tata Nexon EV Max has a MIDC-certified driving range of 437 km on a single full charge.",
+      'ev_knowledge'
+    );
+  }
+
+  if (queryLower.includes('nexon') && (queryLower.includes('battery') || queryLower.includes('capacity') || queryLower.includes('size'))) {
+    return makeResult(
+      "The Tata Nexon EV Max is equipped with a 40.5 kWh high-density Lithium-ion battery pack, while the medium-range version comes with a 30 kWh battery.",
+      'ev_knowledge'
+    );
+  }
+
+  if (queryLower.includes('nexon') && (queryLower.includes('charging') || queryLower.includes('charge time') || queryLower.includes('how long'))) {
+    return makeResult(
+      "Using a 50 kW DC fast charger, the Tata Nexon EV Max can charge from 0% to 80% in approximately 56 minutes. A standard 7.2 kW AC home wallbox charger takes about 6 hours for a full charge.",
+      'ev_knowledge'
+    );
+  }
+
+  if (queryLower.includes('mileage') || queryLower.includes('efficiency') || queryLower.includes('consumption')) {
+    if (queryLower.includes('nexon') || queryLower.includes('ev')) {
+      return makeResult(
+        "Electric vehicles don't have 'mileage' in the traditional sense, but rather energy efficiency. The Tata Nexon EV has an average energy consumption of 140 to 160 Wh/km, translating to about 6 to 7 km per unit (kWh) of electricity.",
+        'ev_knowledge'
+      );
+    }
+  }
+
+  if (queryLower.includes('traffic') || queryLower.includes('routing')) {
+    return makeResult(
+      "The Smart EV Assistant utilizes real-time traffic routing to suggest alternative paths with less congestion, helping to conserve energy and optimize battery consumption during heavy traffic.",
+      'ev_knowledge'
+    );
+  }
+
+  if (queryLower.includes('nexon') && (queryLower.includes('spec') || queryLower.includes('detail') || queryLower.includes('tell me about'))) {
+    return makeResult(
+      "The Tata Nexon EV Max features a 40.5 kWh battery pack, a MIDC certified range of 437 km, support for 50 kW DC fast charging (0-80% in 56 minutes), and an electric motor delivering 143 PS of power and 250 Nm of torque.",
+      'ev_knowledge'
+    );
+  }
+
+  // Distance queries
+  const distanceQuery = parseDistanceQuery(queryToParse);
+  let loc1 = null;
+  let loc2 = null;
+
+  if (distanceQuery) {
+    loc1 = distanceQuery.loc1;
+    loc2 = distanceQuery.loc2;
+  } else {
+    // Check for single location distance query or navigation query
+    const singleMatch = queryToParse.match(/(?:how\s+far\s+is\s+to|how\s+far\s+is|distance\s+to|how\s+far\s+to|how\s+many\s+km\s+to|how\s+many\s+kilometers\s+to|navigate\s+me\s+to|navigate\s+to|take\s+me\s+to|start\s+navigation\s+to|drive\s+me\s+to|show\s+route\s+to)\s+([a-z0-9\s,]+)/i) ||
+                        queryToParse.match(/(?:distance|how\s+far)\s+(?:of|for)\s+([a-z0-9\s,]+)/i);
+    if (singleMatch) {
+      loc1 = "current location";
+      loc2 = singleMatch[1].trim();
+    }
+  }
+
+  if (loc1 && loc2) {
+    const screens = [
+      'dashboard', 'navigation', 'charging stations', 'stations', 'booking', 'slot booking', 
+      'emergency sos', 'sos', 'voice assistant', 'analytics', 'settings', 'garage', 
+      'weather alert', 'weather alerts', 'weather', 'cost optimizer', 'community', 'forum'
+    ];
+    const isExcluded = screens.includes(loc2.toLowerCase()) || 
+                       loc2.toLowerCase().includes('station') || 
+                       loc2.toLowerCase().includes('charger');
+    if (isExcluded) {
+      loc1 = null;
+      loc2 = null;
+    }
+  }
+
+  if (loc1 && loc2) {
+    // Strip trailing punctuation
+    loc1 = loc1.replace(/[?.,!]/g, "").trim();
+    loc2 = loc2.replace(/[?.,!]/g, "").trim();
+
+    // Handle Salem naming
+    if (loc1.toLowerCase().includes('salem') && !loc1.toLowerCase().includes('tamil')) {
+      loc1 = "salem, tamil nadu";
+    }
+    if (loc2.toLowerCase().includes('salem') && !loc2.toLowerCase().includes('tamil')) {
+      loc2 = "salem, tamil nadu";
+    }
+
+    let coord1 = null;
+    let coord2 = null;
+
+    if (loc1.toLowerCase().includes("current location") || loc1.toLowerCase() === "my location") {
+      let lat = 13.0473;
+      let lng = 80.0945;
+      let name1 = "your current location";
+      if (telemetry && telemetry.location && telemetry.location.coordinates) {
+        lng = telemetry.location.coordinates[0];
+        lat = telemetry.location.coordinates[1];
+        // find closest city
+        let closestCity = null;
+        let minDistance = Infinity;
+        for (const [cityName, cityData] of Object.entries(INDIA_CITIES)) {
+          const dist = Math.sqrt(Math.pow(cityData.lat - lat, 2) + Math.pow(cityData.lng - lng, 2));
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestCity = cityName;
+          }
+        }
+        if (closestCity && minDistance < 0.1) {
+          name1 = `your current location (${closestCity.charAt(0).toUpperCase() + closestCity.slice(1)})`;
+        }
+      }
+      coord1 = { lat, lng, name: name1 };
+      loc1 = name1;
+    } else {
+      coord1 = await getGeocodingCoordinates(loc1);
+    }
+
+    if (loc2.toLowerCase().includes("current location") || loc2.toLowerCase() === "my location") {
+      let lat = 13.0473;
+      let lng = 80.0945;
+      let name2 = "your current location";
+      if (telemetry && telemetry.location && telemetry.location.coordinates) {
+        lng = telemetry.location.coordinates[0];
+        lat = telemetry.location.coordinates[1];
+        let closestCity = null;
+        let minDistance = Infinity;
+        for (const [cityName, cityData] of Object.entries(INDIA_CITIES)) {
+          const dist = Math.sqrt(Math.pow(cityData.lat - lat, 2) + Math.pow(cityData.lng - lng, 2));
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestCity = cityName;
+          }
+        }
+        if (closestCity && minDistance < 0.1) {
+          name2 = `your current location (${closestCity.charAt(0).toUpperCase() + closestCity.slice(1)})`;
+        }
+      }
+      coord2 = { lat, lng, name: name2 };
+      loc2 = name2;
+    } else {
+      coord2 = await getGeocodingCoordinates(loc2);
+    }
+
+    if (coord1 && coord2) {
+      const norm1 = normalizeCityName(coord1.name);
+      const norm2 = normalizeCityName(coord2.name);
+
+      const navKeywords = ['navigate', 'take me', 'start navigation', 'begin navigation', 'go to', 'open navigation', 'route to', 'plan route', 'drive me', 'show route'];
+      const isExplicitNavigation = navKeywords.some(kw => cleanCmd.includes(kw));
+
+      const formatDuration = (mins) => {
+        const hrs = Math.floor(mins / 60);
+        const remainingMins = mins % 60;
+        let res = "";
+        if (hrs > 0) {
+          res += `${hrs} hour${hrs > 1 ? 's' : ''}`;
+        }
+        if (remainingMins > 0) {
+          if (res) res += " ";
+          res += `${remainingMins} minute${remainingMins > 1 ? 's' : ''}`;
+        }
+        return res || "0 minutes";
+      };
+
+      // Check KNOWN_ROUTES
+      const routeKey = `${norm1}-${norm2}`;
+      const revRouteKey = `${norm2}-${norm1}`;
+      let routeData = KNOWN_ROUTES[routeKey] || KNOWN_ROUTES[revRouteKey];
+
+      if (routeData) {
+        const dist = routeData.distance;
+        const timeMins = Math.round(routeData.timeHours * 60);
+        const responseText = isExplicitNavigation
+          ? `Starting navigation to ${coord2.name}. The route distance is ${dist} km and the estimated travel time is ${formatDuration(timeMins)}.`
+          : `The driving distance from ${coord1.name} to ${coord2.name} is ${dist} km and the estimated travel time is ${formatDuration(timeMins)}.`;
+        
+        return makeResult(
+          responseText,
+          isExplicitNavigation ? 'route_navigation' : 'telemetry_query',
+          isExplicitNavigation ? 'plan_route' : 'speak_only',
+          isExplicitNavigation ? '/navigation' : '',
+          isExplicitNavigation ? { 
+            origin: coord1.name,
+            destination: coord2.name,
+            distance: dist,
+            originCoords: [coord1.lng, coord1.lat],
+            destinationCoords: [coord2.lng, coord2.lat]
+          } : {}
+        );
+      }
+
+      // Attempt online distance lookup
+      const roadData = await getOnlineRoadDistance(coord1.lat, coord1.lng, coord2.lat, coord2.lng);
+      if (roadData) {
+        const dist = roadData.distanceKm;
+        const time = roadData.durationMins;
+        const responseText = isExplicitNavigation
+          ? `Starting navigation to ${coord2.name}. The route distance is ${dist} km and the estimated travel time is ${formatDuration(time)}.`
+          : `The driving distance from ${coord1.name} to ${coord2.name} is ${dist} km and the estimated travel time is ${formatDuration(time)}.`;
+        return makeResult(
+          responseText,
+          isExplicitNavigation ? 'route_navigation' : 'telemetry_query',
+          isExplicitNavigation ? 'plan_route' : 'speak_only',
+          isExplicitNavigation ? '/navigation' : '',
+          isExplicitNavigation ? {
+            origin: coord1.name,
+            destination: coord2.name,
+            distance: dist,
+            duration: time,
+            originCoords: [coord1.lng, coord1.lat],
+            destinationCoords: [coord2.lng, coord2.lat]
+          } : {}
+        );
+      } else {
+        // Fallback to Haversine
+        const haversineDist = calculateHaversineDistance(coord1.lat, coord1.lng, coord2.lat, coord2.lng);
+        const estRoadDist = Math.round(haversineDist * 1.25);
+        const estTime = Math.round(estRoadDist * 1.2);
+        const responseText = isExplicitNavigation
+          ? `Starting navigation to ${coord2.name}. The route distance is ${estRoadDist} km and the estimated travel time is ${formatDuration(estTime)}.`
+          : `The driving distance from ${coord1.name} to ${coord2.name} is ${estRoadDist} km and the estimated travel time is ${formatDuration(estTime)}.`;
+        return makeResult(
+          responseText,
+          isExplicitNavigation ? 'route_navigation' : 'telemetry_query',
+          isExplicitNavigation ? 'plan_route' : 'speak_only',
+          isExplicitNavigation ? '/navigation' : '',
+          isExplicitNavigation ? {
+            origin: coord1.name,
+            destination: coord2.name,
+            distance: estRoadDist,
+            duration: estTime,
+            originCoords: [coord1.lng, coord1.lat],
+            destinationCoords: [coord2.lng, coord2.lat]
+          } : {}
+        );
+      }
+    } else {
+      return makeResult(
+        `I'm sorry, I couldn't locate coordinates for one or both cities: "${loc1}" and/or "${loc2}". Please verify spelling.`,
+        'ev_knowledge'
+      );
+    }
+  }
 
   // 1. SOS/Emergency triggers
   const sosKeywords = ['sos', 'emergency', 'help me', 'accident', 'broken down', 'roadside assistance', 'i need help'];
@@ -374,173 +869,7 @@ export function generateConversationalReply(cmd, originalText, vehicle, telemetr
     return makeResult("Your average energy consumption is 160 Watt-hours per kilometer.", 'telemetry_query');
   }
 
-  // Distance / Routing checks between locations
-  const distMatch = cleanCmd.match(/(?:distance|how far).*?(?:from|between)\s+([a-z0-9\s]+)\s+(?:to|and)\s+([a-z0-9\s]+)/i) ||
-                    cleanCmd.match(/(?:from)\s+([a-z0-9\s]+)\s+(?:to)\s+([a-z0-9\s]+)\s+(?:distance|how far)/i);
-  
-  if (distMatch) {
-    const loc1 = distMatch[1].replace(/(?:distance|how far|between|from|to)/gi, "").trim();
-    const loc2 = distMatch[2].replace(/(?:distance|how far|between|from|to)/gi, "").trim();
-    
-    const isL1 = (name) => loc1.includes(name);
-    const isL2 = (name) => loc2.includes(name);
 
-    if ((isL1('adyar') && isL2('poonamalle')) || (isL1('poonamalle') && isL2('adyar'))) {
-      return makeResult("The driving distance from Adyar to Poonamallee in Chennai is approximately 23 kilometers. Cruising at an optimal speed of 60 km/h in your Tata Nexon EV, it will take around 45 minutes and draw 3.7 kWh of battery.", 'route_navigation');
-    }
-    if ((isL1('villupuram') && isL2('chennai')) || (isL1('chennai') && isL2('villupuram'))) {
-      return makeResult("The driving distance from Villupuram to Chennai is approximately 165 kilometers via NH45. Cruising at 80 km/h, it will take about 2.5 hours and consume roughly 26.4 kWh of battery energy. A charging stop at Tindivanam VoltGrid is highly recommended.", 'route_navigation');
-    }
-    if ((isL1('pondicherry') && isL2('chennai')) || (isL1('chennai') && isL2('pondicherry')) || (isL1('puducherry') && isL2('chennai')) || (isL1('chennai') && isL2('puducherry'))) {
-      return makeResult("The driving distance between Chennai and Pondicherry is approximately 150 kilometers via the East Coast Road. Cruising at 75 km/h, it takes around 2.5 hours and consumes 24 kWh.", 'route_navigation');
-    }
-    if ((isL1('bangalore') && isL2('chennai')) || (isL1('chennai') && isL2('bangalore')) || (isL1('bengaluru') && isL2('chennai')) || (isL1('chennai') && isL2('bengaluru'))) {
-      return makeResult("The distance between Chennai and Bangalore is approximately 345 kilometers. Travel time is around 6 hours, consuming 55 kWh. An intermediate DC fast charging stop at Vellore is recommended.", 'route_navigation');
-    }
-    if ((isL1('trichy') && isL2('chennai')) || (isL1('chennai') && isL2('trichy')) || (isL1('tiruchirappalli') && isL2('chennai')) || (isL1('chennai') && isL2('tiruchirappalli'))) {
-      return makeResult("The distance between Chennai and Trichy is approximately 330 kilometers. Cruising at 80 km/h takes about 5 hours and consumes 53 kWh.", 'route_navigation');
-    }
-    if ((isL1('mumbai') && isL2('pune')) || (isL1('pune') && isL2('mumbai'))) {
-      return makeResult("The distance between Mumbai and Pune is approximately 148 kilometers. Cruising at 80 km/h, it will take about 2 hours and 15 minutes, consuming 24 kWh of energy. A charging stop at Lonavala VoltGrid is recommended.", 'route_navigation');
-    }
-    if ((isL1('bandra') && isL2('andheri')) || (isL1('andheri') && isL2('bandra'))) {
-      return makeResult("The distance from Bandra to Andheri is approximately 10 kilometers. Traveling via the Western Express Highway takes about 20 minutes and draws roughly 1.6 kWh of energy.", 'route_navigation');
-    }
-    
-    // Upgraded Haversine calculation for all major Indian cities
-    const INDIA_CITIES = {
-      delhi: { lat: 28.6139, lng: 77.2090 },
-      newdelhi: { lat: 28.6139, lng: 77.2090 },
-      mumbai: { lat: 19.0760, lng: 72.8777 },
-      kolkata: { lat: 22.5726, lng: 88.3639 },
-      chennai: { lat: 13.0827, lng: 80.2707 },
-      bangalore: { lat: 12.9716, lng: 77.5946 },
-      bengaluru: { lat: 12.9716, lng: 77.5946 },
-      hyderabad: { lat: 17.3850, lng: 78.4867 },
-      pune: { lat: 18.5204, lng: 73.8567 },
-      ahmedabad: { lat: 23.0225, lng: 72.5714 },
-      surat: { lat: 21.1702, lng: 72.8311 },
-      jaipur: { lat: 26.9124, lng: 75.7873 },
-      lucknow: { lat: 26.8467, lng: 80.9462 },
-      kochi: { lat: 9.9312, lng: 76.2673 },
-      cochin: { lat: 9.9312, lng: 76.2673 },
-      trivandrum: { lat: 8.5241, lng: 76.9366 },
-      thiruvananthapuram: { lat: 8.5241, lng: 76.9366 },
-      bhopal: { lat: 23.2599, lng: 77.4126 },
-      indore: { lat: 22.7196, lng: 75.8577 },
-      patna: { lat: 25.5941, lng: 85.1376 },
-      ranchi: { lat: 23.3441, lng: 85.3096 },
-      bhubaneswar: { lat: 20.2961, lng: 85.8245 },
-      raipur: { lat: 21.2514, lng: 81.6296 },
-      guwahati: { lat: 26.1158, lng: 91.7086 },
-      panaji: { lat: 15.4909, lng: 73.8278 },
-      goa: { lat: 15.4909, lng: 73.8278 },
-      chandigarh: { lat: 30.7333, lng: 76.7794 },
-      dehradun: { lat: 30.3165, lng: 78.0322 },
-      shimla: { lat: 31.1048, lng: 77.1734 },
-      srinagar: { lat: 34.0837, lng: 74.7973 },
-      jammu: { lat: 32.7266, lng: 74.8570 },
-      amritsar: { lat: 31.6340, lng: 74.8723 },
-      kanpur: { lat: 26.4499, lng: 80.3319 },
-      nagpur: { lat: 21.1458, lng: 79.0882 },
-      visakhapatnam: { lat: 17.6868, lng: 83.2185 },
-      vijayawada: { lat: 16.5062, lng: 80.6480 },
-      agartala: { lat: 23.8315, lng: 91.2868 },
-      shillong: { lat: 25.5788, lng: 91.8933 },
-      imphal: { lat: 24.8170, lng: 93.9368 },
-      itanagar: { lat: 27.0844, lng: 93.6053 },
-      aizawl: { lat: 23.7307, lng: 92.7173 },
-      kohima: { lat: 25.6751, lng: 94.1086 },
-      gangtok: { lat: 27.3314, lng: 88.6138 },
-      agra: { lat: 27.1767, lng: 78.0081 },
-      varanasi: { lat: 25.3176, lng: 82.9739 },
-      prayagraj: { lat: 25.4358, lng: 81.8463 },
-      allahabad: { lat: 25.4358, lng: 81.8463 },
-      madurai: { lat: 9.9252, lng: 78.1198 },
-      coimbatore: { lat: 11.0168, lng: 76.9558 },
-      trichy: { lat: 10.7905, lng: 78.7047 },
-      tiruchirappalli: { lat: 10.7905, lng: 78.7047 },
-      salem: { lat: 11.6643, lng: 78.1460 },
-      tirunelveli: { lat: 8.7139, lng: 77.7567 },
-      tiruppur: { lat: 11.1085, lng: 77.3411 },
-      erode: { lat: 11.3410, lng: 77.7172 },
-      vellore: { lat: 12.9165, lng: 79.1325 },
-      thanjavur: { lat: 10.7870, lng: 79.1378 },
-      thoothukudi: { lat: 8.7642, lng: 78.1348 },
-      tuticorin: { lat: 8.7642, lng: 78.1348 },
-      dindigul: { lat: 10.3673, lng: 77.9806 },
-      nagercoil: { lat: 8.1833, lng: 77.4119 },
-      kanchipuram: { lat: 12.8342, lng: 79.7036 },
-      tiruvannamalai: { lat: 12.2274, lng: 79.0747 },
-      cuddalore: { lat: 11.7480, lng: 79.7714 },
-      villupuram: { lat: 11.9398, lng: 79.4883 },
-      pondicherry: { lat: 11.9416, lng: 79.8083 },
-      puducherry: { lat: 11.9416, lng: 79.8083 },
-      hosur: { lat: 12.7409, lng: 77.8253 },
-      karur: { lat: 10.9601, lng: 78.0766 },
-      kumbakonam: { lat: 10.9602, lng: 79.3844 },
-      nagapattinam: { lat: 10.7672, lng: 79.8449 },
-      ooty: { lat: 11.4102, lng: 76.6950 },
-      udhagamandalam: { lat: 11.4102, lng: 76.6950 },
-      karaikudi: { lat: 10.0747, lng: 78.7842 },
-      namakkal: { lat: 11.2189, lng: 78.1672 },
-      pudukkottai: { lat: 10.3797, lng: 78.8236 },
-      ramanathapuram: { lat: 9.3639, lng: 78.8395 },
-      sivakasi: { lat: 9.4531, lng: 77.7946 },
-      theni: { lat: 10.0104, lng: 77.4768 },
-      virudhunagar: { lat: 9.5872, lng: 77.9514 },
-      ambur: { lat: 12.7857, lng: 78.7047 },
-      adyar: { lat: 13.0063, lng: 80.2575 },
-      poonamallee: { lat: 13.0473, lng: 80.0945 },
-      poonamalle: { lat: 13.0473, lng: 80.0945 },
-      tambaram: { lat: 12.9234, lng: 80.1289 },
-      velachery: { lat: 12.9802, lng: 80.2227 },
-      avadi: { lat: 13.1167, lng: 80.1000 }
-    };
-
-    const key1 = Object.keys(INDIA_CITIES).find(k => loc1.includes(k));
-    const key2 = Object.keys(INDIA_CITIES).find(k => loc2.includes(k));
-
-    if (key1 && key2) {
-      const getHaversineDistance = (lat1, lon1, lat2, lon2) => {
-        const R = 6371; 
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-          Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-      };
-
-      const rawDist = getHaversineDistance(INDIA_CITIES[key1].lat, INDIA_CITIES[key1].lng, INDIA_CITIES[key2].lat, INDIA_CITIES[key2].lng);
-      let calculatedDist = Math.round(rawDist * (rawDist < 30 ? 1.25 : 1.22));
-      
-      if ((key1.includes('villupuram') && key2.includes('chennai')) || (key1.includes('chennai') && key2.includes('villupuram'))) {
-        calculatedDist = 165; 
-      }
-
-      const estKwh = Number((calculatedDist * 0.16).toFixed(1));
-      const estHours = Number((calculatedDist / 70).toFixed(1)); 
-
-      const displayLoc1 = key1.charAt(0).toUpperCase() + key1.slice(1);
-      const displayLoc2 = key2.charAt(0).toUpperCase() + key2.slice(1);
-
-      return makeResult(`The driving distance from ${displayLoc1} to ${displayLoc2} is approximately ${calculatedDist} kilometers. Travelling by EV, it will take about ${estHours} hours and consume ${estKwh} kWh of battery power. Let me know if you would like me to plot this route.`, 'route_navigation');
-    }
-
-    const strHash = (str) => {
-      let hash = 0;
-      for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-      return Math.abs(hash);
-    };
-    const calculatedDist = (strHash(loc1) % 400) + (strHash(loc2) % 300) + 25;
-    const estKwh = Number((calculatedDist * 0.16).toFixed(1));
-    const estMins = Math.round(calculatedDist * 1.5);
-    
-    return makeResult(`Calculating route (Offline Estimated Range)... The calculated distance from ${loc1} to ${loc2} is approximately ${calculatedDist} kilometers. Cruising with a standard EV, it will consume about ${estKwh} kWh and take roughly ${estMins} minutes of travel time. Note: For exact GPS routing coordinates, connect to online maps server.`, 'route_navigation');
-  }
 
   // Speed and distance target range calculations (contains numbers)
   const distanceMatch = cleanCmd.match(/(\d+)\s*(?:km|kilometer|k\.m\.)/i);

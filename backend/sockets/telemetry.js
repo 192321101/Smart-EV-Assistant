@@ -369,8 +369,11 @@ export default function registerTelemetrySocket(io) {
           }
         }
 
+        // Fetch last 10 logs for conversational context
+        const prevLogs = await VoiceLog.find({ userId: socket.userId }).sort({ createdAt: -1 }).limit(10);
+
         // 2. Generate conversational reply
-        const result = generateConversationalReply(command, command, vehicle, telemetry, stations);
+        const result = await generateConversationalReply(command, command, vehicle, telemetry, stations, prevLogs);
 
         // 3. Log assistant reply in DB
         await VoiceLog.create({

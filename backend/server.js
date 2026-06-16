@@ -56,10 +56,22 @@ const app = express();
 const server = http.createServer(app);
 
 // SEC-020: Restrict CORS to the configured frontend origin only.
-const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://dist-taupe-chi-67.vercel.app'
+].filter(Boolean);
 
 const corsOptions = {
-  origin: allowedOrigin,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 };
@@ -449,8 +461,8 @@ async function seedUsersAndData() {
       // SEC-017: Replaced real email with fictional placeholder.
       const user_prabha = await User.create({
         name: 'Prabha User',
-        email: 'prabha.testuser@example.com',
-        password: 'TestPrabha@9999',
+        email: 'prabha02102005@gmail.com',
+        password: '123456789',
         phone: '+919876543219',
         evModel: '4 Wheeler',
         role: 'driver',
