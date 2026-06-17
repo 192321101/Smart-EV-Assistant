@@ -116,29 +116,29 @@ jobs:
         run: |
           python tests/generate_excel_report.py
 
-       - name: Setup Java JDK
-         uses: actions/setup-java@v4
-         with:
-           distribution: 'zulu'
-           java-version: '17'
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
 
-       - name: Run Android Unit Tests
-         run: |
-           cd android/frontend
-           chmod +x gradlew
-           ./gradlew testDebugUnitTest
+      - name: Run Android Unit Tests
+        run: |
+          cd android/frontend
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest
 
-       - name: Parse Android Test Results
-         if: always()
-         run: |
-           python tests/parse_android_tests.py
+      - name: Parse Android Test Results
+        if: always()
+        run: |
+          python tests/parse_android_tests.py
 
-       - name: Upload Test and Security Reports
-         uses: actions/upload-artifact@v4
-         with:
-           name: e2e-and-security-reports
-           path: |
-             tests/ev_test_report.xlsx
-             Vulnerability Test Results/Security_Test_Status.xlsx
-             android/frontend/app/build/reports/tests/testDebugUnitTest/
-           if-no-files-found: warn
+      - name: Upload Test and Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-and-security-reports
+          path: |
+            tests/ev_test_report.xlsx
+            Vulnerability Test Results/Security_Test_Status.xlsx
+            android/frontend/app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: warn
