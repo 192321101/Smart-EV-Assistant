@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgDark"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/sos_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Node"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/sos_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Press the emergency beacon to broadcast your current GPS coords and alert dispatch crews."
+        android:textColor="@color/textColorSecondary"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/sos_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Big red SOS Button -->
+    <Button
+        android:id="@+id/sos_trigger_btn"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:text="SOS"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/textColorPrimary"
+        android:backgroundTint="@color/emergencyRed"
+        app:cornerRadius="110dp"
+        app:elevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/sos_subtitle"
+        app:layout_constraintBottom_toTopOf="@+id/sos_status_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Status Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sos_status_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardDark"
+        app:cardCornerRadius="12dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚨 Alert Dispatched"
+                android:textColor="@color/emergencyRed"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sos_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dispatcher Sent: Yes\nContacts Alerted: 2\nNearest responder dispatched."
+                android:textColor="@color/textColorPrimary"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

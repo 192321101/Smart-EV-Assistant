@@ -14,6 +14,50 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Generate Test Pre-Summary
+        run: |
+          echo "## 📊 Smart EV Assistant - Test Suite Pre-Summary" >> $GITHUB_STEP_SUMMARY
+          echo "This summary outlines the testing modules and security audits scheduled for execution in this CI/CD run." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📱 1. E2E Test Suite (Selenium Web App)" >> $GITHUB_STEP_SUMMARY
+          echo "* **Base URL**: http://localhost:3000" >> $GITHUB_STEP_SUMMARY
+          echo "* **Browser Mode**: Headless Chrome (stable)" >> $GITHUB_STEP_SUMMARY
+          echo "* **Test Driver**: ChromeDriver via WebDriverManager" >> $GITHUB_STEP_SUMMARY
+          echo "* **Demo Accounts**: \`test1@ev.app\` (Driver), \`admin@ev.app\` (Admin), \`operator@ev.app\` (Operator)" >> $GITHUB_STEP_SUMMARY
+          echo "* **Total Modules**: 15 Modules (55+ Test Cases)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 1**: Splash & Welcome Screen (TC-001 to TC-004)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 2**: User Authentication & Sign-Up (TC-005 to TC-017)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 3**: System Dashboard & Telemetry Cards (TC-018 to TC-027)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 4**: Map Navigation (TC-028 to TC-031)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 5**: Charging Station Hubs (TC-032 to TC-034)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 6**: Slot Booking & Scheduling (TC-035 to TC-037)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 7**: Emergency SOS Dispatch (TC-038 to TC-040)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 8**: Community Forums & Leaderboards (TC-041 to TC-042)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 9**: AI Voice Assistant Commands (TC-043 to TC-044)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 10**: Energy & Session Analytics (TC-045 to TC-046)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 11**: Profile & Notification Settings (TC-047 to TC-049)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 12**: Smart Weather Alerts (TC-050 to TC-051)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 13**: Cost Optimizer Tariff Analyzer (TC-052 to TC-053)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 14**: Admin Terminal & User Management (TC-054 to TC-055)" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Module 15**: Sidebar Navigation Links" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔒 2. Vulnerability & Security Audits" >> $GITHUB_STEP_SUMMARY
+          echo "* **Audit Tool**: Custom Scanners & Reports" >> $GITHUB_STEP_SUMMARY
+          echo "* **Areas Covered**:" >> $GITHUB_STEP_SUMMARY
+          echo "  - CORS Policy Restrictions" >> $GITHUB_STEP_SUMMARY
+          echo "  - JWT Secret Strength & Verification" >> $GITHUB_STEP_SUMMARY
+          echo "  - SQL & NoSQL Injection Protection" >> $GITHUB_STEP_SUMMARY
+          echo "  - Authentication Token Blocklisting" >> $GITHUB_STEP_SUMMARY
+          echo "  - API Rate Limiting Config" >> $GITHUB_STEP_SUMMARY
+          echo "  - Sensitive Data Encryption (Bcrypt)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🤖 3. Mobile Android App Testing" >> $GITHUB_STEP_SUMMARY
+          echo "* **Frontend Directory**: \`android/frontend\` (Kotlin codebase)" >> $GITHUB_STEP_SUMMARY
+          echo "* **Backend Directory**: \`android/backend\` (Node.js API endpoint)" >> $GITHUB_STEP_SUMMARY
+          echo "* **Testing Type**: JUnit & Espresso Automated Tests" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,7 +69,7 @@ jobs:
 
       - name: Install Backend Dependencies
         run: |
-          cd backend
+          cd android/backend
           npm ci
 
       - name: Start Backend Server (runs MongoMemoryServer internally)
@@ -37,7 +81,7 @@ jobs:
           SEED_OPERATOR_PASSWORD: Operator@1234
           NODE_ENV: test
         run: |
-          cd backend
+          cd android/backend
           npm start &
 
       - name: Start Frontend Server
@@ -72,11 +116,29 @@ jobs:
         run: |
           python tests/generate_excel_report.py
 
-      - name: Upload Test and Security Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: e2e-and-security-reports
-          path: |
-            tests/ev_test_report.xlsx
-            Vulnerability Test Results/Security_Test_Status.xlsx
-          if-no-files-found: error
+       - name: Setup Java JDK
+         uses: actions/setup-java@v4
+         with:
+           distribution: 'zulu'
+           java-version: '17'
+
+       - name: Run Android Unit Tests
+         run: |
+           cd android/frontend
+           chmod +x gradlew
+           ./gradlew testDebugUnitTest
+
+       - name: Parse Android Test Results
+         if: always()
+         run: |
+           python tests/parse_android_tests.py
+
+       - name: Upload Test and Security Reports
+         uses: actions/upload-artifact@v4
+         with:
+           name: e2e-and-security-reports
+           path: |
+             tests/ev_test_report.xlsx
+             Vulnerability Test Results/Security_Test_Status.xlsx
+             android/frontend/app/build/reports/tests/testDebugUnitTest/
+           if-no-files-found: warn

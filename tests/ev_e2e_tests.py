@@ -86,8 +86,13 @@ def is_alive(driver):
 # ──────────────────────────────────────────────────────────────────────────────
 # RESULT STORE
 # ──────────────────────────────────────────────────────────────────────────────
+last_time_store = [time.time()]
+
 def record(tc_id, module, tc_name, description, steps, expected, actual,
            status, notes=""):
+    now = time.time()
+    duration = round(now - last_time_store[0], 2)
+    last_time_store[0] = now
     results.append({
         "TC_ID":       tc_id,
         "Module":      module,
@@ -99,6 +104,7 @@ def record(tc_id, module, tc_name, description, steps, expected, actual,
         "Status":      status,
         "Notes":       notes,
         "Timestamp":   datetime.now().strftime("%H:%M:%S"),
+        "Duration":    f"{duration}s",
     })
     icon = "[PASS]" if status == "PASS" else ("[FAIL]" if status == "FAIL" else "[SKIP]")
     print(f"  {icon} [{tc_id}] {tc_name} -> {status}")
@@ -1175,6 +1181,23 @@ def generate_report():
 
     wb.save(REPORT_NAME)
     print(f"\n[REPORT] Saved -> {REPORT_NAME}")
+
+    # Write to GitHub Step Summary if environment variable exists
+    if "GITHUB_STEP_SUMMARY" in os.environ:
+        summary_file = os.environ["GITHUB_STEP_SUMMARY"]
+        try:
+            with open(summary_file, "a", encoding="utf-8") as f:
+                f.write("\n## E2E Test Results\n\n")
+                f.write(f"**Total:** {total} | **Pass:** {passed} | **Fail:** {failed} | **Pass Rate:** {rate}%\n\n")
+                f.write("| ID | Module | Test Name | Status | Duration |\n")
+                f.write("|----|--------|-----------|--------|----------|\n")
+                for r in results:
+                    status_emoji = "✅ PASS" if r["Status"] == "PASS" else ("❌ FAIL" if r["Status"] == "FAIL" else "⚠️ SKIP")
+                    f.write(f"| {r['TC_ID']} | {r['Module']} | {r['TC_Name']} | {status_emoji} | {r.get('Duration', '0.0s')} |\n")
+                f.write("\n")
+        except Exception as e:
+            print(f"[ERROR] Failed to write E2E results to GITHUB_STEP_SUMMARY: {e}")
+
     return REPORT_NAME
 
 

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgDark"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/signin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Driver Gateway"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/signin_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in to sync with the smart charging grid"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/signin_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Email input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"
+            android:textColorHint="@color/textColorSecondary"
+            android:layout_marginTop="40dp"
+            app:boxBackgroundColor="@color/cardDark"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/signin_subtitle"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textColorHint="@color/textColorSecondary"
+            android:layout_marginTop="16dp"
+            app:boxBackgroundColor="@color/cardDark"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/textColorSecondary"
+            app:layout_constraintTop_toBottomOf="@id/email_layout"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/forgot_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/password_layout"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/signin_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="SIGN IN"
+            android:textStyle="bold"
+            android:textColor="@color/textColorPrimary"
+            android:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/forgot_password_btn"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/goto_signup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Create account"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/signin_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Quick Demo Accounts -->
+        <TextView
+            android:id="@+id/demo_accounts_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QUICK MOCK CREDENTIALS"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.1"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/goto_signup_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/demo_accounts_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/demo_driver_btn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Driver"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                app:strokeColor="@color/colorPrimary"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/demo_admin_btn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Admin"
+                android:textColor="@color/accentOrange"
+                android:textSize="12sp"
+                app:strokeColor="@color/accentOrange"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp" />
+
+            <Button
+                android:id="@+id/demo_operator_btn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Operator"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:strokeColor="@color/colorAccent"
+                android:layout_marginStart="4dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

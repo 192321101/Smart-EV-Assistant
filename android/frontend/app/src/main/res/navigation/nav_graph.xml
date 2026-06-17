@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_splash">
+
+    <fragment
+        android:id="@+id/nav_splash"
+        android:name="com.smartev.assistant.ui.SplashFragment"
+        android:label="Splash" />
+
+    <fragment
+        android:id="@+id/nav_welcome"
+        android:name="com.smartev.assistant.ui.WelcomeFragment"
+        android:label="Welcome" />
+
+    <fragment
+        android:id="@+id/nav_signin"
+        android:name="com.smartev.assistant.ui.SignInFragment"
+        android:label="SignIn" />
+
+    <fragment
+        android:id="@+id/nav_signup"
+        android:name="com.smartev.assistant.ui.SignUpFragment"
+        android:label="SignUp" />
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.smartev.assistant.ui.DashboardFragment"
+        android:label="Dashboard" />
+
+    <fragment
+        android:id="@+id/nav_stations"
+        android:name="com.smartev.assistant.ui.StationsFragment"
+        android:label="Stations" />
+
+    <fragment
+        android:id="@+id/nav_bookings"
+        android:name="com.smartev.assistant.ui.BookingFragment"
+        android:label="Bookings" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.smartev.assistant.ui.SettingsFragment"
+        android:label="Settings" />
+
+    <fragment
+        android:id="@+id/nav_sos"
+        android:name="com.smartev.assistant.ui.EmergencySOSFragment"
+        android:label="Emergency SOS" />
+
+    <fragment
+        android:id="@+id/nav_voice"
+        android:name="com.smartev.assistant.ui.VoiceAssistantFragment"
+        android:label="Voice Assistant" />
+
+    <fragment
+        android:id="@+id/nav_analytics"
+        android:name="com.smartev.assistant.ui.AnalyticsFragment"
+        android:label="Analytics" />
+
+    <fragment
+        android:id="@+id/nav_community"
+        android:name="com.smartev.assistant.ui.CommunityFragment"
+        android:label="Community" />
+
+    <fragment
+        android:id="@+id/nav_cost_optimizer"
+        android:name="com.smartev.assistant.ui.CostOptimizerFragment"
+        android:label="Cost Optimizer" />
+
+    <fragment
+        android:id="@+id/nav_weather"
+        android:name="com.smartev.assistant.ui.WeatherAlertFragment"
+        android:label="Weather Alerts" />
+</navigation>
