@@ -121,16 +121,21 @@ def count_elements(driver, css_selector):
 
 def go(driver, path):
     try:
-        driver.get(f"{BASE_URL}{path}")
-        time.sleep(PAGE_LOAD)
-    except Exception:
-        pass
+        current_url = driver.current_url
+        if "404" in driver.title or BASE_URL not in current_url or len(html_src(driver)) < 300:
+            driver.get(BASE_URL)
+            time.sleep(PAGE_LOAD)
+        
+        if path != "/":
+            driver.execute_script(f"window.history.pushState({{}}, '', '{path}'); window.dispatchEvent(new PopStateEvent('popstate'));")
+            time.sleep(PAGE_LOAD)
+    except Exception as ex:
+        print(f"  [NAV] Error navigating client-side to {path}: {ex}")
 
 def do_login(driver, email=DEMO_EMAIL, password=DEMO_PASS):
     global _auth_method
     try:
-        driver.get(f"{BASE_URL}/signin")
-        time.sleep(PAGE_LOAD)
+        go(driver, "/signin")
         
         # Check if we are already logged in
         if "/dashboard" in driver.current_url:
@@ -139,10 +144,31 @@ def do_login(driver, email=DEMO_EMAIL, password=DEMO_PASS):
 
         # Click demo fill button if using demo email
         if email == "test1@ev.app":
-            demo_btn = WebDriverWait(driver, 5).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "#demo-driver-btn"))
-            )
-            driver.execute_script("arguments[0].click();", demo_btn)
+            try:
+                # 1. Try finding by ID
+                demo_btn = WebDriverWait(driver, 2).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "#demo-driver-btn"))
+                )
+                driver.execute_script("arguments[0].click();", demo_btn)
+            except Exception:
+                try:
+                    # 2. Try finding by Driver button text
+                    demo_btn = WebDriverWait(driver, 2).until(
+                        EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Driver')]"))
+                    )
+                    driver.execute_script("arguments[0].click();", demo_btn)
+                except Exception:
+                    # 3. Fallback to manual credential insertion
+                    ei = WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
+                    )
+                    ei.click()
+                    ei.clear()
+                    ei.send_keys(email)
+                    pi = driver.find_element(By.CSS_SELECTOR, "input[type='password']")
+                    pi.click()
+                    pi.clear()
+                    pi.send_keys(password)
         else:
             ei = WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
@@ -171,7 +197,7 @@ def do_login(driver, email=DEMO_EMAIL, password=DEMO_PASS):
 # ──────────────────────────────────────────────────────────────────────────────
 def trigger_empty_signin(d):
     try:
-        d.get(f"{BASE_URL}/signin")
+        go(d, "/signin")
         time.sleep(1.5)
         submit_btn = d.find_element(By.CSS_SELECTOR, "button[type='submit']")
         d.execute_script("arguments[0].click();", submit_btn)
@@ -182,7 +208,7 @@ def trigger_empty_signin(d):
 
 def trigger_invalid_email_signin(d):
     try:
-        d.get(f"{BASE_URL}/signin")
+        go(d, "/signin")
         time.sleep(1.5)
         email_input = d.find_element(By.CSS_SELECTOR, "input[type='email']")
         email_input.clear()
@@ -196,7 +222,7 @@ def trigger_invalid_email_signin(d):
 
 def trigger_wrong_login(d):
     try:
-        d.get(f"{BASE_URL}/signin")
+        go(d, "/signin")
         time.sleep(1.5)
         email_input = d.find_element(By.CSS_SELECTOR, "input[type='email']")
         email_input.clear()
@@ -213,9 +239,9 @@ def trigger_wrong_login(d):
 
 def check_forgot_password(d):
     try:
-        d.get(f"{BASE_URL}/signin")
+        go(d, "/signin")
         time.sleep(1.5)
-        btns = d.find_elements(By.XPATH, "//button[contains(text(),'Forgot Password')]")
+        btns = d.find_elements(By.XPATH, "//button[contains(.,'Forgot Password')]")
         if btns:
             d.execute_script("arguments[0].click();", btns[0])
             time.sleep(0.5)
@@ -230,9 +256,9 @@ def check_forgot_password(d):
 
 def check_quick_fill(d, role_name, expected_email):
     try:
-        d.get(f"{BASE_URL}/signin")
+        go(d, "/signin")
         time.sleep(1.5)
-        btn = d.find_element(By.XPATH, f"//button[.//span[text()='{role_name}']]")
+        btn = d.find_element(By.XPATH, f"//button[contains(.,'{role_name}')]")
         d.execute_script("arguments[0].click();", btn)
         time.sleep(0.5)
         val = d.find_element(By.CSS_SELECTOR, "input[type='email']").get_attribute("value")
@@ -242,7 +268,7 @@ def check_quick_fill(d, role_name, expected_email):
 
 def trigger_empty_signup(d):
     try:
-        d.get(f"{BASE_URL}/signup")
+        go(d, "/signup")
         time.sleep(1.5)
         submit_btn = d.find_element(By.CSS_SELECTOR, "button[type='submit']")
         d.execute_script("arguments[0].click();", submit_btn)
@@ -262,13 +288,13 @@ def click_and_verify(d, xpath, expected_path):
 
 def check_dashboard_shortcut_nav(d, text, path):
     try:
-        d.get(f"{BASE_URL}/dashboard")
+        go(d, "/dashboard")
         time.sleep(1.5)
         btn = d.find_element(By.XPATH, f"//button[contains(.,'{text}')]")
         d.execute_script("arguments[0].click();", btn)
         time.sleep(1.5)
         success = path in d.current_url
-        d.get(f"{BASE_URL}/dashboard")
+        go(d, "/dashboard")
         time.sleep(1)
         return success
     except Exception:
