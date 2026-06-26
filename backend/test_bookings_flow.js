@@ -106,8 +106,8 @@ async function runTest() {
       });
       throw new Error('Double-booking succeeded! Validation check failed.');
     } catch (err) {
-      if (err.response && err.response.status === 400) {
-        console.log(`✅ [Booking] Rejection successful: 400 - ${err.response.data.message}`);
+      if (err.response && (err.response.status === 400 || err.response.status === 409)) {
+        console.log(`✅ [Booking] Rejection successful: ${err.response.status} - ${err.response.data.message}`);
       } else {
         throw err;
       }

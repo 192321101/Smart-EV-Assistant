@@ -12,6 +12,9 @@ async function diagnose() {
   }
 
   try {
+    // Clear conflicting users from DB first to prevent duplicate key errors
+    await User.deleteMany({ email: { $in: ['test1@ev.app', 'prabha02102005@gmail.com'] } });
+
     // Replicate User seeding code
     console.log('Seeding users...');
     const driver = await User.create({
@@ -46,8 +49,10 @@ async function diagnose() {
     }
   } catch (err) {
     console.error('Error during diagnosis:', err);
+    process.exit(1);
   } finally {
     await mongoose.disconnect();
+    process.exit(0);
   }
 }
 

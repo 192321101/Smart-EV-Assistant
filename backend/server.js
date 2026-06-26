@@ -12,6 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import connectDB from './config/db.js';
+import mongoose from 'mongoose';
 import registerTelemetrySocket from './sockets/telemetry.js';
 
 // Route Imports
@@ -42,11 +43,14 @@ import bcrypt from 'bcryptjs';
 
 // dotenv.config() already called above at module load time.
 
+let isSeeded = false;
+
 // Connect to MongoDB Atlas
 connectDB().then(async (isConnected) => {
   if (isConnected) {
     await seedStations();
     await seedUsersAndData();
+    isSeeded = true;
   } else {
     console.log('⚠️ [DB Seed] Skipping seed because database connection is offline.');
   }
@@ -142,6 +146,15 @@ app.use('/api/location', locationRoutes);
 
 // Base route for connectivity verification
 app.get('/api/health', (req, res) => {
+  const dbConnected = mongoose.connection.readyState === 1;
+  if (!dbConnected || !isSeeded) {
+    return res.status(503).json({ 
+      success: false, 
+      status: 'Service Unavailable',
+      dbConnected,
+      isSeeded
+    });
+  }
   res.json({ success: true, status: 'Smart EV Assistant API is fully operational' });
 });
 

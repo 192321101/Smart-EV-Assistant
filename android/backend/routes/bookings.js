@@ -95,8 +95,12 @@ router.post('/', protect, async (req, res) => {
     const updatedStation = await Station.findOneAndUpdate(
       {
         _id: stationId,
-        'slots.id': slotId,
-        'slots.status': 'available'
+        slots: {
+          $elemMatch: {
+            id: slotId,
+            status: 'available'
+          }
+        }
       },
       {
         $set: { 'slots.$.status': 'occupied' }
