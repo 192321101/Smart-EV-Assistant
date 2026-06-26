@@ -98,3 +98,6 @@ dist-ssr/
 .vercel
 
 Test Results/
+
+__pycache__/
+*.pyc
