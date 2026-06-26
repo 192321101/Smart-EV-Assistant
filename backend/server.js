@@ -95,7 +95,7 @@ app.use(express.json({ limit: '2mb' }));
 // SEC-021: Global rate limiter — 200 requests per 15 minutes per IP (increased in dev/test).
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: process.env.NODE_ENV === 'production' ? 200 : 10000,
+  max: process.env.DISABLE_RATE_LIMIT === 'true' ? 1000000 : (process.env.NODE_ENV === 'production' ? 200 : 10000),
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: 'Too many requests, please try again later.' }
