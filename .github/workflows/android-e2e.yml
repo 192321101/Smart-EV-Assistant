@@ -1,0 +1,121 @@
+name: Android Appium E2E Automation & Reports Publishing
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  android-e2e-testing:
+    runs-on: macos-13 # Using macOS as recommended for Android Emulator acceleration
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r appium/requirements.txt
+
+      - name: Install Appium and Drivers
+        run: |
+          npm install -g appium
+          appium driver install uiautomator2
+
+      - name: Install Android Backend Dependencies
+        run: |
+          cd android/backend
+          npm ci
+
+      - name: Start Android Backend API Server
+        run: |
+          cd android/backend
+          npm start &
+
+      - name: Build Android Debug APK
+        run: |
+          cd android/frontend
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Run Android Appium E2E Tests
+        env:
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          python appium/appium_e2e_tests.py
+
+      - name: Prepare GitHub Pages Deployment Structure
+        if: always()
+        run: |
+          mkdir -p deploy-pages/reports/latest
+          mkdir -p deploy-pages/reports/history/build-${{ github.run_number }}
+          
+          # Copy to latest
+          cp -r "Test Results/HTML/execution-report.html" deploy-pages/reports/latest/ || true
+          cp -r "Test Results/Summary/summary.md" deploy-pages/reports/latest/ || true
+          cp -r "Test Results/Excel/Automation_Test_Report.xlsx" deploy-pages/reports/latest/ || true
+          cp -r "Test Results/Screenshots" deploy-pages/reports/latest/ || true
+          cp -r "Test Results/Logs" deploy-pages/reports/latest/ || true
+          
+          # Copy to history
+          cp -r "Test Results/HTML/execution-report.html" deploy-pages/reports/history/build-${{ github.run_number }}/ || true
+          cp -r "Test Results/Summary/summary.md" deploy-pages/reports/history/build-${{ github.run_number }}/ || true
+          cp -r "Test Results/Excel/Automation_Test_Report.xlsx" deploy-pages/reports/history/build-${{ github.run_number }}/ || true
+          cp -r "Test Results/Screenshots" deploy-pages/reports/history/build-${{ github.run_number }}/ || true
+          cp -r "Test Results/Logs" deploy-pages/reports/history/build-${{ github.run_number }}/ || true
+
+      - name: Publish Test Reports to GitHub Pages
+        if: success() || failure()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy-pages
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Upload Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: appium-e2e-execution-reports
+          path: |
+            Test Results/Excel/Automation_Test_Report.xlsx
+            Test Results/HTML/execution-report.html
+            Test Results/Summary/summary.md
+            Test Results/Logs/execution.log
+            Test Results/Screenshots/
+          if-no-files-found: warn
+
+      - name: Write Test Stats to Step Summary
+        if: always()
+        run: |
+          if [ -f "Test Results/Summary/summary.md" ]; then
+            cat "Test Results/Summary/summary.md" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## 📊 Appium Test Run Summary" >> $GITHUB_STEP_SUMMARY
+            echo "Test report summary could not be found." >> $GITHUB_STEP_SUMMARY
+          fi

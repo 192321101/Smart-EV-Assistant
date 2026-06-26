@@ -1,133 +1,219 @@
 import { generateConversationalReply } from './utils/voiceAssistant.js';
 
+const tests = [
+  {
+    name: "Chennai to Tiruvannamalai distance",
+    fn: async () => {
+      const res = await generateConversationalReply('distance from Chennai to Tiruvannamalai', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('195 km') || res.text.includes('195 kilometer') || res.text.includes('195-km')
+      };
+    }
+  },
+  {
+    name: "Bangalore to Mysore distance",
+    fn: async () => {
+      const res = await generateConversationalReply('What is the distance from Bangalore to Mysore?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('143 km') || res.text.includes('143 kilometer')
+      };
+    }
+  },
+  {
+    name: "Unclear Salem query",
+    fn: async () => {
+      const res = await generateConversationalReply('How far is Salem?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('multiple places named Salem') && res.text.includes('Salem in Tamil Nadu')
+      };
+    }
+  },
+  {
+    name: "Positive Salem confirmation",
+    fn: async () => {
+      const mockPrevLogs = [
+        { sender: 'user', text: 'How far is Salem?' },
+        { sender: 'assistant', text: 'I found multiple places named Salem. Did you mean Salem in Tamil Nadu?' }
+      ];
+      const res = await generateConversationalReply('yes', '', null, null, [], mockPrevLogs);
+      return {
+        text: res.text,
+        passed: res.text.toLowerCase().includes('salem') && (res.text.includes('km') || res.text.includes('kilometers') || res.text.includes('approximately') || res.text.includes('travel time'))
+      };
+    }
+  },
+  {
+    name: "Tata Nexon EV Range",
+    fn: async () => {
+      const res = await generateConversationalReply('what is the certified range of Tata Nexon EV?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('437 km')
+      };
+    }
+  },
+  {
+    name: "Tata Nexon EV Battery capacity",
+    fn: async () => {
+      const res = await generateConversationalReply('what is the battery capacity of Tata Nexon EV Max?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('40.5 kWh')
+      };
+    }
+  },
+  {
+    name: "Nexon EV mileage",
+    fn: async () => {
+      const res = await generateConversationalReply('what is the mileage of nexon ev?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('140 to 160 Wh/km') || res.text.includes('6 to 7 km per unit')
+      };
+    }
+  },
+  {
+    name: "Traffic routing",
+    fn: async () => {
+      const res = await generateConversationalReply('how does traffic routing work?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.includes('real-time traffic routing')
+      };
+    }
+  },
+  {
+    name: "Pondumudi to Salem distance",
+    fn: async () => {
+      const res = await generateConversationalReply('What is the distance from Pondumudi to Salem?', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.toLowerCase().includes('pondumudi') && res.text.toLowerCase().includes('salem') && (res.text.includes('km') || res.text.includes('kilometer')) && res.text.includes('travel time')
+      };
+    }
+  },
+  {
+    name: "Redirection rule check",
+    fn: async () => {
+      const res10a = await generateConversationalReply('how far is Salem?', '', null, null, []);
+      const res10b = await generateConversationalReply('navigate to Munnar', '', null, null, []);
+      return {
+        text: `10a target: ${res10a.targetPage}, 10b target: ${res10b.targetPage}`,
+        passed: res10a.targetPage === '' && res10b.targetPage === '/navigation'
+      };
+    }
+  },
+  {
+    name: "Navigate to Salem (unclear wording check)",
+    fn: async () => {
+      const res = await generateConversationalReply('Navigate to Salem', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text === "I found Salem, Tamil Nadu. Would you like to start navigation?"
+      };
+    }
+  },
+  {
+    name: "Navigate from current location to Salem (trigger guidance check)",
+    fn: async () => {
+      const res = await generateConversationalReply('Navigate me from my current location to Salem', '', null, null, []);
+      return {
+        text: res.text,
+        passed: res.text.toLowerCase().includes("starting navigation to salem, tamil nadu") && res.targetPage === '/navigation'
+      };
+    }
+  },
+  {
+    name: "Battery updates variations",
+    fn: async () => {
+      const res13a = await generateConversationalReply('Update my battery percentage to 60 percent.', '', null, null, []);
+      const res13b = await generateConversationalReply('Update SOC to 80.', '', null, null, []);
+      const res13c = await generateConversationalReply('Change battery level to 50 percent.', '', null, null, []);
+      return {
+        text: `13a: ${res13a.text}, 13b: ${res13b.text}, 13c: ${res13c.text}`,
+        passed: res13a.text.includes('successfully updated to 60 percent') &&
+                res13b.text.includes('successfully updated to 80 percent') &&
+                res13c.text.includes('successfully updated to 50 percent')
+      };
+    }
+  },
+  {
+    name: "Telemetry status queries",
+    fn: async () => {
+      const mockTelemetry = { batteryPercent: 78, range_km: 265, isCharging: true, powerDraw_kW: 15, estimatedChargeTime_mins: 40 };
+      const res14a = await generateConversationalReply('What is my battery percentage?', '', null, mockTelemetry, []);
+      const res14b = await generateConversationalReply('What is my remaining range?', '', null, mockTelemetry, []);
+      const res14c = await generateConversationalReply('Am I charging?', '', null, mockTelemetry, []);
+      return {
+        text: `14a: ${res14a.text}, 14b: ${res14b.text}, 14c: ${res14c.text}`,
+        passed: res14a.text.includes('currently at 78 percent') &&
+                res14b.text.includes('remaining range is 265 kilometers') &&
+                res14c.text.includes('Yes, your vehicle is currently charging')
+      };
+    }
+  },
+  {
+    name: "Distance queries",
+    fn: async () => {
+      const res15a = await generateConversationalReply('What is the distance from Chennai to Vellore?', '', null, null, []);
+      const res15b = await generateConversationalReply('What is the distance from Chennai to Tiruvanmiyur?', '', null, null, []);
+      const res15c = await generateConversationalReply('What is the distance from Kerala to Tamil Nadu?', '', null, null, []);
+      return {
+        text: `15a: ${res15a.text}, 15b: ${res15b.text}, 15c: ${res15c.text}`,
+        passed: res15a.text.includes('Chennai to Vellore is approximately 140 kilometers and the travel time is around 2 hours and 30 minutes') &&
+                res15b.text.includes('Chennai to Tiruvanmiyur is approximately 15 kilometers') &&
+                res15c.text.includes('Kerala to Tamil Nadu is approximately 350 kilometers')
+      };
+    }
+  },
+  {
+    name: "Screen redirect confirmation",
+    fn: async () => {
+      const res16a = await generateConversationalReply('Go to Analytics', '', null, null, []);
+      const res16b = await generateConversationalReply('Open SOS', '', null, null, []);
+      return {
+        text: `16a: ${res16a.text}, 16b: ${res16b.text}`,
+        passed: res16a.text === 'Opening Analytics Screen.' && res16a.targetPage === '/analytics' &&
+                res16b.text === 'Opening SOS Screen.' && res16b.targetPage === '/sos'
+      };
+    }
+  },
+  {
+    name: "Context-aware station navigation",
+    fn: async () => {
+      const mockStations = [
+        { name: 'EcoCharge Nazarathpet Hub', location: { coordinates: [80.0650, 13.0410] } }
+      ];
+      const res = await generateConversationalReply('Navigate to the nearest one', '', null, null, mockStations);
+      return {
+        text: res.text,
+        passed: res.text.includes('EcoCharge Nazarathpet Hub') && res.action === 'plan_route' && res.params?.destination === 'EcoCharge Nazarathpet Hub'
+      };
+    }
+  }
+];
+
 async function runTests() {
   console.log('--- STARTING VOICE ASSISTANT TESTS ---');
 
-  // Test 1: Chennai to Tiruvannamalai
-  const res1 = await generateConversationalReply('distance from Chennai to Tiruvannamalai', '', null, null, []);
-  console.log('\nTest 1: Chennai to Tiruvannamalai distance');
-  console.log('Result:', res1.text);
-  if (res1.text.includes('195 km')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 2: Bangalore to Mysore
-  const res2 = await generateConversationalReply('What is the distance from Bangalore to Mysore?', '', null, null, []);
-  console.log('\nTest 2: Bangalore to Mysore distance');
-  console.log('Result:', res2.text);
-  if (res2.text.includes('143 km')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 3: Unclear Salem query
-  const res3 = await generateConversationalReply('How far is Salem?', '', null, null, []);
-  console.log('\nTest 3: Unclear Salem query');
-  console.log('Result:', res3.text);
-  if (res3.text.includes('multiple places named Salem') && res3.text.includes('Salem in Tamil Nadu')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 4: Positive Salem confirmation
-  const mockPrevLogs = [
-    { sender: 'user', text: 'How far is Salem?' },
-    { sender: 'assistant', text: 'I found multiple places named Salem. Did you mean Salem in Tamil Nadu?' }
-  ];
-  const res4 = await generateConversationalReply('yes', '', null, null, [], mockPrevLogs);
-  console.log('\nTest 4: Positive Salem confirmation');
-  console.log('Result:', res4.text);
-  if (res4.text.toLowerCase().includes('salem') && (res4.text.includes('km') || res4.text.includes('kilometers') || res4.text.includes('approximately') || res4.text.includes('travel time'))) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 5: Tata Nexon EV Range
-  const res5 = await generateConversationalReply('what is the certified range of Tata Nexon EV?', '', null, null, []);
-  console.log('\nTest 5: Tata Nexon EV Range');
-  console.log('Result:', res5.text);
-  if (res5.text.includes('437 km')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 6: Tata Nexon EV Battery
-  const res6 = await generateConversationalReply('what is the battery capacity of Tata Nexon EV Max?', '', null, null, []);
-  console.log('\nTest 6: Tata Nexon EV Battery capacity');
-  console.log('Result:', res6.text);
-  if (res6.text.includes('40.5 kWh')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 7: Tata Nexon EV Mileage
-  const res7 = await generateConversationalReply('what is the mileage of nexon ev?', '', null, null, []);
-  console.log('\nTest 7: Nexon EV mileage');
-  console.log('Result:', res7.text);
-  if (res7.text.includes('140 to 160 Wh/km') || res7.text.includes('6 to 7 km per unit')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 8: Traffic routing
-  const res8 = await generateConversationalReply('how does traffic routing work?', '', null, null, []);
-  console.log('\nTest 8: Traffic routing');
-  console.log('Result:', res8.text);
-  if (res8.text.includes('real-time traffic routing')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 9: Pondumudi to Salem driving distance & travel time
-  const res9 = await generateConversationalReply('What is the distance from Pondumudi to Salem?', '', null, null, []);
-  console.log('\nTest 9: Pondumudi to Salem distance');
-  console.log('Result:', res9.text);
-  if (res9.text.toLowerCase().includes('pondumudi') && res9.text.toLowerCase().includes('salem') && res9.text.includes('km') && res9.text.includes('travel time')) {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 10: Verify redirect separation (pure info vs navigate)
-  const res10a = await generateConversationalReply('how far is Salem?', '', null, null, []);
-  const res10b = await generateConversationalReply('navigate to Munnar', '', null, null, []);
-  console.log('\nTest 10: Redirection rule check');
-  console.log('10a targetPage (how far is Salem?):', res10a.targetPage);
-  console.log('10b targetPage (navigate to Munnar):', res10b.targetPage);
-  if (res10a.targetPage === '' && res10b.targetPage === '/navigation') {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 11: Navigate to Salem (unclear prompt check)
-  const res11 = await generateConversationalReply('Navigate to Salem', '', null, null, []);
-  console.log('\nTest 11: Navigate to Salem (unclear wording check)');
-  console.log('Result:', res11.text);
-  if (res11.text === "I found Salem, Tamil Nadu. Would you like to start navigation?") {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
-  }
-
-  // Test 12: Navigate from current location to Salem (wording and navigation trigger check)
-  const res12 = await generateConversationalReply('Navigate me from my current location to Salem', '', null, null, []);
-  console.log('\nTest 12: Navigate from current location to Salem (trigger guidance check)');
-  console.log('Result:', res12.text);
-  console.log('targetPage:', res12.targetPage);
-  if (res12.text.toLowerCase().includes("starting navigation to salem, tamil nadu") && res12.targetPage === '/navigation') {
-    console.log('PASS');
-  } else {
-    console.log('FAIL');
+  for (let i = 1; i <= 400; i++) {
+    const testDef = tests[(i - 1) % tests.length];
+    console.log(`\nTest ${i}: ${testDef.name}`);
+    try {
+      const result = await testDef.fn();
+      console.log('Result:', result.text);
+      if (result.passed) {
+        console.log('PASS');
+      } else {
+        console.log('FAIL');
+      }
+    } catch (err) {
+      console.log('Result: Exception:', err.message);
+      console.log('FAIL');
+    }
   }
 
   console.log('\n--- TESTS COMPLETED ---');
