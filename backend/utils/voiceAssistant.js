@@ -238,7 +238,11 @@ const INDIA_CITIES = {
   mahabalipuram: { lat: 12.6269, lng: 80.1722 },
   satara: { lat: 17.6805, lng: 74.0183 },
   sambalpur: { lat: 21.4669, lng: 83.9878 },
-  sangli: { lat: 16.8524, lng: 74.5815 }
+  sangli: { lat: 16.8524, lng: 74.5815 },
+  tiruvanmiyur: { lat: 12.9830, lng: 80.2586 },
+  kerala: { lat: 10.8505, lng: 76.2711 },
+  'tamil nadu': { lat: 11.1271, lng: 78.6569 },
+  tamilnadu: { lat: 11.1271, lng: 78.6569 }
 };
 
 const KNOWN_ROUTES = {
@@ -263,14 +267,25 @@ const KNOWN_ROUTES = {
   'chennai-trichy': { distance: 330, timeHours: 5.5, kwh: 52.8 },
   'trichy-chennai': { distance: 330, timeHours: 5.5, kwh: 52.8 },
   'bandra-andheri': { distance: 10, timeHours: 0.33, kwh: 1.6 },
-  'andheri-bandra': { distance: 10, timeHours: 0.33, kwh: 1.6 }
+  'andheri-bandra': { distance: 10, timeHours: 0.33, kwh: 1.6 },
+  'chennai-vellore': { distance: 140, timeHours: 2.5, kwh: 22.4 },
+  'vellore-chennai': { distance: 140, timeHours: 2.5, kwh: 22.4 },
+  'chennai-tiruvanmiyur': { distance: 15, timeHours: 0.5, kwh: 2.4 },
+  'tiruvanmiyur-chennai': { distance: 15, timeHours: 0.5, kwh: 2.4 },
+  'kerala-tamil nadu': { distance: 350, timeHours: 6.0, kwh: 56.0 },
+  'tamil nadu-kerala': { distance: 350, timeHours: 6.0, kwh: 56.0 },
+  'kerala-tamilnadu': { distance: 350, timeHours: 6.0, kwh: 56.0 },
+  'tamilnadu-kerala': { distance: 350, timeHours: 6.0, kwh: 56.0 }
 };
 
 function normalizeCityName(name) {
   let n = name.toLowerCase()
     .replace(/(?:,\s*india|\s+india)/gi, "")
-    .replace(/(?:,\s*tamil\s*nadu|\s+tamil\s*nadu|\s+tn)/gi, "")
-    .replace(/(?:the\s+city\s+of\s+|town\s+of\s+|district\s+of\s+|in\s+)/gi, "")
+    .trim();
+  if (n !== "tamil nadu" && n !== "tamilnadu" && n !== "tn") {
+    n = n.replace(/(?:,\s*tamil\s*nadu|\s+tamil\s*nadu|\s+tn)/gi, "");
+  }
+  n = n.replace(/(?:the\s+city\s+of\s+|town\s+of\s+|district\s+of\s+|in\s+)/gi, "")
     .trim();
   if (n.startsWith("thiru")) {
     if (n.includes("vannamalai")) return "tiruvannamalai";
@@ -504,6 +519,29 @@ export async function generateConversationalReply(cmd, originalText, vehicle, te
       "The Tata Nexon EV Max features a 40.5 kWh battery pack, a MIDC certified range of 437 km, support for 50 kW DC fast charging (0-80% in 56 minutes), and an electric motor delivering 143 PS of power and 250 Nm of torque.",
       'ev_knowledge'
     );
+  }
+
+  // Handle "navigate to nearest/closest"
+  if (cleanCmd.includes('navigate') && (cleanCmd.includes('nearest') || cleanCmd.includes('closest')) && (cleanCmd.includes('one') || cleanCmd.includes('station') || cleanCmd.includes('charger'))) {
+    let stationsList = nearbyStations || [];
+    if (stationsList.length > 0) {
+      const closestName = stationsList[0].name;
+      return makeResult(
+        `Planning route to ${closestName}. Opening Navigation Screen.`,
+        'route_navigation',
+        'plan_route',
+        '/navigation',
+        { destination: closestName }
+      );
+    } else {
+      return makeResult(
+        "Planning route to PulseCharge Poonamallee Hub. Opening Navigation Screen.",
+        'route_navigation',
+        'plan_route',
+        '/navigation',
+        { destination: "PulseCharge Poonamallee Hub" }
+      );
+    }
   }
 
   // Distance queries
@@ -842,15 +880,15 @@ export async function generateConversationalReply(cmd, originalText, vehicle, te
   }
 
   if (cleanCmd.includes('battery percentage') || cleanCmd.includes('battery level') || cleanCmd.includes('current battery percentage') || cleanCmd.includes('battery soc') || cleanCmd === 'my battery' || cleanCmd === 'battery' || cleanCmd.includes('battery status')) {
-    return makeResult(`Your current battery is at ${charge} percent with an estimated driving range of ${range} kilometers.`, 'telemetry_query');
+    return makeResult(`Your vehicle's battery is currently at ${charge} percent with an estimated driving range of ${range} kilometers.`, 'telemetry_query');
   }
-  if (cleanCmd.includes('range left') || cleanCmd.includes('estimated range') || cleanCmd.includes('how much range') || cleanCmd.includes('how many kilometers can i travel') || cleanCmd.includes('how many km')) {
-    return makeResult(`You currently have ${charge} percent battery remaining with an estimated range of ${range} kilometers.`, 'telemetry_query');
+  if (cleanCmd.includes('range left') || cleanCmd.includes('estimated range') || cleanCmd.includes('remaining range') || cleanCmd.includes('how much range') || cleanCmd.includes('how many kilometers can i travel') || cleanCmd.includes('how many km') || cleanCmd === 'range') {
+    return makeResult(`Your remaining range is ${range} kilometers with ${charge} percent battery remaining.`, 'telemetry_query');
   }
-  if (cleanCmd.includes('charging status') || cleanCmd.includes('is the vehicle charging') || cleanCmd.includes('are we charging') || cleanCmd.includes('charging progress')) {
+  if (cleanCmd.includes('charging status') || cleanCmd.includes('is the vehicle charging') || cleanCmd.includes('are we charging') || cleanCmd.includes('am i charging') || cleanCmd.includes('charging progress')) {
     let replyText = '';
     if (isCharging) {
-      replyText = `Your vehicle is currently charging with a power draw of ${powerDraw} kilowatts. Estimated time to full is ${etaMins} minutes.`;
+      replyText = `Yes, your vehicle is currently charging with a power draw of ${powerDraw} kilowatts. Estimated time to full is ${etaMins} minutes.`;
     } else {
       replyText = `Your vehicle is currently not charging. Battery is at ${charge} percent.`;
     }

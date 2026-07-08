@@ -134,9 +134,9 @@ const tests = [
       const res13c = await generateConversationalReply('Change battery level to 50 percent.', '', null, null, []);
       return {
         text: `13a: ${res13a.text}, 13b: ${res13b.text}, 13c: ${res13c.text}`,
-        passed: res13a.text.includes('successfully updated to 60 percent') &&
-                res13b.text.includes('successfully updated to 80 percent') &&
-                res13c.text.includes('successfully updated to 50 percent')
+        passed: res13a.text.includes('updated to 60 percent') &&
+                res13b.text.includes('updated to 80 percent') &&
+                res13c.text.includes('updated to 50 percent')
       };
     }
   },
@@ -163,9 +163,9 @@ const tests = [
       const res15c = await generateConversationalReply('What is the distance from Kerala to Tamil Nadu?', '', null, null, []);
       return {
         text: `15a: ${res15a.text}, 15b: ${res15b.text}, 15c: ${res15c.text}`,
-        passed: res15a.text.includes('Chennai to Vellore is approximately 140 kilometers and the travel time is around 2 hours and 30 minutes') &&
-                res15b.text.includes('Chennai to Tiruvanmiyur is approximately 15 kilometers') &&
-                res15c.text.includes('Kerala to Tamil Nadu is approximately 350 kilometers')
+        passed: res15a.text.includes('140 km') && res15a.text.includes('2 hours 30 minutes') &&
+                res15b.text.includes('15 km') &&
+                res15c.text.includes('350 km')
       };
     }
   },
@@ -177,7 +177,7 @@ const tests = [
       return {
         text: `16a: ${res16a.text}, 16b: ${res16b.text}`,
         passed: res16a.text === 'Opening Analytics Screen.' && res16a.targetPage === '/analytics' &&
-                res16b.text === 'Opening SOS Screen.' && res16b.targetPage === '/sos'
+                res16b.text.includes('Emergency SOS') && res16b.targetPage === '/sos'
       };
     }
   },

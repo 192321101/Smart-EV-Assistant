@@ -1,0 +1,9 @@
+{
+  "name": "smart-ev-assistant-frontend",
+  "version": "1.0.0",
+  "description": "Frontend static file server wrapper for Smart EV Assistant",
+  "scripts": {
+    "dev": "npx serve -s dist -l 3000",
+    "start": "npx serve -s dist -l 3000"
+  }
+}
