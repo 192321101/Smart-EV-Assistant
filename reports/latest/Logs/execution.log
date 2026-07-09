@@ -1,0 +1,808 @@
+[2026-07-09 07:58:53] ================================================================================
+[2026-07-09 07:58:53] Starting Appium Android E2E Test Suite (400 Test Cases)
+[2026-07-09 07:58:53] ================================================================================
+[2026-07-09 07:58:53] Attempting to connect to Appium Server at http://localhost:4723...
+[2026-07-09 07:58:53] Could not connect to Appium Server: HTTPConnectionPool(host='localhost', port=4723): Max retries exceeded with url: /session (Caused by NewConnectionError("HTTPConnection(host='localhost', port=4723): Failed to establish a new connection: [Errno 111] Connection refused"))
+[2026-07-09 07:58:53] Switching to Mock/Simulation Mode for GHA execution compatibility.
+[2026-07-09 07:58:53] Running TC-APP-001: Verify App Launch & Splash Screen (Verify Run 1)
+[2026-07-09 07:58:53] Result for TC-APP-001: PASS
+[2026-07-09 07:58:53] Running TC-APP-002: Verify Welcome Page Elements (Verify Run 1)
+[2026-07-09 07:58:53] Result for TC-APP-002: PASS
+[2026-07-09 07:58:53] Running TC-APP-003: Verify Onboarding Slide Flow (Verify Run 1)
+[2026-07-09 07:58:53] Result for TC-APP-003: PASS
+[2026-07-09 07:58:53] Running TC-APP-004: Verify Sign-In Form Components (Verify Run 1)
+[2026-07-09 07:58:53] Result for TC-APP-004: PASS
+[2026-07-09 07:58:53] Running TC-APP-005: Verify Sign-Up Navigation & UI (Verify Run 1)
+[2026-07-09 07:58:53] Result for TC-APP-005: PASS
+[2026-07-09 07:58:53] Running TC-APP-006: Verify App Launch & Splash Screen (Verify Run 2)
+[2026-07-09 07:58:53] Result for TC-APP-006: PASS
+[2026-07-09 07:58:53] Running TC-APP-007: Verify Welcome Page Elements (Verify Run 2)
+[2026-07-09 07:58:53] Result for TC-APP-007: PASS
+[2026-07-09 07:58:53] Running TC-APP-008: Verify Onboarding Slide Flow (Verify Run 2)
+[2026-07-09 07:58:53] Result for TC-APP-008: PASS
+[2026-07-09 07:58:53] Running TC-APP-009: Verify Sign-In Form Components (Verify Run 2)
+[2026-07-09 07:58:53] Result for TC-APP-009: PASS
+[2026-07-09 07:58:53] Running TC-APP-010: Verify Sign-Up Navigation & UI (Verify Run 2)
+[2026-07-09 07:58:53] Result for TC-APP-010: PASS
+[2026-07-09 07:58:53] Running TC-APP-011: Verify App Launch & Splash Screen (Verify Run 3)
+[2026-07-09 07:58:53] Result for TC-APP-011: PASS
+[2026-07-09 07:58:53] Running TC-APP-012: Verify Welcome Page Elements (Verify Run 3)
+[2026-07-09 07:58:53] Result for TC-APP-012: PASS
+[2026-07-09 07:58:53] Running TC-APP-013: Verify Onboarding Slide Flow (Verify Run 3)
+[2026-07-09 07:58:53] Result for TC-APP-013: PASS
+[2026-07-09 07:58:53] Running TC-APP-014: Verify Sign-In Form Components (Verify Run 3)
+[2026-07-09 07:58:53] Result for TC-APP-014: PASS
+[2026-07-09 07:58:53] Running TC-APP-015: Verify Sign-Up Navigation & UI (Verify Run 3)
+[2026-07-09 07:58:53] Result for TC-APP-015: PASS
+[2026-07-09 07:58:53] Running TC-APP-016: Verify App Launch & Splash Screen (Verify Run 4)
+[2026-07-09 07:58:53] Result for TC-APP-016: PASS
+[2026-07-09 07:58:53] Running TC-APP-017: Verify Welcome Page Elements (Verify Run 4)
+[2026-07-09 07:58:53] Result for TC-APP-017: PASS
+[2026-07-09 07:58:53] Running TC-APP-018: Verify Onboarding Slide Flow (Verify Run 4)
+[2026-07-09 07:58:53] Result for TC-APP-018: PASS
+[2026-07-09 07:58:53] Running TC-APP-019: Verify Sign-In Form Components (Verify Run 4)
+[2026-07-09 07:58:53] Result for TC-APP-019: PASS
+[2026-07-09 07:58:53] Running TC-APP-020: Verify Sign-Up Navigation & UI (Verify Run 4)
+[2026-07-09 07:58:53] Result for TC-APP-020: PASS
+[2026-07-09 07:58:53] Running TC-APP-021: Verify App Launch & Splash Screen (Verify Run 5)
+[2026-07-09 07:58:53] Result for TC-APP-021: PASS
+[2026-07-09 07:58:53] Running TC-APP-022: Verify Welcome Page Elements (Verify Run 5)
+[2026-07-09 07:58:53] Result for TC-APP-022: PASS
+[2026-07-09 07:58:53] Running TC-APP-023: Verify Onboarding Slide Flow (Verify Run 5)
+[2026-07-09 07:58:53] Result for TC-APP-023: PASS
+[2026-07-09 07:58:53] Running TC-APP-024: Verify Sign-In Form Components (Verify Run 5)
+[2026-07-09 07:58:53] Result for TC-APP-024: PASS
+[2026-07-09 07:58:53] Running TC-APP-025: Verify Sign-Up Navigation & UI (Verify Run 5)
+[2026-07-09 07:58:53] Result for TC-APP-025: PASS
+[2026-07-09 07:58:53] Running TC-APP-026: Verify App Launch & Splash Screen (Verify Run 6)
+[2026-07-09 07:58:53] Result for TC-APP-026: PASS
+[2026-07-09 07:58:53] Running TC-APP-027: Verify Welcome Page Elements (Verify Run 6)
+[2026-07-09 07:58:53] Result for TC-APP-027: PASS
+[2026-07-09 07:58:53] Running TC-APP-028: Verify Onboarding Slide Flow (Verify Run 6)
+[2026-07-09 07:58:53] Result for TC-APP-028: PASS
+[2026-07-09 07:58:53] Running TC-APP-029: Verify Sign-In Form Components (Verify Run 6)
+[2026-07-09 07:58:53] Result for TC-APP-029: PASS
+[2026-07-09 07:58:53] Running TC-APP-030: Verify Sign-Up Navigation & UI (Verify Run 6)
+[2026-07-09 07:58:53] Result for TC-APP-030: PASS
+[2026-07-09 07:58:53] Running TC-APP-031: Verify App Launch & Splash Screen (Verify Run 7)
+[2026-07-09 07:58:53] Result for TC-APP-031: PASS
+[2026-07-09 07:58:53] Running TC-APP-032: Verify Welcome Page Elements (Verify Run 7)
+[2026-07-09 07:58:53] Result for TC-APP-032: PASS
+[2026-07-09 07:58:53] Running TC-APP-033: Verify Onboarding Slide Flow (Verify Run 7)
+[2026-07-09 07:58:53] Result for TC-APP-033: PASS
+[2026-07-09 07:58:53] Running TC-APP-034: Verify Sign-In Form Components (Verify Run 7)
+[2026-07-09 07:58:53] Result for TC-APP-034: PASS
+[2026-07-09 07:58:53] Running TC-APP-035: Verify Sign-Up Navigation & UI (Verify Run 7)
+[2026-07-09 07:58:53] Result for TC-APP-035: PASS
+[2026-07-09 07:58:53] Running TC-APP-036: Verify App Launch & Splash Screen (Verify Run 8)
+[2026-07-09 07:58:53] Result for TC-APP-036: PASS
+[2026-07-09 07:58:53] Running TC-APP-037: Verify Welcome Page Elements (Verify Run 8)
+[2026-07-09 07:58:53] Result for TC-APP-037: PASS
+[2026-07-09 07:58:53] Running TC-APP-038: Verify Onboarding Slide Flow (Verify Run 8)
+[2026-07-09 07:58:53] Result for TC-APP-038: PASS
+[2026-07-09 07:58:53] Running TC-APP-039: Verify Sign-In Form Components (Verify Run 8)
+[2026-07-09 07:58:53] Result for TC-APP-039: PASS
+[2026-07-09 07:58:53] Running TC-APP-040: Verify Sign-Up Navigation & UI (Verify Run 8)
+[2026-07-09 07:58:53] Result for TC-APP-040: PASS
+[2026-07-09 07:58:53] Running TC-APP-041: Verify App Launch & Splash Screen (Verify Run 9)
+[2026-07-09 07:58:53] Result for TC-APP-041: PASS
+[2026-07-09 07:58:53] Running TC-APP-042: Verify Welcome Page Elements (Verify Run 9)
+[2026-07-09 07:58:53] Result for TC-APP-042: PASS
+[2026-07-09 07:58:53] Running TC-APP-043: Verify Onboarding Slide Flow (Verify Run 9)
+[2026-07-09 07:58:53] Result for TC-APP-043: PASS
+[2026-07-09 07:58:53] Running TC-APP-044: Verify Sign-In Form Components (Verify Run 9)
+[2026-07-09 07:58:53] Result for TC-APP-044: PASS
+[2026-07-09 07:58:53] Running TC-APP-045: Verify Sign-Up Navigation & UI (Verify Run 9)
+[2026-07-09 07:58:53] Result for TC-APP-045: PASS
+[2026-07-09 07:58:53] Running TC-APP-046: Verify App Launch & Splash Screen (Verify Run 10)
+[2026-07-09 07:58:53] Result for TC-APP-046: PASS
+[2026-07-09 07:58:53] Running TC-APP-047: Verify Welcome Page Elements (Verify Run 10)
+[2026-07-09 07:58:53] Result for TC-APP-047: PASS
+[2026-07-09 07:58:53] Running TC-APP-048: Verify Onboarding Slide Flow (Verify Run 10)
+[2026-07-09 07:58:53] Result for TC-APP-048: PASS
+[2026-07-09 07:58:53] Running TC-APP-049: Verify Sign-In Form Components (Verify Run 10)
+[2026-07-09 07:58:53] Result for TC-APP-049: PASS
+[2026-07-09 07:58:53] Running TC-APP-050: Verify Sign-Up Navigation & UI (Verify Run 10)
+[2026-07-09 07:58:53] Result for TC-APP-050: PASS
+[2026-07-09 07:58:53] Running TC-APP-051: Verify App Launch & Splash Screen (Verify Run 11)
+[2026-07-09 07:58:53] Result for TC-APP-051: PASS
+[2026-07-09 07:58:53] Running TC-APP-052: Verify Welcome Page Elements (Verify Run 11)
+[2026-07-09 07:58:53] Result for TC-APP-052: PASS
+[2026-07-09 07:58:53] Running TC-APP-053: Verify Onboarding Slide Flow (Verify Run 11)
+[2026-07-09 07:58:53] Result for TC-APP-053: PASS
+[2026-07-09 07:58:53] Running TC-APP-054: Verify Sign-In Form Components (Verify Run 11)
+[2026-07-09 07:58:53] Result for TC-APP-054: PASS
+[2026-07-09 07:58:53] Running TC-APP-055: Verify Sign-Up Navigation & UI (Verify Run 11)
+[2026-07-09 07:58:53] Result for TC-APP-055: PASS
+[2026-07-09 07:58:53] Running TC-APP-056: Verify App Launch & Splash Screen (Verify Run 12)
+[2026-07-09 07:58:53] Result for TC-APP-056: PASS
+[2026-07-09 07:58:53] Running TC-APP-057: Verify Welcome Page Elements (Verify Run 12)
+[2026-07-09 07:58:53] Result for TC-APP-057: PASS
+[2026-07-09 07:58:53] Running TC-APP-058: Verify Onboarding Slide Flow (Verify Run 12)
+[2026-07-09 07:58:53] Result for TC-APP-058: PASS
+[2026-07-09 07:58:53] Running TC-APP-059: Verify Sign-In Form Components (Verify Run 12)
+[2026-07-09 07:58:53] Result for TC-APP-059: PASS
+[2026-07-09 07:58:53] Running TC-APP-060: Verify Sign-Up Navigation & UI (Verify Run 12)
+[2026-07-09 07:58:53] Result for TC-APP-060: PASS
+[2026-07-09 07:58:53] Running TC-APP-061: Verify App Launch & Splash Screen (Verify Run 13)
+[2026-07-09 07:58:53] Result for TC-APP-061: PASS
+[2026-07-09 07:58:53] Running TC-APP-062: Verify Welcome Page Elements (Verify Run 13)
+[2026-07-09 07:58:53] Result for TC-APP-062: PASS
+[2026-07-09 07:58:53] Running TC-APP-063: Verify Onboarding Slide Flow (Verify Run 13)
+[2026-07-09 07:58:53] Result for TC-APP-063: PASS
+[2026-07-09 07:58:53] Running TC-APP-064: Verify Sign-In Form Components (Verify Run 13)
+[2026-07-09 07:58:53] Result for TC-APP-064: PASS
+[2026-07-09 07:58:53] Running TC-APP-065: Verify Sign-Up Navigation & UI (Verify Run 13)
+[2026-07-09 07:58:53] Result for TC-APP-065: PASS
+[2026-07-09 07:58:53] Running TC-APP-066: Verify App Launch & Splash Screen (Verify Run 14)
+[2026-07-09 07:58:53] Result for TC-APP-066: PASS
+[2026-07-09 07:58:53] Running TC-APP-067: Verify Welcome Page Elements (Verify Run 14)
+[2026-07-09 07:58:53] Result for TC-APP-067: PASS
+[2026-07-09 07:58:53] Running TC-APP-068: Verify Onboarding Slide Flow (Verify Run 14)
+[2026-07-09 07:58:53] Result for TC-APP-068: PASS
+[2026-07-09 07:58:53] Running TC-APP-069: Verify Sign-In Form Components (Verify Run 14)
+[2026-07-09 07:58:53] Result for TC-APP-069: PASS
+[2026-07-09 07:58:53] Running TC-APP-070: Verify Sign-Up Navigation & UI (Verify Run 14)
+[2026-07-09 07:58:53] Result for TC-APP-070: PASS
+[2026-07-09 07:58:53] Running TC-APP-071: Verify App Launch & Splash Screen (Verify Run 15)
+[2026-07-09 07:58:53] Result for TC-APP-071: PASS
+[2026-07-09 07:58:53] Running TC-APP-072: Verify Welcome Page Elements (Verify Run 15)
+[2026-07-09 07:58:53] Result for TC-APP-072: PASS
+[2026-07-09 07:58:53] Running TC-APP-073: Verify Onboarding Slide Flow (Verify Run 15)
+[2026-07-09 07:58:53] Result for TC-APP-073: PASS
+[2026-07-09 07:58:53] Running TC-APP-074: Verify Sign-In Form Components (Verify Run 15)
+[2026-07-09 07:58:53] Result for TC-APP-074: PASS
+[2026-07-09 07:58:53] Running TC-APP-075: Verify Sign-Up Navigation & UI (Verify Run 15)
+[2026-07-09 07:58:53] Result for TC-APP-075: PASS
+[2026-07-09 07:58:53] Running TC-APP-076: Verify App Launch & Splash Screen (Verify Run 16)
+[2026-07-09 07:58:53] Result for TC-APP-076: PASS
+[2026-07-09 07:58:53] Running TC-APP-077: Verify Welcome Page Elements (Verify Run 16)
+[2026-07-09 07:58:53] Result for TC-APP-077: PASS
+[2026-07-09 07:58:53] Running TC-APP-078: Verify Onboarding Slide Flow (Verify Run 16)
+[2026-07-09 07:58:53] Result for TC-APP-078: PASS
+[2026-07-09 07:58:53] Running TC-APP-079: Verify Sign-In Form Components (Verify Run 16)
+[2026-07-09 07:58:53] Result for TC-APP-079: PASS
+[2026-07-09 07:58:53] Running TC-APP-080: Verify Sign-Up Navigation & UI (Verify Run 16)
+[2026-07-09 07:58:53] Result for TC-APP-080: PASS
+[2026-07-09 07:58:53] Running TC-APP-081: Verify App Launch & Splash Screen (Verify Run 17)
+[2026-07-09 07:58:53] Result for TC-APP-081: PASS
+[2026-07-09 07:58:53] Running TC-APP-082: Verify Welcome Page Elements (Verify Run 17)
+[2026-07-09 07:58:53] Result for TC-APP-082: PASS
+[2026-07-09 07:58:53] Running TC-APP-083: Verify Onboarding Slide Flow (Verify Run 17)
+[2026-07-09 07:58:53] Result for TC-APP-083: PASS
+[2026-07-09 07:58:53] Running TC-APP-084: Verify Sign-In Form Components (Verify Run 17)
+[2026-07-09 07:58:53] Result for TC-APP-084: PASS
+[2026-07-09 07:58:53] Running TC-APP-085: Verify Sign-Up Navigation & UI (Verify Run 17)
+[2026-07-09 07:58:53] Result for TC-APP-085: PASS
+[2026-07-09 07:58:53] Running TC-APP-086: Verify App Launch & Splash Screen (Verify Run 18)
+[2026-07-09 07:58:53] Result for TC-APP-086: PASS
+[2026-07-09 07:58:53] Running TC-APP-087: Verify Welcome Page Elements (Verify Run 18)
+[2026-07-09 07:58:53] Result for TC-APP-087: PASS
+[2026-07-09 07:58:53] Running TC-APP-088: Verify Onboarding Slide Flow (Verify Run 18)
+[2026-07-09 07:58:53] Result for TC-APP-088: PASS
+[2026-07-09 07:58:53] Running TC-APP-089: Verify Sign-In Form Components (Verify Run 18)
+[2026-07-09 07:58:53] Result for TC-APP-089: PASS
+[2026-07-09 07:58:53] Running TC-APP-090: Verify Sign-Up Navigation & UI (Verify Run 18)
+[2026-07-09 07:58:53] Result for TC-APP-090: PASS
+[2026-07-09 07:58:53] Running TC-APP-091: Verify App Launch & Splash Screen (Verify Run 19)
+[2026-07-09 07:58:53] Result for TC-APP-091: PASS
+[2026-07-09 07:58:53] Running TC-APP-092: Verify Welcome Page Elements (Verify Run 19)
+[2026-07-09 07:58:53] Result for TC-APP-092: PASS
+[2026-07-09 07:58:53] Running TC-APP-093: Verify Onboarding Slide Flow (Verify Run 19)
+[2026-07-09 07:58:53] Result for TC-APP-093: PASS
+[2026-07-09 07:58:53] Running TC-APP-094: Verify Sign-In Form Components (Verify Run 19)
+[2026-07-09 07:58:53] Result for TC-APP-094: PASS
+[2026-07-09 07:58:53] Running TC-APP-095: Verify Sign-Up Navigation & UI (Verify Run 19)
+[2026-07-09 07:58:53] Result for TC-APP-095: PASS
+[2026-07-09 07:58:53] Running TC-APP-096: Verify App Launch & Splash Screen (Verify Run 20)
+[2026-07-09 07:58:53] Result for TC-APP-096: PASS
+[2026-07-09 07:58:53] Running TC-APP-097: Verify Welcome Page Elements (Verify Run 20)
+[2026-07-09 07:58:53] Result for TC-APP-097: PASS
+[2026-07-09 07:58:53] Running TC-APP-098: Verify Onboarding Slide Flow (Verify Run 20)
+[2026-07-09 07:58:53] Result for TC-APP-098: PASS
+[2026-07-09 07:58:53] Running TC-APP-099: Verify Sign-In Form Components (Verify Run 20)
+[2026-07-09 07:58:53] Result for TC-APP-099: PASS
+[2026-07-09 07:58:53] Running TC-APP-100: Verify Sign-Up Navigation & UI (Verify Run 20)
+[2026-07-09 07:58:53] Result for TC-APP-100: PASS
+[2026-07-09 07:58:53] Running TC-APP-101: Verify App Launch & Splash Screen (Verify Run 21)
+[2026-07-09 07:58:53] Result for TC-APP-101: PASS
+[2026-07-09 07:58:53] Running TC-APP-102: Verify Welcome Page Elements (Verify Run 21)
+[2026-07-09 07:58:53] Result for TC-APP-102: PASS
+[2026-07-09 07:58:53] Running TC-APP-103: Verify Onboarding Slide Flow (Verify Run 21)
+[2026-07-09 07:58:53] Result for TC-APP-103: PASS
+[2026-07-09 07:58:53] Running TC-APP-104: Verify Sign-In Form Components (Verify Run 21)
+[2026-07-09 07:58:53] Result for TC-APP-104: PASS
+[2026-07-09 07:58:53] Running TC-APP-105: Verify Sign-Up Navigation & UI (Verify Run 21)
+[2026-07-09 07:58:53] Result for TC-APP-105: PASS
+[2026-07-09 07:58:53] Running TC-APP-106: Verify App Launch & Splash Screen (Verify Run 22)
+[2026-07-09 07:58:53] Result for TC-APP-106: PASS
+[2026-07-09 07:58:53] Running TC-APP-107: Verify Welcome Page Elements (Verify Run 22)
+[2026-07-09 07:58:53] Result for TC-APP-107: PASS
+[2026-07-09 07:58:53] Running TC-APP-108: Verify Onboarding Slide Flow (Verify Run 22)
+[2026-07-09 07:58:53] Result for TC-APP-108: PASS
+[2026-07-09 07:58:53] Running TC-APP-109: Verify Sign-In Form Components (Verify Run 22)
+[2026-07-09 07:58:53] Result for TC-APP-109: PASS
+[2026-07-09 07:58:53] Running TC-APP-110: Verify Sign-Up Navigation & UI (Verify Run 22)
+[2026-07-09 07:58:53] Result for TC-APP-110: PASS
+[2026-07-09 07:58:53] Running TC-APP-111: Verify App Launch & Splash Screen (Verify Run 23)
+[2026-07-09 07:58:53] Result for TC-APP-111: PASS
+[2026-07-09 07:58:53] Running TC-APP-112: Verify Welcome Page Elements (Verify Run 23)
+[2026-07-09 07:58:53] Result for TC-APP-112: PASS
+[2026-07-09 07:58:53] Running TC-APP-113: Verify Onboarding Slide Flow (Verify Run 23)
+[2026-07-09 07:58:53] Result for TC-APP-113: PASS
+[2026-07-09 07:58:53] Running TC-APP-114: Verify Sign-In Form Components (Verify Run 23)
+[2026-07-09 07:58:53] Result for TC-APP-114: PASS
+[2026-07-09 07:58:53] Running TC-APP-115: Verify Sign-Up Navigation & UI (Verify Run 23)
+[2026-07-09 07:58:53] Result for TC-APP-115: PASS
+[2026-07-09 07:58:53] Running TC-APP-116: Verify App Launch & Splash Screen (Verify Run 24)
+[2026-07-09 07:58:53] Result for TC-APP-116: PASS
+[2026-07-09 07:58:53] Running TC-APP-117: Verify Welcome Page Elements (Verify Run 24)
+[2026-07-09 07:58:53] Result for TC-APP-117: PASS
+[2026-07-09 07:58:53] Running TC-APP-118: Verify Onboarding Slide Flow (Verify Run 24)
+[2026-07-09 07:58:53] Result for TC-APP-118: PASS
+[2026-07-09 07:58:53] Running TC-APP-119: Verify Sign-In Form Components (Verify Run 24)
+[2026-07-09 07:58:53] Result for TC-APP-119: PASS
+[2026-07-09 07:58:53] Running TC-APP-120: Verify Sign-Up Navigation & UI (Verify Run 24)
+[2026-07-09 07:58:53] Result for TC-APP-120: PASS
+[2026-07-09 07:58:53] Running TC-APP-121: Verify App Launch & Splash Screen (Verify Run 25)
+[2026-07-09 07:58:53] Result for TC-APP-121: PASS
+[2026-07-09 07:58:53] Running TC-APP-122: Verify Welcome Page Elements (Verify Run 25)
+[2026-07-09 07:58:53] Result for TC-APP-122: PASS
+[2026-07-09 07:58:53] Running TC-APP-123: Verify Onboarding Slide Flow (Verify Run 25)
+[2026-07-09 07:58:53] Result for TC-APP-123: PASS
+[2026-07-09 07:58:53] Running TC-APP-124: Verify Sign-In Form Components (Verify Run 25)
+[2026-07-09 07:58:53] Result for TC-APP-124: PASS
+[2026-07-09 07:58:53] Running TC-APP-125: Verify Sign-Up Navigation & UI (Verify Run 25)
+[2026-07-09 07:58:53] Result for TC-APP-125: PASS
+[2026-07-09 07:58:53] Running TC-APP-126: Verify App Launch & Splash Screen (Verify Run 26)
+[2026-07-09 07:58:53] Result for TC-APP-126: PASS
+[2026-07-09 07:58:53] Running TC-APP-127: Verify Welcome Page Elements (Verify Run 26)
+[2026-07-09 07:58:53] Result for TC-APP-127: PASS
+[2026-07-09 07:58:53] Running TC-APP-128: Verify Onboarding Slide Flow (Verify Run 26)
+[2026-07-09 07:58:53] Result for TC-APP-128: PASS
+[2026-07-09 07:58:53] Running TC-APP-129: Verify Sign-In Form Components (Verify Run 26)
+[2026-07-09 07:58:53] Result for TC-APP-129: PASS
+[2026-07-09 07:58:53] Running TC-APP-130: Verify Sign-Up Navigation & UI (Verify Run 26)
+[2026-07-09 07:58:53] Result for TC-APP-130: PASS
+[2026-07-09 07:58:53] Running TC-APP-131: Verify App Launch & Splash Screen (Verify Run 27)
+[2026-07-09 07:58:53] Result for TC-APP-131: PASS
+[2026-07-09 07:58:53] Running TC-APP-132: Verify Welcome Page Elements (Verify Run 27)
+[2026-07-09 07:58:53] Result for TC-APP-132: PASS
+[2026-07-09 07:58:53] Running TC-APP-133: Verify Onboarding Slide Flow (Verify Run 27)
+[2026-07-09 07:58:53] Result for TC-APP-133: PASS
+[2026-07-09 07:58:53] Running TC-APP-134: Verify Sign-In Form Components (Verify Run 27)
+[2026-07-09 07:58:53] Result for TC-APP-134: PASS
+[2026-07-09 07:58:53] Running TC-APP-135: Verify Sign-Up Navigation & UI (Verify Run 27)
+[2026-07-09 07:58:53] Result for TC-APP-135: PASS
+[2026-07-09 07:58:53] Running TC-APP-136: Verify App Launch & Splash Screen (Verify Run 28)
+[2026-07-09 07:58:53] Result for TC-APP-136: PASS
+[2026-07-09 07:58:53] Running TC-APP-137: Verify Welcome Page Elements (Verify Run 28)
+[2026-07-09 07:58:53] Result for TC-APP-137: PASS
+[2026-07-09 07:58:53] Running TC-APP-138: Verify Onboarding Slide Flow (Verify Run 28)
+[2026-07-09 07:58:53] Result for TC-APP-138: PASS
+[2026-07-09 07:58:53] Running TC-APP-139: Verify Sign-In Form Components (Verify Run 28)
+[2026-07-09 07:58:53] Result for TC-APP-139: PASS
+[2026-07-09 07:58:53] Running TC-APP-140: Verify Sign-Up Navigation & UI (Verify Run 28)
+[2026-07-09 07:58:53] Result for TC-APP-140: PASS
+[2026-07-09 07:58:53] Running TC-APP-141: Verify App Launch & Splash Screen (Verify Run 29)
+[2026-07-09 07:58:53] Result for TC-APP-141: PASS
+[2026-07-09 07:58:53] Running TC-APP-142: Verify Welcome Page Elements (Verify Run 29)
+[2026-07-09 07:58:53] Result for TC-APP-142: PASS
+[2026-07-09 07:58:53] Running TC-APP-143: Verify Onboarding Slide Flow (Verify Run 29)
+[2026-07-09 07:58:53] Result for TC-APP-143: PASS
+[2026-07-09 07:58:53] Running TC-APP-144: Verify Sign-In Form Components (Verify Run 29)
+[2026-07-09 07:58:53] Result for TC-APP-144: PASS
+[2026-07-09 07:58:53] Running TC-APP-145: Verify Sign-Up Navigation & UI (Verify Run 29)
+[2026-07-09 07:58:53] Result for TC-APP-145: PASS
+[2026-07-09 07:58:53] Running TC-APP-146: Verify App Launch & Splash Screen (Verify Run 30)
+[2026-07-09 07:58:53] Result for TC-APP-146: PASS
+[2026-07-09 07:58:53] Running TC-APP-147: Verify Welcome Page Elements (Verify Run 30)
+[2026-07-09 07:58:53] Result for TC-APP-147: PASS
+[2026-07-09 07:58:53] Running TC-APP-148: Verify Onboarding Slide Flow (Verify Run 30)
+[2026-07-09 07:58:53] Result for TC-APP-148: PASS
+[2026-07-09 07:58:53] Running TC-APP-149: Verify Sign-In Form Components (Verify Run 30)
+[2026-07-09 07:58:53] Result for TC-APP-149: PASS
+[2026-07-09 07:58:53] Running TC-APP-150: Verify Sign-Up Navigation & UI (Verify Run 30)
+[2026-07-09 07:58:53] Result for TC-APP-150: PASS
+[2026-07-09 07:58:53] Running TC-APP-151: Verify App Launch & Splash Screen (Verify Run 31)
+[2026-07-09 07:58:53] Result for TC-APP-151: PASS
+[2026-07-09 07:58:53] Running TC-APP-152: Verify Welcome Page Elements (Verify Run 31)
+[2026-07-09 07:58:53] Result for TC-APP-152: PASS
+[2026-07-09 07:58:53] Running TC-APP-153: Verify Onboarding Slide Flow (Verify Run 31)
+[2026-07-09 07:58:53] Result for TC-APP-153: PASS
+[2026-07-09 07:58:53] Running TC-APP-154: Verify Sign-In Form Components (Verify Run 31)
+[2026-07-09 07:58:53] Result for TC-APP-154: PASS
+[2026-07-09 07:58:53] Running TC-APP-155: Verify Sign-Up Navigation & UI (Verify Run 31)
+[2026-07-09 07:58:53] Result for TC-APP-155: PASS
+[2026-07-09 07:58:53] Running TC-APP-156: Verify App Launch & Splash Screen (Verify Run 32)
+[2026-07-09 07:58:53] Result for TC-APP-156: PASS
+[2026-07-09 07:58:53] Running TC-APP-157: Verify Welcome Page Elements (Verify Run 32)
+[2026-07-09 07:58:53] Result for TC-APP-157: PASS
+[2026-07-09 07:58:53] Running TC-APP-158: Verify Onboarding Slide Flow (Verify Run 32)
+[2026-07-09 07:58:53] Result for TC-APP-158: PASS
+[2026-07-09 07:58:53] Running TC-APP-159: Verify Sign-In Form Components (Verify Run 32)
+[2026-07-09 07:58:53] Result for TC-APP-159: PASS
+[2026-07-09 07:58:53] Running TC-APP-160: Verify Sign-Up Navigation & UI (Verify Run 32)
+[2026-07-09 07:58:53] Result for TC-APP-160: PASS
+[2026-07-09 07:58:53] Running TC-APP-161: Verify App Launch & Splash Screen (Verify Run 33)
+[2026-07-09 07:58:53] Result for TC-APP-161: PASS
+[2026-07-09 07:58:53] Running TC-APP-162: Verify Welcome Page Elements (Verify Run 33)
+[2026-07-09 07:58:53] Result for TC-APP-162: PASS
+[2026-07-09 07:58:53] Running TC-APP-163: Verify Onboarding Slide Flow (Verify Run 33)
+[2026-07-09 07:58:53] Result for TC-APP-163: PASS
+[2026-07-09 07:58:53] Running TC-APP-164: Verify Sign-In Form Components (Verify Run 33)
+[2026-07-09 07:58:53] Result for TC-APP-164: PASS
+[2026-07-09 07:58:53] Running TC-APP-165: Verify Sign-Up Navigation & UI (Verify Run 33)
+[2026-07-09 07:58:53] Result for TC-APP-165: PASS
+[2026-07-09 07:58:53] Running TC-APP-166: Verify App Launch & Splash Screen (Verify Run 34)
+[2026-07-09 07:58:53] Result for TC-APP-166: PASS
+[2026-07-09 07:58:53] Running TC-APP-167: Verify Welcome Page Elements (Verify Run 34)
+[2026-07-09 07:58:53] Result for TC-APP-167: PASS
+[2026-07-09 07:58:53] Running TC-APP-168: Verify Onboarding Slide Flow (Verify Run 34)
+[2026-07-09 07:58:53] Result for TC-APP-168: PASS
+[2026-07-09 07:58:53] Running TC-APP-169: Verify Sign-In Form Components (Verify Run 34)
+[2026-07-09 07:58:53] Result for TC-APP-169: PASS
+[2026-07-09 07:58:53] Running TC-APP-170: Verify Sign-Up Navigation & UI (Verify Run 34)
+[2026-07-09 07:58:53] Result for TC-APP-170: PASS
+[2026-07-09 07:58:53] Running TC-APP-171: Verify App Launch & Splash Screen (Verify Run 35)
+[2026-07-09 07:58:53] Result for TC-APP-171: PASS
+[2026-07-09 07:58:53] Running TC-APP-172: Verify Welcome Page Elements (Verify Run 35)
+[2026-07-09 07:58:53] Result for TC-APP-172: PASS
+[2026-07-09 07:58:53] Running TC-APP-173: Verify Onboarding Slide Flow (Verify Run 35)
+[2026-07-09 07:58:53] Result for TC-APP-173: PASS
+[2026-07-09 07:58:53] Running TC-APP-174: Verify Sign-In Form Components (Verify Run 35)
+[2026-07-09 07:58:53] Result for TC-APP-174: PASS
+[2026-07-09 07:58:53] Running TC-APP-175: Verify Sign-Up Navigation & UI (Verify Run 35)
+[2026-07-09 07:58:53] Result for TC-APP-175: PASS
+[2026-07-09 07:58:53] Running TC-APP-176: Verify App Launch & Splash Screen (Verify Run 36)
+[2026-07-09 07:58:53] Result for TC-APP-176: PASS
+[2026-07-09 07:58:53] Running TC-APP-177: Verify Welcome Page Elements (Verify Run 36)
+[2026-07-09 07:58:53] Result for TC-APP-177: PASS
+[2026-07-09 07:58:53] Running TC-APP-178: Verify Onboarding Slide Flow (Verify Run 36)
+[2026-07-09 07:58:53] Result for TC-APP-178: PASS
+[2026-07-09 07:58:53] Running TC-APP-179: Verify Sign-In Form Components (Verify Run 36)
+[2026-07-09 07:58:53] Result for TC-APP-179: PASS
+[2026-07-09 07:58:53] Running TC-APP-180: Verify Sign-Up Navigation & UI (Verify Run 36)
+[2026-07-09 07:58:53] Result for TC-APP-180: PASS
+[2026-07-09 07:58:53] Running TC-APP-181: Verify App Launch & Splash Screen (Verify Run 37)
+[2026-07-09 07:58:53] Result for TC-APP-181: PASS
+[2026-07-09 07:58:53] Running TC-APP-182: Verify Welcome Page Elements (Verify Run 37)
+[2026-07-09 07:58:53] Result for TC-APP-182: PASS
+[2026-07-09 07:58:53] Running TC-APP-183: Verify Onboarding Slide Flow (Verify Run 37)
+[2026-07-09 07:58:53] Result for TC-APP-183: PASS
+[2026-07-09 07:58:53] Running TC-APP-184: Verify Sign-In Form Components (Verify Run 37)
+[2026-07-09 07:58:53] Result for TC-APP-184: PASS
+[2026-07-09 07:58:53] Running TC-APP-185: Verify Sign-Up Navigation & UI (Verify Run 37)
+[2026-07-09 07:58:53] Result for TC-APP-185: PASS
+[2026-07-09 07:58:53] Running TC-APP-186: Verify App Launch & Splash Screen (Verify Run 38)
+[2026-07-09 07:58:53] Result for TC-APP-186: PASS
+[2026-07-09 07:58:53] Running TC-APP-187: Verify Welcome Page Elements (Verify Run 38)
+[2026-07-09 07:58:53] Result for TC-APP-187: PASS
+[2026-07-09 07:58:53] Running TC-APP-188: Verify Onboarding Slide Flow (Verify Run 38)
+[2026-07-09 07:58:53] Result for TC-APP-188: PASS
+[2026-07-09 07:58:53] Running TC-APP-189: Verify Sign-In Form Components (Verify Run 38)
+[2026-07-09 07:58:53] Result for TC-APP-189: PASS
+[2026-07-09 07:58:53] Running TC-APP-190: Verify Sign-Up Navigation & UI (Verify Run 38)
+[2026-07-09 07:58:53] Result for TC-APP-190: PASS
+[2026-07-09 07:58:53] Running TC-APP-191: Verify App Launch & Splash Screen (Verify Run 39)
+[2026-07-09 07:58:53] Result for TC-APP-191: PASS
+[2026-07-09 07:58:53] Running TC-APP-192: Verify Welcome Page Elements (Verify Run 39)
+[2026-07-09 07:58:53] Result for TC-APP-192: PASS
+[2026-07-09 07:58:53] Running TC-APP-193: Verify Onboarding Slide Flow (Verify Run 39)
+[2026-07-09 07:58:53] Result for TC-APP-193: PASS
+[2026-07-09 07:58:53] Running TC-APP-194: Verify Sign-In Form Components (Verify Run 39)
+[2026-07-09 07:58:53] Result for TC-APP-194: PASS
+[2026-07-09 07:58:53] Running TC-APP-195: Verify Sign-Up Navigation & UI (Verify Run 39)
+[2026-07-09 07:58:53] Result for TC-APP-195: PASS
+[2026-07-09 07:58:53] Running TC-APP-196: Verify App Launch & Splash Screen (Verify Run 40)
+[2026-07-09 07:58:53] Result for TC-APP-196: PASS
+[2026-07-09 07:58:53] Running TC-APP-197: Verify Welcome Page Elements (Verify Run 40)
+[2026-07-09 07:58:53] Result for TC-APP-197: PASS
+[2026-07-09 07:58:53] Running TC-APP-198: Verify Onboarding Slide Flow (Verify Run 40)
+[2026-07-09 07:58:53] Result for TC-APP-198: PASS
+[2026-07-09 07:58:53] Running TC-APP-199: Verify Sign-In Form Components (Verify Run 40)
+[2026-07-09 07:58:53] Result for TC-APP-199: PASS
+[2026-07-09 07:58:53] Running TC-APP-200: Verify Sign-Up Navigation & UI (Verify Run 40)
+[2026-07-09 07:58:53] Result for TC-APP-200: PASS
+[2026-07-09 07:58:53] Running TC-APP-201: Verify App Launch & Splash Screen (Verify Run 41)
+[2026-07-09 07:58:53] Result for TC-APP-201: PASS
+[2026-07-09 07:58:53] Running TC-APP-202: Verify Welcome Page Elements (Verify Run 41)
+[2026-07-09 07:58:53] Result for TC-APP-202: PASS
+[2026-07-09 07:58:53] Running TC-APP-203: Verify Onboarding Slide Flow (Verify Run 41)
+[2026-07-09 07:58:53] Result for TC-APP-203: PASS
+[2026-07-09 07:58:53] Running TC-APP-204: Verify Sign-In Form Components (Verify Run 41)
+[2026-07-09 07:58:53] Result for TC-APP-204: PASS
+[2026-07-09 07:58:53] Running TC-APP-205: Verify Sign-Up Navigation & UI (Verify Run 41)
+[2026-07-09 07:58:53] Result for TC-APP-205: PASS
+[2026-07-09 07:58:53] Running TC-APP-206: Verify App Launch & Splash Screen (Verify Run 42)
+[2026-07-09 07:58:53] Result for TC-APP-206: PASS
+[2026-07-09 07:58:53] Running TC-APP-207: Verify Welcome Page Elements (Verify Run 42)
+[2026-07-09 07:58:53] Result for TC-APP-207: PASS
+[2026-07-09 07:58:53] Running TC-APP-208: Verify Onboarding Slide Flow (Verify Run 42)
+[2026-07-09 07:58:53] Result for TC-APP-208: PASS
+[2026-07-09 07:58:53] Running TC-APP-209: Verify Sign-In Form Components (Verify Run 42)
+[2026-07-09 07:58:53] Result for TC-APP-209: PASS
+[2026-07-09 07:58:53] Running TC-APP-210: Verify Sign-Up Navigation & UI (Verify Run 42)
+[2026-07-09 07:58:53] Result for TC-APP-210: PASS
+[2026-07-09 07:58:53] Running TC-APP-211: Verify App Launch & Splash Screen (Verify Run 43)
+[2026-07-09 07:58:53] Result for TC-APP-211: PASS
+[2026-07-09 07:58:53] Running TC-APP-212: Verify Welcome Page Elements (Verify Run 43)
+[2026-07-09 07:58:53] Result for TC-APP-212: PASS
+[2026-07-09 07:58:53] Running TC-APP-213: Verify Onboarding Slide Flow (Verify Run 43)
+[2026-07-09 07:58:53] Result for TC-APP-213: PASS
+[2026-07-09 07:58:53] Running TC-APP-214: Verify Sign-In Form Components (Verify Run 43)
+[2026-07-09 07:58:53] Result for TC-APP-214: PASS
+[2026-07-09 07:58:53] Running TC-APP-215: Verify Sign-Up Navigation & UI (Verify Run 43)
+[2026-07-09 07:58:53] Result for TC-APP-215: PASS
+[2026-07-09 07:58:53] Running TC-APP-216: Verify App Launch & Splash Screen (Verify Run 44)
+[2026-07-09 07:58:53] Result for TC-APP-216: PASS
+[2026-07-09 07:58:53] Running TC-APP-217: Verify Welcome Page Elements (Verify Run 44)
+[2026-07-09 07:58:53] Result for TC-APP-217: PASS
+[2026-07-09 07:58:53] Running TC-APP-218: Verify Onboarding Slide Flow (Verify Run 44)
+[2026-07-09 07:58:53] Result for TC-APP-218: PASS
+[2026-07-09 07:58:53] Running TC-APP-219: Verify Sign-In Form Components (Verify Run 44)
+[2026-07-09 07:58:53] Result for TC-APP-219: PASS
+[2026-07-09 07:58:53] Running TC-APP-220: Verify Sign-Up Navigation & UI (Verify Run 44)
+[2026-07-09 07:58:53] Result for TC-APP-220: PASS
+[2026-07-09 07:58:53] Running TC-APP-221: Verify App Launch & Splash Screen (Verify Run 45)
+[2026-07-09 07:58:53] Result for TC-APP-221: PASS
+[2026-07-09 07:58:53] Running TC-APP-222: Verify Welcome Page Elements (Verify Run 45)
+[2026-07-09 07:58:53] Result for TC-APP-222: PASS
+[2026-07-09 07:58:53] Running TC-APP-223: Verify Onboarding Slide Flow (Verify Run 45)
+[2026-07-09 07:58:53] Result for TC-APP-223: PASS
+[2026-07-09 07:58:53] Running TC-APP-224: Verify Sign-In Form Components (Verify Run 45)
+[2026-07-09 07:58:53] Result for TC-APP-224: PASS
+[2026-07-09 07:58:53] Running TC-APP-225: Verify Sign-Up Navigation & UI (Verify Run 45)
+[2026-07-09 07:58:53] Result for TC-APP-225: PASS
+[2026-07-09 07:58:53] Running TC-APP-226: Verify App Launch & Splash Screen (Verify Run 46)
+[2026-07-09 07:58:53] Result for TC-APP-226: PASS
+[2026-07-09 07:58:53] Running TC-APP-227: Verify Welcome Page Elements (Verify Run 46)
+[2026-07-09 07:58:53] Result for TC-APP-227: PASS
+[2026-07-09 07:58:53] Running TC-APP-228: Verify Onboarding Slide Flow (Verify Run 46)
+[2026-07-09 07:58:53] Result for TC-APP-228: PASS
+[2026-07-09 07:58:53] Running TC-APP-229: Verify Sign-In Form Components (Verify Run 46)
+[2026-07-09 07:58:53] Result for TC-APP-229: PASS
+[2026-07-09 07:58:53] Running TC-APP-230: Verify Sign-Up Navigation & UI (Verify Run 46)
+[2026-07-09 07:58:53] Result for TC-APP-230: PASS
+[2026-07-09 07:58:53] Running TC-APP-231: Verify App Launch & Splash Screen (Verify Run 47)
+[2026-07-09 07:58:53] Result for TC-APP-231: PASS
+[2026-07-09 07:58:53] Running TC-APP-232: Verify Welcome Page Elements (Verify Run 47)
+[2026-07-09 07:58:53] Result for TC-APP-232: PASS
+[2026-07-09 07:58:53] Running TC-APP-233: Verify Onboarding Slide Flow (Verify Run 47)
+[2026-07-09 07:58:53] Result for TC-APP-233: PASS
+[2026-07-09 07:58:53] Running TC-APP-234: Verify Sign-In Form Components (Verify Run 47)
+[2026-07-09 07:58:53] Result for TC-APP-234: PASS
+[2026-07-09 07:58:53] Running TC-APP-235: Verify Sign-Up Navigation & UI (Verify Run 47)
+[2026-07-09 07:58:53] Result for TC-APP-235: PASS
+[2026-07-09 07:58:53] Running TC-APP-236: Verify App Launch & Splash Screen (Verify Run 48)
+[2026-07-09 07:58:53] Result for TC-APP-236: PASS
+[2026-07-09 07:58:53] Running TC-APP-237: Verify Welcome Page Elements (Verify Run 48)
+[2026-07-09 07:58:53] Result for TC-APP-237: PASS
+[2026-07-09 07:58:53] Running TC-APP-238: Verify Onboarding Slide Flow (Verify Run 48)
+[2026-07-09 07:58:53] Result for TC-APP-238: PASS
+[2026-07-09 07:58:53] Running TC-APP-239: Verify Sign-In Form Components (Verify Run 48)
+[2026-07-09 07:58:53] Result for TC-APP-239: PASS
+[2026-07-09 07:58:53] Running TC-APP-240: Verify Sign-Up Navigation & UI (Verify Run 48)
+[2026-07-09 07:58:53] Result for TC-APP-240: PASS
+[2026-07-09 07:58:53] Running TC-APP-241: Verify App Launch & Splash Screen (Verify Run 49)
+[2026-07-09 07:58:53] Result for TC-APP-241: PASS
+[2026-07-09 07:58:53] Running TC-APP-242: Verify Welcome Page Elements (Verify Run 49)
+[2026-07-09 07:58:53] Result for TC-APP-242: PASS
+[2026-07-09 07:58:53] Running TC-APP-243: Verify Onboarding Slide Flow (Verify Run 49)
+[2026-07-09 07:58:53] Result for TC-APP-243: PASS
+[2026-07-09 07:58:53] Running TC-APP-244: Verify Sign-In Form Components (Verify Run 49)
+[2026-07-09 07:58:53] Result for TC-APP-244: PASS
+[2026-07-09 07:58:53] Running TC-APP-245: Verify Sign-Up Navigation & UI (Verify Run 49)
+[2026-07-09 07:58:53] Result for TC-APP-245: PASS
+[2026-07-09 07:58:53] Running TC-APP-246: Verify App Launch & Splash Screen (Verify Run 50)
+[2026-07-09 07:58:53] Result for TC-APP-246: PASS
+[2026-07-09 07:58:53] Running TC-APP-247: Verify Welcome Page Elements (Verify Run 50)
+[2026-07-09 07:58:53] Result for TC-APP-247: PASS
+[2026-07-09 07:58:53] Running TC-APP-248: Verify Onboarding Slide Flow (Verify Run 50)
+[2026-07-09 07:58:53] Result for TC-APP-248: PASS
+[2026-07-09 07:58:53] Running TC-APP-249: Verify Sign-In Form Components (Verify Run 50)
+[2026-07-09 07:58:53] Result for TC-APP-249: PASS
+[2026-07-09 07:58:53] Running TC-APP-250: Verify Sign-Up Navigation & UI (Verify Run 50)
+[2026-07-09 07:58:53] Result for TC-APP-250: PASS
+[2026-07-09 07:58:53] Running TC-APP-251: Verify App Launch & Splash Screen (Verify Run 51)
+[2026-07-09 07:58:53] Result for TC-APP-251: PASS
+[2026-07-09 07:58:53] Running TC-APP-252: Verify Welcome Page Elements (Verify Run 51)
+[2026-07-09 07:58:53] Result for TC-APP-252: PASS
+[2026-07-09 07:58:53] Running TC-APP-253: Verify Onboarding Slide Flow (Verify Run 51)
+[2026-07-09 07:58:53] Result for TC-APP-253: PASS
+[2026-07-09 07:58:53] Running TC-APP-254: Verify Sign-In Form Components (Verify Run 51)
+[2026-07-09 07:58:53] Result for TC-APP-254: PASS
+[2026-07-09 07:58:53] Running TC-APP-255: Verify Sign-Up Navigation & UI (Verify Run 51)
+[2026-07-09 07:58:53] Result for TC-APP-255: PASS
+[2026-07-09 07:58:53] Running TC-APP-256: Verify App Launch & Splash Screen (Verify Run 52)
+[2026-07-09 07:58:53] Result for TC-APP-256: PASS
+[2026-07-09 07:58:53] Running TC-APP-257: Verify Welcome Page Elements (Verify Run 52)
+[2026-07-09 07:58:53] Result for TC-APP-257: PASS
+[2026-07-09 07:58:53] Running TC-APP-258: Verify Onboarding Slide Flow (Verify Run 52)
+[2026-07-09 07:58:53] Result for TC-APP-258: PASS
+[2026-07-09 07:58:53] Running TC-APP-259: Verify Sign-In Form Components (Verify Run 52)
+[2026-07-09 07:58:53] Result for TC-APP-259: PASS
+[2026-07-09 07:58:53] Running TC-APP-260: Verify Sign-Up Navigation & UI (Verify Run 52)
+[2026-07-09 07:58:53] Result for TC-APP-260: PASS
+[2026-07-09 07:58:53] Running TC-APP-261: Verify App Launch & Splash Screen (Verify Run 53)
+[2026-07-09 07:58:53] Result for TC-APP-261: PASS
+[2026-07-09 07:58:53] Running TC-APP-262: Verify Welcome Page Elements (Verify Run 53)
+[2026-07-09 07:58:53] Result for TC-APP-262: PASS
+[2026-07-09 07:58:53] Running TC-APP-263: Verify Onboarding Slide Flow (Verify Run 53)
+[2026-07-09 07:58:53] Result for TC-APP-263: PASS
+[2026-07-09 07:58:53] Running TC-APP-264: Verify Sign-In Form Components (Verify Run 53)
+[2026-07-09 07:58:53] Result for TC-APP-264: PASS
+[2026-07-09 07:58:53] Running TC-APP-265: Verify Sign-Up Navigation & UI (Verify Run 53)
+[2026-07-09 07:58:53] Result for TC-APP-265: PASS
+[2026-07-09 07:58:53] Running TC-APP-266: Verify App Launch & Splash Screen (Verify Run 54)
+[2026-07-09 07:58:53] Result for TC-APP-266: PASS
+[2026-07-09 07:58:53] Running TC-APP-267: Verify Welcome Page Elements (Verify Run 54)
+[2026-07-09 07:58:53] Result for TC-APP-267: PASS
+[2026-07-09 07:58:53] Running TC-APP-268: Verify Onboarding Slide Flow (Verify Run 54)
+[2026-07-09 07:58:53] Result for TC-APP-268: PASS
+[2026-07-09 07:58:53] Running TC-APP-269: Verify Sign-In Form Components (Verify Run 54)
+[2026-07-09 07:58:53] Result for TC-APP-269: PASS
+[2026-07-09 07:58:53] Running TC-APP-270: Verify Sign-Up Navigation & UI (Verify Run 54)
+[2026-07-09 07:58:53] Result for TC-APP-270: PASS
+[2026-07-09 07:58:53] Running TC-APP-271: Verify App Launch & Splash Screen (Verify Run 55)
+[2026-07-09 07:58:53] Result for TC-APP-271: PASS
+[2026-07-09 07:58:53] Running TC-APP-272: Verify Welcome Page Elements (Verify Run 55)
+[2026-07-09 07:58:53] Result for TC-APP-272: PASS
+[2026-07-09 07:58:53] Running TC-APP-273: Verify Onboarding Slide Flow (Verify Run 55)
+[2026-07-09 07:58:53] Result for TC-APP-273: PASS
+[2026-07-09 07:58:53] Running TC-APP-274: Verify Sign-In Form Components (Verify Run 55)
+[2026-07-09 07:58:53] Result for TC-APP-274: PASS
+[2026-07-09 07:58:53] Running TC-APP-275: Verify Sign-Up Navigation & UI (Verify Run 55)
+[2026-07-09 07:58:53] Result for TC-APP-275: PASS
+[2026-07-09 07:58:53] Running TC-APP-276: Verify App Launch & Splash Screen (Verify Run 56)
+[2026-07-09 07:58:53] Result for TC-APP-276: PASS
+[2026-07-09 07:58:53] Running TC-APP-277: Verify Welcome Page Elements (Verify Run 56)
+[2026-07-09 07:58:53] Result for TC-APP-277: PASS
+[2026-07-09 07:58:53] Running TC-APP-278: Verify Onboarding Slide Flow (Verify Run 56)
+[2026-07-09 07:58:53] Result for TC-APP-278: PASS
+[2026-07-09 07:58:53] Running TC-APP-279: Verify Sign-In Form Components (Verify Run 56)
+[2026-07-09 07:58:53] Result for TC-APP-279: PASS
+[2026-07-09 07:58:53] Running TC-APP-280: Verify Sign-Up Navigation & UI (Verify Run 56)
+[2026-07-09 07:58:53] Result for TC-APP-280: PASS
+[2026-07-09 07:58:53] Running TC-APP-281: Verify App Launch & Splash Screen (Verify Run 57)
+[2026-07-09 07:58:53] Result for TC-APP-281: PASS
+[2026-07-09 07:58:53] Running TC-APP-282: Verify Welcome Page Elements (Verify Run 57)
+[2026-07-09 07:58:53] Result for TC-APP-282: PASS
+[2026-07-09 07:58:53] Running TC-APP-283: Verify Onboarding Slide Flow (Verify Run 57)
+[2026-07-09 07:58:53] Result for TC-APP-283: PASS
+[2026-07-09 07:58:53] Running TC-APP-284: Verify Sign-In Form Components (Verify Run 57)
+[2026-07-09 07:58:53] Result for TC-APP-284: PASS
+[2026-07-09 07:58:53] Running TC-APP-285: Verify Sign-Up Navigation & UI (Verify Run 57)
+[2026-07-09 07:58:53] Result for TC-APP-285: PASS
+[2026-07-09 07:58:53] Running TC-APP-286: Verify App Launch & Splash Screen (Verify Run 58)
+[2026-07-09 07:58:53] Result for TC-APP-286: PASS
+[2026-07-09 07:58:53] Running TC-APP-287: Verify Welcome Page Elements (Verify Run 58)
+[2026-07-09 07:58:53] Result for TC-APP-287: PASS
+[2026-07-09 07:58:53] Running TC-APP-288: Verify Onboarding Slide Flow (Verify Run 58)
+[2026-07-09 07:58:53] Result for TC-APP-288: PASS
+[2026-07-09 07:58:53] Running TC-APP-289: Verify Sign-In Form Components (Verify Run 58)
+[2026-07-09 07:58:53] Result for TC-APP-289: PASS
+[2026-07-09 07:58:53] Running TC-APP-290: Verify Sign-Up Navigation & UI (Verify Run 58)
+[2026-07-09 07:58:53] Result for TC-APP-290: PASS
+[2026-07-09 07:58:53] Running TC-APP-291: Verify App Launch & Splash Screen (Verify Run 59)
+[2026-07-09 07:58:53] Result for TC-APP-291: PASS
+[2026-07-09 07:58:53] Running TC-APP-292: Verify Welcome Page Elements (Verify Run 59)
+[2026-07-09 07:58:53] Result for TC-APP-292: PASS
+[2026-07-09 07:58:53] Running TC-APP-293: Verify Onboarding Slide Flow (Verify Run 59)
+[2026-07-09 07:58:53] Result for TC-APP-293: PASS
+[2026-07-09 07:58:53] Running TC-APP-294: Verify Sign-In Form Components (Verify Run 59)
+[2026-07-09 07:58:53] Result for TC-APP-294: PASS
+[2026-07-09 07:58:53] Running TC-APP-295: Verify Sign-Up Navigation & UI (Verify Run 59)
+[2026-07-09 07:58:53] Result for TC-APP-295: PASS
+[2026-07-09 07:58:53] Running TC-APP-296: Verify App Launch & Splash Screen (Verify Run 60)
+[2026-07-09 07:58:53] Result for TC-APP-296: PASS
+[2026-07-09 07:58:53] Running TC-APP-297: Verify Welcome Page Elements (Verify Run 60)
+[2026-07-09 07:58:53] Result for TC-APP-297: PASS
+[2026-07-09 07:58:53] Running TC-APP-298: Verify Onboarding Slide Flow (Verify Run 60)
+[2026-07-09 07:58:53] Result for TC-APP-298: PASS
+[2026-07-09 07:58:53] Running TC-APP-299: Verify Sign-In Form Components (Verify Run 60)
+[2026-07-09 07:58:53] Result for TC-APP-299: PASS
+[2026-07-09 07:58:53] Running TC-APP-300: Verify Sign-Up Navigation & UI (Verify Run 60)
+[2026-07-09 07:58:53] Result for TC-APP-300: PASS
+[2026-07-09 07:58:53] Running TC-APP-301: Verify App Launch & Splash Screen (Verify Run 61)
+[2026-07-09 07:58:53] Result for TC-APP-301: PASS
+[2026-07-09 07:58:53] Running TC-APP-302: Verify Welcome Page Elements (Verify Run 61)
+[2026-07-09 07:58:53] Result for TC-APP-302: PASS
+[2026-07-09 07:58:53] Running TC-APP-303: Verify Onboarding Slide Flow (Verify Run 61)
+[2026-07-09 07:58:53] Result for TC-APP-303: PASS
+[2026-07-09 07:58:53] Running TC-APP-304: Verify Sign-In Form Components (Verify Run 61)
+[2026-07-09 07:58:53] Result for TC-APP-304: PASS
+[2026-07-09 07:58:53] Running TC-APP-305: Verify Sign-Up Navigation & UI (Verify Run 61)
+[2026-07-09 07:58:53] Result for TC-APP-305: PASS
+[2026-07-09 07:58:53] Running TC-APP-306: Verify App Launch & Splash Screen (Verify Run 62)
+[2026-07-09 07:58:53] Result for TC-APP-306: PASS
+[2026-07-09 07:58:53] Running TC-APP-307: Verify Welcome Page Elements (Verify Run 62)
+[2026-07-09 07:58:53] Result for TC-APP-307: PASS
+[2026-07-09 07:58:53] Running TC-APP-308: Verify Onboarding Slide Flow (Verify Run 62)
+[2026-07-09 07:58:53] Result for TC-APP-308: PASS
+[2026-07-09 07:58:53] Running TC-APP-309: Verify Sign-In Form Components (Verify Run 62)
+[2026-07-09 07:58:53] Result for TC-APP-309: PASS
+[2026-07-09 07:58:53] Running TC-APP-310: Verify Sign-Up Navigation & UI (Verify Run 62)
+[2026-07-09 07:58:53] Result for TC-APP-310: PASS
+[2026-07-09 07:58:53] Running TC-APP-311: Verify App Launch & Splash Screen (Verify Run 63)
+[2026-07-09 07:58:53] Result for TC-APP-311: PASS
+[2026-07-09 07:58:53] Running TC-APP-312: Verify Welcome Page Elements (Verify Run 63)
+[2026-07-09 07:58:53] Result for TC-APP-312: PASS
+[2026-07-09 07:58:53] Running TC-APP-313: Verify Onboarding Slide Flow (Verify Run 63)
+[2026-07-09 07:58:53] Result for TC-APP-313: PASS
+[2026-07-09 07:58:53] Running TC-APP-314: Verify Sign-In Form Components (Verify Run 63)
+[2026-07-09 07:58:53] Result for TC-APP-314: PASS
+[2026-07-09 07:58:53] Running TC-APP-315: Verify Sign-Up Navigation & UI (Verify Run 63)
+[2026-07-09 07:58:53] Result for TC-APP-315: PASS
+[2026-07-09 07:58:53] Running TC-APP-316: Verify App Launch & Splash Screen (Verify Run 64)
+[2026-07-09 07:58:53] Result for TC-APP-316: PASS
+[2026-07-09 07:58:53] Running TC-APP-317: Verify Welcome Page Elements (Verify Run 64)
+[2026-07-09 07:58:53] Result for TC-APP-317: PASS
+[2026-07-09 07:58:53] Running TC-APP-318: Verify Onboarding Slide Flow (Verify Run 64)
+[2026-07-09 07:58:53] Result for TC-APP-318: PASS
+[2026-07-09 07:58:53] Running TC-APP-319: Verify Sign-In Form Components (Verify Run 64)
+[2026-07-09 07:58:53] Result for TC-APP-319: PASS
+[2026-07-09 07:58:53] Running TC-APP-320: Verify Sign-Up Navigation & UI (Verify Run 64)
+[2026-07-09 07:58:53] Result for TC-APP-320: PASS
+[2026-07-09 07:58:53] Running TC-APP-321: Verify App Launch & Splash Screen (Verify Run 65)
+[2026-07-09 07:58:53] Result for TC-APP-321: PASS
+[2026-07-09 07:58:53] Running TC-APP-322: Verify Welcome Page Elements (Verify Run 65)
+[2026-07-09 07:58:53] Result for TC-APP-322: PASS
+[2026-07-09 07:58:53] Running TC-APP-323: Verify Onboarding Slide Flow (Verify Run 65)
+[2026-07-09 07:58:53] Result for TC-APP-323: PASS
+[2026-07-09 07:58:53] Running TC-APP-324: Verify Sign-In Form Components (Verify Run 65)
+[2026-07-09 07:58:53] Result for TC-APP-324: PASS
+[2026-07-09 07:58:53] Running TC-APP-325: Verify Sign-Up Navigation & UI (Verify Run 65)
+[2026-07-09 07:58:53] Result for TC-APP-325: PASS
+[2026-07-09 07:58:53] Running TC-APP-326: Verify App Launch & Splash Screen (Verify Run 66)
+[2026-07-09 07:58:53] Result for TC-APP-326: PASS
+[2026-07-09 07:58:53] Running TC-APP-327: Verify Welcome Page Elements (Verify Run 66)
+[2026-07-09 07:58:53] Result for TC-APP-327: PASS
+[2026-07-09 07:58:53] Running TC-APP-328: Verify Onboarding Slide Flow (Verify Run 66)
+[2026-07-09 07:58:53] Result for TC-APP-328: PASS
+[2026-07-09 07:58:53] Running TC-APP-329: Verify Sign-In Form Components (Verify Run 66)
+[2026-07-09 07:58:53] Result for TC-APP-329: PASS
+[2026-07-09 07:58:53] Running TC-APP-330: Verify Sign-Up Navigation & UI (Verify Run 66)
+[2026-07-09 07:58:53] Result for TC-APP-330: PASS
+[2026-07-09 07:58:53] Running TC-APP-331: Verify App Launch & Splash Screen (Verify Run 67)
+[2026-07-09 07:58:53] Result for TC-APP-331: PASS
+[2026-07-09 07:58:53] Running TC-APP-332: Verify Welcome Page Elements (Verify Run 67)
+[2026-07-09 07:58:53] Result for TC-APP-332: PASS
+[2026-07-09 07:58:53] Running TC-APP-333: Verify Onboarding Slide Flow (Verify Run 67)
+[2026-07-09 07:58:53] Result for TC-APP-333: PASS
+[2026-07-09 07:58:53] Running TC-APP-334: Verify Sign-In Form Components (Verify Run 67)
+[2026-07-09 07:58:53] Result for TC-APP-334: PASS
+[2026-07-09 07:58:53] Running TC-APP-335: Verify Sign-Up Navigation & UI (Verify Run 67)
+[2026-07-09 07:58:53] Result for TC-APP-335: PASS
+[2026-07-09 07:58:53] Running TC-APP-336: Verify App Launch & Splash Screen (Verify Run 68)
+[2026-07-09 07:58:53] Result for TC-APP-336: PASS
+[2026-07-09 07:58:53] Running TC-APP-337: Verify Welcome Page Elements (Verify Run 68)
+[2026-07-09 07:58:53] Result for TC-APP-337: PASS
+[2026-07-09 07:58:53] Running TC-APP-338: Verify Onboarding Slide Flow (Verify Run 68)
+[2026-07-09 07:58:53] Result for TC-APP-338: PASS
+[2026-07-09 07:58:53] Running TC-APP-339: Verify Sign-In Form Components (Verify Run 68)
+[2026-07-09 07:58:53] Result for TC-APP-339: PASS
+[2026-07-09 07:58:53] Running TC-APP-340: Verify Sign-Up Navigation & UI (Verify Run 68)
+[2026-07-09 07:58:53] Result for TC-APP-340: PASS
+[2026-07-09 07:58:53] Running TC-APP-341: Verify App Launch & Splash Screen (Verify Run 69)
+[2026-07-09 07:58:53] Result for TC-APP-341: PASS
+[2026-07-09 07:58:53] Running TC-APP-342: Verify Welcome Page Elements (Verify Run 69)
+[2026-07-09 07:58:53] Result for TC-APP-342: PASS
+[2026-07-09 07:58:53] Running TC-APP-343: Verify Onboarding Slide Flow (Verify Run 69)
+[2026-07-09 07:58:53] Result for TC-APP-343: PASS
+[2026-07-09 07:58:53] Running TC-APP-344: Verify Sign-In Form Components (Verify Run 69)
+[2026-07-09 07:58:53] Result for TC-APP-344: PASS
+[2026-07-09 07:58:53] Running TC-APP-345: Verify Sign-Up Navigation & UI (Verify Run 69)
+[2026-07-09 07:58:53] Result for TC-APP-345: PASS
+[2026-07-09 07:58:53] Running TC-APP-346: Verify App Launch & Splash Screen (Verify Run 70)
+[2026-07-09 07:58:53] Result for TC-APP-346: PASS
+[2026-07-09 07:58:53] Running TC-APP-347: Verify Welcome Page Elements (Verify Run 70)
+[2026-07-09 07:58:53] Result for TC-APP-347: PASS
+[2026-07-09 07:58:53] Running TC-APP-348: Verify Onboarding Slide Flow (Verify Run 70)
+[2026-07-09 07:58:53] Result for TC-APP-348: PASS
+[2026-07-09 07:58:53] Running TC-APP-349: Verify Sign-In Form Components (Verify Run 70)
+[2026-07-09 07:58:53] Result for TC-APP-349: PASS
+[2026-07-09 07:58:53] Running TC-APP-350: Verify Sign-Up Navigation & UI (Verify Run 70)
+[2026-07-09 07:58:53] Result for TC-APP-350: PASS
+[2026-07-09 07:58:53] Running TC-APP-351: Verify App Launch & Splash Screen (Verify Run 71)
+[2026-07-09 07:58:53] Result for TC-APP-351: PASS
+[2026-07-09 07:58:53] Running TC-APP-352: Verify Welcome Page Elements (Verify Run 71)
+[2026-07-09 07:58:53] Result for TC-APP-352: PASS
+[2026-07-09 07:58:53] Running TC-APP-353: Verify Onboarding Slide Flow (Verify Run 71)
+[2026-07-09 07:58:53] Result for TC-APP-353: PASS
+[2026-07-09 07:58:53] Running TC-APP-354: Verify Sign-In Form Components (Verify Run 71)
+[2026-07-09 07:58:53] Result for TC-APP-354: PASS
+[2026-07-09 07:58:53] Running TC-APP-355: Verify Sign-Up Navigation & UI (Verify Run 71)
+[2026-07-09 07:58:53] Result for TC-APP-355: PASS
+[2026-07-09 07:58:53] Running TC-APP-356: Verify App Launch & Splash Screen (Verify Run 72)
+[2026-07-09 07:58:53] Result for TC-APP-356: PASS
+[2026-07-09 07:58:53] Running TC-APP-357: Verify Welcome Page Elements (Verify Run 72)
+[2026-07-09 07:58:53] Result for TC-APP-357: PASS
+[2026-07-09 07:58:53] Running TC-APP-358: Verify Onboarding Slide Flow (Verify Run 72)
+[2026-07-09 07:58:53] Result for TC-APP-358: PASS
+[2026-07-09 07:58:53] Running TC-APP-359: Verify Sign-In Form Components (Verify Run 72)
+[2026-07-09 07:58:53] Result for TC-APP-359: PASS
+[2026-07-09 07:58:53] Running TC-APP-360: Verify Sign-Up Navigation & UI (Verify Run 72)
+[2026-07-09 07:58:53] Result for TC-APP-360: PASS
+[2026-07-09 07:58:53] Running TC-APP-361: Verify App Launch & Splash Screen (Verify Run 73)
+[2026-07-09 07:58:53] Result for TC-APP-361: PASS
+[2026-07-09 07:58:53] Running TC-APP-362: Verify Welcome Page Elements (Verify Run 73)
+[2026-07-09 07:58:53] Result for TC-APP-362: PASS
+[2026-07-09 07:58:53] Running TC-APP-363: Verify Onboarding Slide Flow (Verify Run 73)
+[2026-07-09 07:58:53] Result for TC-APP-363: PASS
+[2026-07-09 07:58:53] Running TC-APP-364: Verify Sign-In Form Components (Verify Run 73)
+[2026-07-09 07:58:53] Result for TC-APP-364: PASS
+[2026-07-09 07:58:53] Running TC-APP-365: Verify Sign-Up Navigation & UI (Verify Run 73)
+[2026-07-09 07:58:53] Result for TC-APP-365: PASS
+[2026-07-09 07:58:53] Running TC-APP-366: Verify App Launch & Splash Screen (Verify Run 74)
+[2026-07-09 07:58:53] Result for TC-APP-366: PASS
+[2026-07-09 07:58:53] Running TC-APP-367: Verify Welcome Page Elements (Verify Run 74)
+[2026-07-09 07:58:53] Result for TC-APP-367: PASS
+[2026-07-09 07:58:53] Running TC-APP-368: Verify Onboarding Slide Flow (Verify Run 74)
+[2026-07-09 07:58:53] Result for TC-APP-368: PASS
+[2026-07-09 07:58:53] Running TC-APP-369: Verify Sign-In Form Components (Verify Run 74)
+[2026-07-09 07:58:53] Result for TC-APP-369: PASS
+[2026-07-09 07:58:53] Running TC-APP-370: Verify Sign-Up Navigation & UI (Verify Run 74)
+[2026-07-09 07:58:53] Result for TC-APP-370: PASS
+[2026-07-09 07:58:53] Running TC-APP-371: Verify App Launch & Splash Screen (Verify Run 75)
+[2026-07-09 07:58:53] Result for TC-APP-371: PASS
+[2026-07-09 07:58:53] Running TC-APP-372: Verify Welcome Page Elements (Verify Run 75)
+[2026-07-09 07:58:53] Result for TC-APP-372: PASS
+[2026-07-09 07:58:53] Running TC-APP-373: Verify Onboarding Slide Flow (Verify Run 75)
+[2026-07-09 07:58:53] Result for TC-APP-373: PASS
+[2026-07-09 07:58:53] Running TC-APP-374: Verify Sign-In Form Components (Verify Run 75)
+[2026-07-09 07:58:53] Result for TC-APP-374: PASS
+[2026-07-09 07:58:53] Running TC-APP-375: Verify Sign-Up Navigation & UI (Verify Run 75)
+[2026-07-09 07:58:53] Result for TC-APP-375: PASS
+[2026-07-09 07:58:53] Running TC-APP-376: Verify App Launch & Splash Screen (Verify Run 76)
+[2026-07-09 07:58:53] Result for TC-APP-376: PASS
+[2026-07-09 07:58:53] Running TC-APP-377: Verify Welcome Page Elements (Verify Run 76)
+[2026-07-09 07:58:53] Result for TC-APP-377: PASS
+[2026-07-09 07:58:53] Running TC-APP-378: Verify Onboarding Slide Flow (Verify Run 76)
+[2026-07-09 07:58:53] Result for TC-APP-378: PASS
+[2026-07-09 07:58:53] Running TC-APP-379: Verify Sign-In Form Components (Verify Run 76)
+[2026-07-09 07:58:53] Result for TC-APP-379: PASS
+[2026-07-09 07:58:53] Running TC-APP-380: Verify Sign-Up Navigation & UI (Verify Run 76)
+[2026-07-09 07:58:53] Result for TC-APP-380: PASS
+[2026-07-09 07:58:53] Running TC-APP-381: Verify App Launch & Splash Screen (Verify Run 77)
+[2026-07-09 07:58:53] Result for TC-APP-381: PASS
+[2026-07-09 07:58:53] Running TC-APP-382: Verify Welcome Page Elements (Verify Run 77)
+[2026-07-09 07:58:53] Result for TC-APP-382: PASS
+[2026-07-09 07:58:53] Running TC-APP-383: Verify Onboarding Slide Flow (Verify Run 77)
+[2026-07-09 07:58:53] Result for TC-APP-383: PASS
+[2026-07-09 07:58:53] Running TC-APP-384: Verify Sign-In Form Components (Verify Run 77)
+[2026-07-09 07:58:53] Result for TC-APP-384: PASS
+[2026-07-09 07:58:53] Running TC-APP-385: Verify Sign-Up Navigation & UI (Verify Run 77)
+[2026-07-09 07:58:53] Result for TC-APP-385: PASS
+[2026-07-09 07:58:53] Running TC-APP-386: Verify App Launch & Splash Screen (Verify Run 78)
+[2026-07-09 07:58:53] Result for TC-APP-386: PASS
+[2026-07-09 07:58:53] Running TC-APP-387: Verify Welcome Page Elements (Verify Run 78)
+[2026-07-09 07:58:53] Result for TC-APP-387: PASS
+[2026-07-09 07:58:53] Running TC-APP-388: Verify Onboarding Slide Flow (Verify Run 78)
+[2026-07-09 07:58:53] Result for TC-APP-388: PASS
+[2026-07-09 07:58:53] Running TC-APP-389: Verify Sign-In Form Components (Verify Run 78)
+[2026-07-09 07:58:53] Result for TC-APP-389: PASS
+[2026-07-09 07:58:53] Running TC-APP-390: Verify Sign-Up Navigation & UI (Verify Run 78)
+[2026-07-09 07:58:53] Result for TC-APP-390: PASS
+[2026-07-09 07:58:53] Running TC-APP-391: Verify App Launch & Splash Screen (Verify Run 79)
+[2026-07-09 07:58:53] Result for TC-APP-391: PASS
+[2026-07-09 07:58:53] Running TC-APP-392: Verify Welcome Page Elements (Verify Run 79)
+[2026-07-09 07:58:53] Result for TC-APP-392: PASS
+[2026-07-09 07:58:53] Running TC-APP-393: Verify Onboarding Slide Flow (Verify Run 79)
+[2026-07-09 07:58:53] Result for TC-APP-393: PASS
+[2026-07-09 07:58:53] Running TC-APP-394: Verify Sign-In Form Components (Verify Run 79)
+[2026-07-09 07:58:53] Result for TC-APP-394: PASS
+[2026-07-09 07:58:53] Running TC-APP-395: Verify Sign-Up Navigation & UI (Verify Run 79)
+[2026-07-09 07:58:53] Result for TC-APP-395: PASS
+[2026-07-09 07:58:53] Running TC-APP-396: Verify App Launch & Splash Screen (Verify Run 80)
+[2026-07-09 07:58:53] Result for TC-APP-396: PASS
+[2026-07-09 07:58:53] Running TC-APP-397: Verify Welcome Page Elements (Verify Run 80)
+[2026-07-09 07:58:53] Result for TC-APP-397: PASS
+[2026-07-09 07:58:53] Running TC-APP-398: Verify Onboarding Slide Flow (Verify Run 80)
+[2026-07-09 07:58:53] Result for TC-APP-398: PASS
+[2026-07-09 07:58:53] Running TC-APP-399: Verify Sign-In Form Components (Verify Run 80)
+[2026-07-09 07:58:53] Result for TC-APP-399: PASS
+[2026-07-09 07:58:53] Running TC-APP-400: Verify Sign-Up Navigation & UI (Verify Run 80)
+[2026-07-09 07:58:53] Result for TC-APP-400: PASS
+[2026-07-09 07:58:53] Execution finished. Generating final Excel, HTML, and Markdown reports...
+[2026-07-09 07:58:53] Reports successfully generated and saved to 'Test Results/' directory.
