@@ -194,24 +194,25 @@ jobs:
 
       - name: Download Selenium Report
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: selenium-report
           path: reports/selenium
-          ignore-on-no-artifact-found: true
 
       - name: Download Android Report
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: android-report
           path: reports/android
-          ignore-on-no-artifact-found: true
 
       - name: Download Security Report
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: security-report
           path: reports/security
-          ignore-on-no-artifact-found: true
+
 
       - name: Generate Master Step Summary
         run: |

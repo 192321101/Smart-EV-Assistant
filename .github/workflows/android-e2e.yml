@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   android-e2e-testing:
-    runs-on: macos-13 # Using macOS as recommended for Android Emulator acceleration
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Source Code
